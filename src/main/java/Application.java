@@ -1,10 +1,10 @@
-import controller.UserController;
+import org.springframework.boot.orm.jpa.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import service.UserService;
 import model.User;
-import model.UserDao;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -12,19 +12,15 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringBootApplication
-@ComponentScan({"model","controller"})
+@EnableJpaRepositories(basePackages = {"model"})
+@ComponentScan(basePackages = {"model", "service"})
+@EntityScan(basePackages = {"model"})
 public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class);
-
+        SpringApplication springApplication = new SpringApplication();
+        ApplicationContext context = springApplication.run(Application.class, args);
+        UserService userController = context.getBean(UserService.class);
+        User userById = userController.getUserById(1);
+        System.out.println(userById);
     }
-
-    @Bean
-    public CommandLineRunner demo(UserDao userDao){
-        return (args) -> {
-            User userById = new UserController().getUserById(1);
-            System.out.println(userById);
-        };
-    }
-
 }
