@@ -1,10 +1,7 @@
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import service.UserService;
-import model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -17,10 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EntityScan(basePackages = {"model"})
 public class Application {
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication();
-        ApplicationContext context = springApplication.run(Application.class, args);
-        UserService userController = context.getBean(UserService.class);
-        User userById = userController.getUserById(1);
-        System.out.println(userById);
+        SpringApplication.run(Application.class, args);
+
     }
 }
