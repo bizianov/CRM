@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"model"})
-@ComponentScan(basePackages = {"model", "service"})
+@ComponentScan(basePackages = {"model", "service", "controller"})
 @EntityScan(basePackages = {"model"})
 public class Application {
     public static void main(String[] args) {
