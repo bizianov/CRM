@@ -1,3 +1,5 @@
+package project;
+
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.boot.SpringApplication;
@@ -9,9 +11,9 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"model"})
-@ComponentScan(basePackages = {"model", "service", "controller"})
-@EntityScan(basePackages = {"model"})
+@EnableJpaRepositories(basePackages = {"project/model"})
+@ComponentScan(basePackages = {"project"})
+@EntityScan(basePackages = {"project/model"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
