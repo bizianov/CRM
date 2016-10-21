@@ -6,20 +6,15 @@ import javax.persistence.*;
  * Created by slava23 on 10/11/2016.
  */
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "role")
     private String role;
 
-    @Column(name = "login")
     private String login;
 
-    @Column(name = "password")
     private String password;
 
     public int getId() {
