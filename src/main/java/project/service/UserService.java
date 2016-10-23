@@ -1,9 +1,9 @@
 package project.service;
 
-import project.model.User;
-import project.model.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.model.User;
+import project.model.UserDao;
 
 /**
  * Created by slava23 on 10/11/2016.
