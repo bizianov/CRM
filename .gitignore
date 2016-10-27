@@ -1,5 +1,2 @@
-*.zip
-*.log
 .idea/*
-*.class
-target*
+target/
