@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackages = "project")
+@ComponentScan(basePackages = {"project"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
