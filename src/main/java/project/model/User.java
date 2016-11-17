@@ -1,4 +1,4 @@
-package model;
+package project.model;
 
 import javax.persistence.*;
 
@@ -6,21 +6,16 @@ import javax.persistence.*;
  * Created by slava23 on 10/11/2016.
  */
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "role")
-    private String role;
+    private String username;
 
-    @Column(name = "login")
-    private String login;
-
-    @Column(name = "password")
     private String password;
+
+    private boolean enabled;
 
     public int getId() {
         return id;
@@ -30,20 +25,12 @@ public class User {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getUsername() {
+        return username;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -54,12 +41,20 @@ public class User {
         this.password = password;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
-                ", login='" + login + '\'' +
+                ", username='" + username + '\'' +
+                ", enabled=" + enabled +
                 '}';
     }
 }
