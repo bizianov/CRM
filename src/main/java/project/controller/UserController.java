@@ -26,16 +26,27 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getUserById", method = GET)
-    public String getUserById(@RequestParam(value = "id") int id, Model model){
+    public String getUserById(@RequestParam(value = "id") int id,
+                              Model model){
         User userById = userService.getUserById(id);
         model.addAttribute("user", userById);
         return "showUser";
     }
 
     @RequestMapping(value = "/getUserByName", method = GET)
-    public String getUserByName(@RequestParam(value = "username") String name, Model model){
+    public String getUserByName(@RequestParam(value = "username") String name,
+                                Model model){
         User userByName = userService.getUserByName(name);
         model.addAttribute("user", userByName);
+        return "showUser";
+    }
+
+    @RequestMapping(value = "/createUser", method = GET)
+    public String createUser(@RequestParam(value = "id") int id,
+                             @RequestParam(value = "name") String name,
+                             Model model){
+        User user = userService.createUser(id, name);
+        model.addAttribute("user", user);
         return "showUser";
     }
 

@@ -23,14 +23,11 @@ public class UserService {
     }
 
     public User getUserByName(String name){
-        Iterator<User> iterator = userDao.findAll().iterator();
-        while (iterator.hasNext()){
-            User next = iterator.next();
-            if (next.getUsername().equals(name)){
-                return next;
-            }
-        }
-        return null;
+        return userDao.findByUsername(name);
+    }
+
+    public User createUser(int id, String name){
+        return userDao.save(new User(id, name));
     }
 
     public UserDao getUserDao() {

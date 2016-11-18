@@ -8,6 +8,8 @@ import javax.persistence.*;
 @Entity
 public class User {
 
+    private static final String DEFAULT_PASSWORD = "123456";
+
     @Id
     private int id;
 
@@ -16,6 +18,20 @@ public class User {
     private String password;
 
     private boolean enabled;
+
+    public User() {
+    }
+
+    public User(int id, String username, String password, boolean enabled) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+    }
+
+    public User(int id, String username) {
+        this(id, username, DEFAULT_PASSWORD, false);
+    }
 
     public int getId() {
         return id;
