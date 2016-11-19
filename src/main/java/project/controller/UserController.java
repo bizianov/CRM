@@ -50,6 +50,14 @@ public class UserController {
         return "showUser";
     }
 
+    @RequestMapping(value = "/deleteUser", method = GET)
+    public String deleteUser(@RequestParam(value = "id") int id,
+                             Model model){
+        User deleteUser = userService.deleteUser(id);
+        model.addAttribute("user", deleteUser);
+        return "deleteUser";
+    }
+
     public UserService getUserService() {
         return userService;
     }

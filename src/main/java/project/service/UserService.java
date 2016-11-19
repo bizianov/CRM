@@ -30,6 +30,12 @@ public class UserService {
         return userDao.save(new User(id, name));
     }
 
+    public User deleteUser(int id){
+        User userById = getUserById(id);
+        userDao.delete(userById);
+        return userById;
+    }
+
     public UserDao getUserDao() {
         return userDao;
     }
