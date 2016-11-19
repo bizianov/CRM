@@ -11,7 +11,6 @@ import project.service.UserService;
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 /**
  * Created by slava23 on 11/18/2016.
@@ -38,6 +37,11 @@ public class CRUDOperations {
     @Test
     public void deleteUser() throws Exception {
        mockMvc.perform(get("/deleteUser?id=2")).andExpect(view().name("deleteUser"));
+    }
+
+    @Test
+    public void updateUser() throws Exception {
+        mockMvc.perform(get("/updateUser?id=1&username=slava1")).andExpect(view().name("updateUser"));
     }
 
     @Before

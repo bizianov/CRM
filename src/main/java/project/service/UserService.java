@@ -36,6 +36,10 @@ public class UserService {
         return userById;
     }
 
+    public void saveUser(User user){
+        userDao.save(user);
+    }
+
     public UserDao getUserDao() {
         return userDao;
     }
