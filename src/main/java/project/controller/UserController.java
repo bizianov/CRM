@@ -1,15 +1,16 @@
 package project.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.model.User;
 import project.service.UserService;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
  * Created by slava23 on 10/17/2016.
@@ -17,6 +18,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 public class UserController {
+
+    private final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
 
@@ -28,6 +31,7 @@ public class UserController {
     @RequestMapping(value = "/getUserById", method = GET)
     public String getUserById(@RequestParam(value = "id") int id,
                               Model model){
+        logger.info("User with id={} was requested", id);
         User userById = userService.getUserById(id);
         model.addAttribute("user", userById);
         return "showUser";
