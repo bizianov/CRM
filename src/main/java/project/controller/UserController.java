@@ -40,6 +40,7 @@ public class UserController {
     @RequestMapping(value = "/getUserByName", method = GET)
     public String getUserByName(@RequestParam(value = "username") String name,
                                 Model model){
+        logger.info("User with name={} was requested", name);
         User userByName = userService.getUserByName(name);
         model.addAttribute("user", userByName);
         return "showUser";
