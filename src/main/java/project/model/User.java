@@ -1,6 +1,9 @@
 package project.model;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by slava23 on 10/11/2016.
@@ -12,25 +15,28 @@ public class User {
 
     @Id
     private int id;
-
     private String username;
-
     private String password;
-
     private boolean enabled;
 
-    public User() {
+    @ElementCollection
+    @Column(name = "role")
+    private Set<String> roles;
+
+    public User(int id, String username) {
+        this(id, username, DEFAULT_PASSWORD, true,
+                new HashSet<>(Arrays.asList(Roles.MANAGER.getRole())));
     }
 
-    public User(int id, String username, String password, boolean enabled) {
+    public User(int id, String username, String password, boolean enabled, Set<String> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
+        this.roles = roles;
     }
 
-    public User(int id, String username) {
-        this(id, username, DEFAULT_PASSWORD, false);
+    public User() {
     }
 
     public int getId() {
@@ -63,6 +69,14 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 
     @Override

@@ -4,11 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.model.User;
 import project.service.UserService;
+
+import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -47,6 +50,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/createUser", method = GET)
+    @Transactional
     public String createUser(@RequestParam(value = "id") int id,
                              @RequestParam(value = "name") String name,
                              Model model){
@@ -56,6 +60,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/deleteUser", method = GET)
+    @Transactional
     public String deleteUser(@RequestParam(value = "id") int id,
                              Model model){
         User deleteUser = userService.deleteUser(id);
@@ -64,6 +69,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/updateUser", method = GET)
+    @Transactional
     public String updateUser(@RequestParam(value = "id") int id,
                              @RequestParam(value = "username", required = false) String name,
                              @RequestParam(value = "enabled", required = false) Boolean enabled,
@@ -77,12 +83,15 @@ public class UserController {
             if (enabled != null) {
                 userById.setEnabled(enabled);
             }
-            if (password != null) {
+            if (password != null && password != "") {
                 userById.setPassword(password);
             }
         }
         model.addAttribute("user", userById);
-        userService.saveUser(userById);
+        User updatedUser = userService.saveUser(userById);
+        if (updatedUser != null){
+
+        }
         return "updateUser";
     }
 

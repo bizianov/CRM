@@ -32,12 +32,15 @@ public class UserService {
 
     public User deleteUser(int id){
         User userById = getUserById(id);
-        userDao.delete(userById);
+        if (userById != null) {
+            userDao.delete(userById);
+        }
         return userById;
     }
 
-    public void saveUser(User user){
-        userDao.save(user);
+    public User saveUser(User user){
+        User savedUser = userDao.save(user);
+        return savedUser;
     }
 
     public UserDao getUserDao() {
