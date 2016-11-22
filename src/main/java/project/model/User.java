@@ -14,6 +14,7 @@ public class User {
     private static final String DEFAULT_PASSWORD = "123456";
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
@@ -23,13 +24,12 @@ public class User {
     @Column(name = "role")
     private Set<String> roles;
 
-    public User(int id, String username) {
-        this(id, username, DEFAULT_PASSWORD, true,
+    public User(String username) {
+        this(username, DEFAULT_PASSWORD, true,
                 new HashSet<>(Arrays.asList(Roles.MANAGER.getRole())));
     }
 
-    public User(int id, String username, String password, boolean enabled, Set<String> roles) {
-        this.id = id;
+    public User(String username, String password, boolean enabled, Set<String> roles) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;

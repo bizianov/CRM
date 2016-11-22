@@ -51,10 +51,9 @@ public class UserController {
 
     @RequestMapping(value = "/createUser", method = GET)
     @Transactional
-    public String createUser(@RequestParam(value = "id") int id,
-                             @RequestParam(value = "name") String name,
+    public String createUser(@RequestParam(value = "name") String name,
                              Model model){
-        User user = userService.createUser(id, name);
+        User user = userService.createUser(name);
         model.addAttribute("user", user);
         return "showUser";
     }

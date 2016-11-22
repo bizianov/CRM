@@ -31,7 +31,7 @@ public class CRUDOperations {
 
     @Test
     public void createUser() throws Exception {
-        mockMvc.perform(get("/createUser?id=2&name=anfisa")).andExpect(view().name("showUser"));
+        mockMvc.perform(get("/createUser?name=anfisa")).andExpect(view().name("showUser"));
     }
 
     @Test

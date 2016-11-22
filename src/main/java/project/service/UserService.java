@@ -26,8 +26,8 @@ public class UserService {
         return userDao.findByUsername(name);
     }
 
-    public User createUser(int id, String name){
-        return userDao.save(new User(id, name));
+    public User createUser(String name){
+        return userDao.save(new User(name));
     }
 
     public User deleteUser(int id){
