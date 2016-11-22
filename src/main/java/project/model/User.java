@@ -20,7 +20,7 @@ public class User {
     private String password;
     private boolean enabled;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "role")
     private Set<String> roles;
 
@@ -85,6 +85,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", enabled=" + enabled +
+                ", roles=" + roles +
                 '}';
     }
 }

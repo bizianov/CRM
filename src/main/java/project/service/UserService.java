@@ -1,6 +1,7 @@
 package project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import project.model.User;
 import project.model.UserDao;
@@ -17,6 +18,8 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public User getUserById(int id){
         return userDao.findOne(id);
@@ -27,7 +30,9 @@ public class UserService {
     }
 
     public User createUser(String name){
-        return userDao.save(new User(name));
+        User user = new User(name);
+        user.setPassword(encoder.encode(user.getPassword()));
+        return userDao.save(user);
     }
 
     public User deleteUser(int id){
