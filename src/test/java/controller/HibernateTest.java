@@ -23,6 +23,7 @@ import project.service.UserService;
 import javax.persistence.PersistenceContext;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Created by slava23 on 11/24/2016.
@@ -57,6 +58,27 @@ public class HibernateTest {
         String username = savedUser.getUsername();
         User userByName = userService.getUserByName(username);
         assertEquals(userByName.getUsername(),"testUser");
+    }
+
+    @Test
+    public void deleteUser(){
+        User user = new User("testUser");
+        User savedUser = entityManager.persist(user);
+        int id = savedUser.getId();
+        userService.deleteUser(id);
+        User userById = userService.getUserById(id);
+        assertNull(userById);
+    }
+
+    @Test
+    public void updateUser(){
+        User user = new User("testUser");
+        User savedUser = entityManager.persist(user);
+        int id = savedUser.getId();
+        savedUser.setUsername("testUserNew");
+        userService.saveUser(savedUser);
+        User userById = userService.getUserById(id);
+        assertEquals(userById.getUsername(),"testUserNew");
     }
 
 }
