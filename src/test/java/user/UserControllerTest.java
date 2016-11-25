@@ -1,4 +1,4 @@
-package controller;
+package user;
 
 import org.junit.Test;
 import org.springframework.ui.ExtendedModelMap;

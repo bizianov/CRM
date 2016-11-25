@@ -1,4 +1,4 @@
-package controller;
+package user;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by slava23 on 11/18/2016.
  */
-public class CRUDOperations {
+public class ViewResolverTest {
 
     private MockMvc mockMvc;
 
