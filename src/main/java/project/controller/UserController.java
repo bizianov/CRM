@@ -3,6 +3,7 @@ package project.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ public class UserController {
     private final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public UserController(UserService userService) {
@@ -71,26 +75,23 @@ public class UserController {
     @Transactional
     public String updateUser(@RequestParam(value = "id") int id,
                              @RequestParam(value = "username", required = false) String name,
-                             @RequestParam(value = "enabled", required = false) Boolean enabled,
+                             @RequestParam(value = "enabled", required = false) String enabled,
                              @RequestParam(value = "password", required = false) String password,
                              Model model){
         User userById = userService.getUserById(id);
         if (userById != null) {
-            if (name != null) {
+            if (name != null && name != "") {
                 userById.setUsername(name);
             }
-            if (enabled != null) {
-                userById.setEnabled(enabled);
+            if (enabled != null && enabled != "") {
+                userById.setEnabled(Boolean.valueOf(enabled));
             }
             if (password != null && password != "") {
-                userById.setPassword(password);
+                userById.setPassword(passwordEncoder.encode(password));
             }
         }
-        model.addAttribute("user", userById);
         User updatedUser = userService.saveUser(userById);
-        if (updatedUser != null){
-
-        }
+        model.addAttribute("user", updatedUser);
         return "updateUser";
     }
 

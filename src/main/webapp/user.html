@@ -34,7 +34,11 @@
     <form action="/updateUser" method="get">
         id = <input type="text" name="id">
         name = <input type="text" name="username">
-        enabled = <input type="text" name="enabled">
+        <!--enabled = <input type="text" name="enabled">-->
+        enabled = <select>
+                    <option typeof="boolean" value="true">true</option>
+                    <option typeof="boolean" value="false">false</option>
+                  </select>
         password = <input type="text" name="password">
         <input type="submit" value="Update">
     </form>
