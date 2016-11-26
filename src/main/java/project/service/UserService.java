@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import project.model.User;
 import project.model.UserDao;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by slava23 on 10/11/2016.
@@ -47,6 +49,13 @@ public class UserService {
     public User saveUser(User user){
         User savedUser = userDao.save(user);
         return savedUser;
+    }
+
+    public List<User> getAllUsers(){
+        List<User> allUsers = new ArrayList<>();
+        Iterable<User> all = userDao.findAll();
+        all.forEach(user -> allUsers.add(user));
+        return allUsers;
     }
 
     public UserDao getUserDao() {

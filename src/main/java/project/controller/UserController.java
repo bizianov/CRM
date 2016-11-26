@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import project.model.User;
 import project.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -100,6 +102,13 @@ public class UserController {
         User updatedUser = userService.saveUser(userById);
         model.addAttribute("user", updatedUser);
         return "updateUser";
+    }
+
+    @RequestMapping(value = "/getAllUsers", method = GET)
+    public String getAllUsers(Model model){
+        List<User> allUsers = userService.getAllUsers();
+        model.addAttribute("allUsers", allUsers);
+        return "showAllUsers";
     }
 
     public UserService getUserService() {
