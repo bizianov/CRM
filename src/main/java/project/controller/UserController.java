@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.model.User;
 import project.service.UserService;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -56,8 +58,12 @@ public class UserController {
     @RequestMapping(value = "/createUser", method = GET)
     @Transactional
     public String createUser(@RequestParam(value = "name") String name,
+                             @RequestParam(value = "role", required = false) List<String> roles,
                              Model model){
         User user = userService.createUser(name);
+        if (roles != null && !roles.isEmpty()) {
+            user.setRoles(new HashSet<>(roles));
+        }
         model.addAttribute("user", user);
         return "showUser";
     }
@@ -84,7 +90,8 @@ public class UserController {
                 userById.setUsername(name);
             }
             if (enabled != null && enabled != "") {
-                userById.setEnabled(Boolean.valueOf(enabled));
+                logger.info("enabled was set to {}", enabled);
+                userById.setEnabled(Boolean.parseBoolean(enabled));
             }
             if (password != null && password != "") {
                 userById.setPassword(passwordEncoder.encode(password));
