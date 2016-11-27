@@ -53,6 +53,12 @@ public class ViewResolverTest {
                 .andExpect(model().attributeExists("allUsers"));
     }
 
+    @Test
+    public void userMenu() throws Exception {
+        mockMvc.perform(get("/user"))
+                .andExpect(view().name("user"));
+    }
+
     @Before
     public void setup() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

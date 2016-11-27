@@ -45,5 +45,10 @@
         <input type="submit" value="Update">
     </form>
 
+    <b>Find all users</b>
+    <form action="/getAllUsers" method="get">
+        <input type="submit" value="Find">
+    </form>
+
 </body>
 </html>

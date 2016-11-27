@@ -116,6 +116,11 @@ public class UserController {
         return "showAllUsers";
     }
 
+    @RequestMapping(value = "/user", method = GET)
+    public String userMenu(){
+        return "user";
+    }
+
     public UserService getUserService() {
         return userService;
     }

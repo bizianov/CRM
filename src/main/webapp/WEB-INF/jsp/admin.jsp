@@ -5,7 +5,7 @@
     
   </head>
   <body>
-    <a href="/user.html">User Menu</a><br>
+    <a href="/user">User Menu</a><br>
     <a href="">Accounting Menu</a><br>
     <a href="">Report Menu</a><br>
   </body>

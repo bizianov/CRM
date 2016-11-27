@@ -6,11 +6,12 @@
     
   </head>
   <body>
-   ---------Manager-----------<br>
+   ---------<b>Manager</b>-----------<br>
    <c:import url="/WEB-INF/jsp/manager.jsp" />
 
+   <br>
    <sec:authorize access="hasRole('ROLE_ADMIN')">
-   -----------Admin-----------<br>
+   -----------<b>Admin</b>-----------<br>
    <c:import url="/WEB-INF/jsp/admin.jsp" />
    </sec:authorize>
 

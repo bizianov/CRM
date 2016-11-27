@@ -10,11 +10,6 @@
   </head>
   <body>
 
-  <sec:authorize access="isAuthenticated()">
-     YES, you are logged in!<br><br>
-     <c:import url="/WEB-INF/views/test.jsp"></c:import>
-  </sec:authorize>
-
   <%
     List<User> allUsers = (List<User>)request.getAttribute("allUsers");
     for(User user : allUsers){
