@@ -3,6 +3,8 @@ package project.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -117,7 +119,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user", method = GET)
-    public String userMenu(){
+    public String userMenu(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        model.addAttribute("username", name);
         return "user";
     }
 

@@ -6,6 +6,8 @@
     <title>User panel</title>
 </head>
 <body>
+    <p align="right">You are logged in as <b>${username}</b>
+    <a href="/login?logout">logout</a></p>
     <b>Find user by id:</b><br>
     <form action="/getUserById" method="get">
         id = <input type="text" name="id">
