@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,8 +21,8 @@
     <b>Create user:</b><br>
     <form action="/createUser" method="get">
         username = <input type="text" name="name">
-        roles = <input type="checkbox" name="role" value="ROLE_USER">manager
-                <input type="checkbox" name="role" value="ROLE_ADMIN">admin
+        roles = <input type="checkbox" name="role" value="manager">manager
+                <input type="checkbox" name="role" value="admin">admin
         <input type="submit" value="Create">
     </form><br>
 

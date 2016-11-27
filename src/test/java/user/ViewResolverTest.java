@@ -10,11 +10,13 @@ import project.service.UserService;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
  * Created by slava23 on 11/18/2016.
  */
+
 public class ViewResolverTest {
 
     private MockMvc mockMvc;
@@ -42,6 +44,13 @@ public class ViewResolverTest {
     @Test
     public void updateUser() throws Exception {
         mockMvc.perform(get("/updateUser?id=1&username=slava1")).andExpect(view().name("updateUser"));
+    }
+
+    @Test
+    public void getAllUsers() throws Exception {
+        mockMvc.perform(get("/getAllUsers"))
+                .andExpect(view().name("showAllUsers"))
+                .andExpect(model().attributeExists("allUsers"));
     }
 
     @Before

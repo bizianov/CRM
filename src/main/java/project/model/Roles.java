@@ -5,8 +5,8 @@ package project.model;
  */
 public enum Roles {
 
-    ADMIN("admin"),
-    MANAGER("manager");
+    ADMIN("ROLE_ADMIN"),
+    USER("ROLE_USER");
 
     private String role;
 

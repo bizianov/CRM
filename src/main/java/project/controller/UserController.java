@@ -9,12 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import project.model.User;
 import project.service.UserService;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -64,6 +61,14 @@ public class UserController {
                              Model model){
         User user = userService.createUser(name);
         if (roles != null && !roles.isEmpty()) {
+            if (roles.contains("manager")){
+                roles.remove("manager");
+                roles.add("ROLE_USER");
+            }
+            if (roles.contains("admin")){
+                roles.remove("admin");
+                roles.add("ROLE_ADMIN");
+            }
             user.setRoles(new HashSet<>(roles));
         }
         model.addAttribute("user", user);

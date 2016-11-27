@@ -26,7 +26,7 @@ public class User {
 
     public User(String username) {
         this(username, DEFAULT_PASSWORD, true,
-                new HashSet<>(Arrays.asList(Roles.MANAGER.getRole())));
+                new HashSet<>(Arrays.asList(Roles.USER.getRole())));
     }
 
     public User(String username, String password, boolean enabled, Set<String> roles) {
