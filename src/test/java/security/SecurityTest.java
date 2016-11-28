@@ -1,4 +1,4 @@
-package user;
+package security;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -37,6 +37,24 @@ public class HotelViewResolverTest {
                 .andExpect(view().name("hotel/showHotel"));
     }
 
+    @Test
+    public void getHotelsByCountry() throws Exception {
+        mockMvc.perform(get("/getHotelsByCountry?country=Egypt"))
+                .andExpect(view().name("hotel/showAllHotels"));
+    }
+
+    @Test
+    public void getHotelsByRegion() throws Exception {
+        mockMvc.perform(get("/getHotelsByRegion?region=Hurgada"))
+                .andExpect(view().name("hotel/showAllHotels"));
+    }
+
+    @Test
+    public void deleteHotel() throws Exception {
+        mockMvc.perform(get("/deleteHotel?id=0"))
+                .andExpect(view().name("hotel/deleteHotel"));
+    }
+
     @Before
     public void setup(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

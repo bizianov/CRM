@@ -9,6 +9,8 @@ import project.model.hotel.Hotel;
 import project.model.hotel.Rate;
 import project.service.HotelService;
 
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 
@@ -51,6 +53,30 @@ public class HotelController {
         Hotel hotelByName = hotelService.findHotelByName(name);
         model.addAttribute("hotel", hotelByName);
         return "hotel/showHotel";
+    }
+
+    @RequestMapping(value = "/getHotelsByCountry", method = GET)
+    public String findHotelsByCountry(@RequestParam(name = "country") String country,
+                                      Model model){
+        List<Hotel> hotelsByCountry = hotelService.findHotelsByCountry(country);
+        model.addAttribute("allHotels", hotelsByCountry);
+        return "hotel/showAllHotels";
+    }
+
+    @RequestMapping(value = "/getHotelsByRegion", method = GET)
+    public String findHotelsByRegion(@RequestParam(name = "region") String region,
+                                      Model model){
+        List<Hotel> hotelsByRegion = hotelService.findHotelsByRegion(region);
+        model.addAttribute("allHotels", hotelsByRegion);
+        return "hotel/showAllHotels";
+    }
+
+    @RequestMapping(value = "/deleteHotel", method = GET)
+    public String deleteHotel(@RequestParam(name = "id") int id,
+                              Model model){
+        Hotel hotel = hotelService.deleteHotel(id);
+        model.addAttribute("hotel", hotel);
+        return "hotel/deleteHotel";
     }
 
     public HotelService getHotelService() {

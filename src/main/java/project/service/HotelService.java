@@ -6,6 +6,8 @@ import project.model.hotel.Hotel;
 import project.model.hotel.HotelDao;
 import project.model.hotel.Rate;
 
+import java.util.List;
+
 /**
  * Created by slava23 on 11/28/2016.
  */
@@ -30,6 +32,21 @@ public class HotelService {
         return hotelDao.findByName(name);
     }
 
+    public List<Hotel> findHotelsByCountry(String country){
+        return hotelDao.findByCountry(country);
+    }
+
+    public List<Hotel> findHotelsByRegion(String region){
+        return hotelDao.findByRegion(region);
+    }
+
+    public Hotel deleteHotel(int id){
+        Hotel hotelById = findHotelById(id);
+        if (hotelById != null){
+            hotelDao.delete(hotelById);
+        }
+        return hotelById;
+    }
 
     public HotelDao getHotelDao() {
         return hotelDao;
