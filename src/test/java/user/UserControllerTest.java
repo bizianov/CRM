@@ -19,6 +19,6 @@ public class UserControllerTest {
         UserService mockUserService = mock(UserService.class);
         UserController userController = new UserController(mockUserService);
         String viewName = userController.getUserById(1, new ExtendedModelMap());
-        assertEquals("showUser", viewName);
+        assertEquals("user/showUser", viewName);
     }
 }

@@ -34,7 +34,23 @@ public class HotelController {
                               Model model){
         Hotel hotel = hotelService.createHotel(name, Rate.valueOf(rate), country, region);
         model.addAttribute("hotel", hotel);
-        return "showHotel";
+        return "hotel/showHotel";
+    }
+
+    @RequestMapping(value = "/getHotelById", method = GET)
+    public String findHotelById(@RequestParam(name = "id") int id,
+                                Model model){
+        Hotel hotelById = hotelService.findHotelById(id);
+        model.addAttribute("hotel", hotelById);
+        return "hotel/showHotel";
+    }
+
+    @RequestMapping(value = "/getHotelByName", method = GET)
+    public String findHotelById(@RequestParam(name = "name") String name,
+                                Model model){
+        Hotel hotelByName = hotelService.findHotelByName(name);
+        model.addAttribute("hotel", hotelByName);
+        return "hotel/showHotel";
     }
 
     public HotelService getHotelService() {

@@ -22,6 +22,14 @@ public class HotelService {
         return hotel;
     }
 
+    public Hotel findHotelById(int id){
+        return hotelDao.findOne(id);
+    }
+
+    public Hotel findHotelByName(String name){
+        return hotelDao.findByName(name);
+    }
+
 
     public HotelDao getHotelDao() {
         return hotelDao;

@@ -18,53 +18,46 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by slava23 on 11/18/2016.
  */
 
-public class ViewResolverTest {
+public class UserViewResolverTest {
 
     private MockMvc mockMvc;
 
     @Test
     public void getUserById() throws Exception {
-        mockMvc.perform(get("/getUserById?id=1")).andExpect(view().name("showUser"));
+        mockMvc.perform(get("/getUserById?id=1")).andExpect(view().name("user/showUser"));
     }
 
     @Test
     public void getUserByName() throws Exception {
-        mockMvc.perform(get("/getUserByName?username=slava")).andExpect(view().name("showUser"));
+        mockMvc.perform(get("/getUserByName?username=slava")).andExpect(view().name("user/showUser"));
     }
 
     @Test
     public void createUser() throws Exception {
-        mockMvc.perform(get("/createUser?name=anfisa")).andExpect(view().name("showUser"));
+        mockMvc.perform(get("/createUser?name=anfisa")).andExpect(view().name("user/showUser"));
     }
 
     @Test
     public void deleteUser() throws Exception {
-       mockMvc.perform(get("/deleteUser?id=2")).andExpect(view().name("deleteUser"));
+       mockMvc.perform(get("/deleteUser?id=2")).andExpect(view().name("user/deleteUser"));
     }
 
     @Test
     public void updateUser() throws Exception {
-        mockMvc.perform(get("/updateUser?id=1&username=slava1")).andExpect(view().name("updateUser"));
+        mockMvc.perform(get("/updateUser?id=1&username=slava1")).andExpect(view().name("user/updateUser"));
     }
 
     @Test
     public void getAllUsers() throws Exception {
         mockMvc.perform(get("/getAllUsers"))
-                .andExpect(view().name("showAllUsers"))
+                .andExpect(view().name("user/showAllUsers"))
                 .andExpect(model().attributeExists("allUsers"));
-    }
-
-    @Ignore
-    @Test
-    public void userMenu() throws Exception {
-        mockMvc.perform(get("/user"))
-                .andExpect(view().name("user"));
     }
 
     @Before
     public void setup() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/jsp/view/");
+        viewResolver.setPrefix("/WEB-INF/view/");
         viewResolver.setSuffix(".jsp");
 
         UserService mockUserService = mock(UserService.class);

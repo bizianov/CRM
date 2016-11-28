@@ -11,4 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface HotelDao extends CrudRepository<Hotel, Integer> {
+    Hotel findByName(String name);
 }

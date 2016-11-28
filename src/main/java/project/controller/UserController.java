@@ -44,7 +44,7 @@ public class UserController {
         logger.info("User with id={} was requested", id);
         User userById = userService.getUserById(id);
         model.addAttribute("user", userById);
-        return "showUser";
+        return "user/showUser";
     }
 
     @RequestMapping(value = "/getUserByName", method = GET)
@@ -53,7 +53,7 @@ public class UserController {
         logger.info("User with name={} was requested", name);
         User userByName = userService.getUserByName(name);
         model.addAttribute("user", userByName);
-        return "showUser";
+        return "user/showUser";
     }
 
     @RequestMapping(value = "/createUser", method = GET)
@@ -74,7 +74,7 @@ public class UserController {
             user.setRoles(new HashSet<>(roles));
         }
         model.addAttribute("user", user);
-        return "showUser";
+        return "user/showUser";
     }
 
     @RequestMapping(value = "/deleteUser", method = GET)
@@ -83,7 +83,7 @@ public class UserController {
                              Model model){
         User deleteUser = userService.deleteUser(id);
         model.addAttribute("user", deleteUser);
-        return "deleteUser";
+        return "user/deleteUser";
     }
 
     @RequestMapping(value = "/updateUser", method = GET)
@@ -108,14 +108,14 @@ public class UserController {
         }
         User updatedUser = userService.saveUser(userById);
         model.addAttribute("user", updatedUser);
-        return "updateUser";
+        return "user/updateUser";
     }
 
     @RequestMapping(value = "/getAllUsers", method = GET)
     public String getAllUsers(Model model){
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("allUsers", allUsers);
-        return "showAllUsers";
+        return "user/showAllUsers";
     }
 
     @RequestMapping(value = "/user", method = GET)
@@ -123,7 +123,7 @@ public class UserController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userLoggedIn = authentication.getName();
         model.addAttribute("userLoggedIn", userLoggedIn);
-        return "user";
+        return "user/user";
     }
 
     public UserService getUserService() {
