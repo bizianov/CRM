@@ -1,6 +1,8 @@
 package project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +71,14 @@ public class HotelController {
         List<Hotel> hotelsByRegion = hotelService.findHotelsByRegion(region);
         model.addAttribute("allHotels", hotelsByRegion);
         return "hotel/showAllHotels";
+    }
+
+    @RequestMapping(value = "/hotel", method = GET)
+    public String hotelMenu(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userLoggedIn = authentication.getName();
+        model.addAttribute("userLoggedIn", userLoggedIn);
+        return "hotel/hotel";
     }
 
     @RequestMapping(value = "/deleteHotel", method = GET)
