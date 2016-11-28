@@ -1,4 +1,4 @@
-package project.model;
+package project.model.user;
 
 /**
  * Created by slava23 on 11/21/2016.

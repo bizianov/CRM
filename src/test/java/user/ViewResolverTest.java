@@ -1,6 +1,7 @@
 package user;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -53,6 +54,7 @@ public class ViewResolverTest {
                 .andExpect(model().attributeExists("allUsers"));
     }
 
+    @Ignore
     @Test
     public void userMenu() throws Exception {
         mockMvc.perform(get("/user"))

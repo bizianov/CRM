@@ -13,7 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import project.Application;
 import project.config.AppRootConfig;
 import project.config.AppWebConfig;
-import project.model.User;
+import project.model.user.User;
 import project.security.SecurityConfig;
 import project.service.UserService;
 

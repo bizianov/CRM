@@ -1,4 +1,4 @@
-package project.model;
+package project.model.user;
 
 import javax.persistence.*;
 import java.util.Arrays;

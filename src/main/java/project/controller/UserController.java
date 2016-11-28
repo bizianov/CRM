@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import project.model.User;
+import project.model.user.User;
 import project.service.UserService;
 
 import java.util.HashSet;
@@ -121,8 +121,8 @@ public class UserController {
     @RequestMapping(value = "/user", method = GET)
     public String userMenu(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String name = authentication.getName();
-        model.addAttribute("username", name);
+        String userLoggedIn = authentication.getName();
+        model.addAttribute("userLoggedIn", userLoggedIn);
         return "user";
     }
 
