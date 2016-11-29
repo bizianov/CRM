@@ -39,6 +39,11 @@
         id = <input type="text" name="id">
         <input type="submit" value="Delete">
     </form><br>
+
+    <b>Passports due to expire</b>
+    <form action="/getExpirePassports" method="get">
+        <input type="submit" value="Find">
+    </form><br>
    
   </body>
 </html>

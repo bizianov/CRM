@@ -43,6 +43,13 @@ public class PassportController {
         return "passport/showPassport";
     }
 
+    @RequestMapping(value = "/getExpirePassports", method = GET)
+    public String getPassportsDueToExpire(Model model){
+        List<Passport> passportsDueToExpire = passportService.getPassportsDueToExpire();
+        model.addAttribute("passportsDueToExpire", passportsDueToExpire);
+        return "passport/expirePassports";
+    }
+
     @RequestMapping(value = "/createPassport", method = GET)
     public String createPassport(@RequestParam(name = "serialNumber") String serialNumber,
                                  @RequestParam(name = "issuer")String issuer,
