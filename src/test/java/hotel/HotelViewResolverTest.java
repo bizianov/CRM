@@ -67,7 +67,7 @@ public class HotelViewResolverTest {
     @Before
     public void setup(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/view/");
+        viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
 
         HotelService hotelService = mock(HotelService.class);
