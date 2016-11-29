@@ -27,6 +27,18 @@ public class PassportService {
         return passport;
     }
 
+    public Passport savePassport(Passport passport){
+        return passportDao.save(passport);
+    }
+
+    public Passport deletePassport(int id){
+        Passport passportById = getPassportById(id);
+        if (passportById != null){
+            passportDao.delete(passportById);
+        }
+        return passportById;
+    }
+
     public PassportDao getPassportDao() {
         return passportDao;
     }

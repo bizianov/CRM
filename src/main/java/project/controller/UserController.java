@@ -105,9 +105,9 @@ public class UserController {
             if (password != null && password != "") {
                 userById.setPassword(passwordEncoder.encode(password));
             }
+            userService.saveUser(userById);
         }
-        User updatedUser = userService.saveUser(userById);
-        model.addAttribute("user", updatedUser);
+        model.addAttribute("user", userById);
         return "user/updateUser";
     }
 

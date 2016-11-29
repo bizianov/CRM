@@ -7,7 +7,7 @@
   </head>
   <body>
     <p align="center"><a href="/passport">Passport menu</a></p>
-    One of the following date is in wrong format:
+    One of the following date is in wrong format (should be yyyy-mm-dd):
 
     ${inputDates}
 

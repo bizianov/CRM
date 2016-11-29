@@ -67,7 +67,7 @@
         <input type="submit" value="Find">
     </form><br>
 
-    <b>Find hotels by country:</b><br>
+    <b>Find hotels by region:</b><br>
     <form action="/getHotelsByRegion" method="get">
         country = <input type="text" name="region">
         <input type="submit" value="Find">

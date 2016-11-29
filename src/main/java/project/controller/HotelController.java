@@ -65,8 +65,8 @@ public class HotelController {
             if (region != null && region != "") {
                 hotelById.setRegion(region);
             }
+            hotelService.saveHotel(hotelById);
         }
-        hotelService.saveHotel(hotelById);
         model.addAttribute("hotel", hotelById);
         return "hotel/updateHotel";
     }

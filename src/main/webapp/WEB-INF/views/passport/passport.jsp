@@ -15,12 +15,29 @@
         <input type="submit" value="Find">
     </form><br>
 
+    <b>Create passport:</b><br>
     <form action="/createPassport" method="get">
         S/N = <input type="text" name="serialNumber">
         issue = <input type="text" name="issuer">
-        issue date (yyyy-MM-dd) = <input type="text" name="issueDate">
-        expire date (yyyy-MM-dd) = <input type="text" name="expireDate">
+        issue date = <input type="text" name="issueDate">
+        expire date = <input type="text" name="expireDate">
         <input type="submit" value="Create">
+    </form><br>
+
+    <b>Update passport:</b><br>
+    <form action="/updatePassport" method="get">
+        id = <input type="text" name="id">
+        S/N = <input type="text" name="serialNumber">
+        issue = <input type="text" name="issuer">
+        issue date = <input type="text" name="issueDate">
+        expire date = <input type="text" name="expireDate">
+    <input type="submit" value="Update">
+    </form><br>
+
+    <b>Delete passport:</b><br>
+    <form action="/deletePassport" method="get">
+        id = <input type="text" name="id">
+        <input type="submit" value="Delete">
     </form><br>
    
   </body>

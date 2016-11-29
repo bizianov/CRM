@@ -8,7 +8,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import project.controller.PassportController;
 import project.service.PassportService;
 import project.validator.DateValidator;
-import project.validator.Validator;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,6 +24,24 @@ public class PassportViewResolverTest {
     public void getPassportById() throws Exception {
         mockMvc.perform(get("/getPassportById?id=1"))
                 .andExpect(view().name("passport/showPassport"));
+    }
+
+    @Test
+    public void createPassport() throws Exception {
+        mockMvc.perform(get("/createPassport?serialNumber=AA0897OM&issuer=2012&issueDate=2012-10-12&expireDate=2022-10-12"))
+                .andExpect(view().name("passport/showPassport"));
+    }
+
+    @Test
+    public void deletePassport() throws Exception {
+        mockMvc.perform(get("/deletePassport?id=1"))
+                .andExpect(view().name("passport/deletePassport"));
+    }
+
+    @Test
+    public void updatePassport() throws Exception {
+        mockMvc.perform(get("/updatePassport?id=0"))
+                .andExpect(view().name("passport/updatePassport"));
     }
 
     @Before

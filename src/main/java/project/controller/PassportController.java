@@ -13,9 +13,7 @@ import project.validator.DateValidator;
 import project.validator.Validator;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -64,6 +62,51 @@ public class PassportController {
             model.addAttribute("inputDates", inputDates);
             return "passport/error/invalidDate";
         }
+    }
+
+    @RequestMapping(value = "/updatePassport", method = GET)
+    public String updatePassport(@RequestParam(name = "id") int id,
+                                 @RequestParam(name = "serialNumber", required = false) String serialNumber,
+                                 @RequestParam(name = "issuer", required = false) String issuer,
+                                 @RequestParam(name = "issueDate", required = false) String issueDate,
+                                 @RequestParam(name = "expireDate", required = false) String expireDate,
+                                 Model model){
+        Passport passportById = passportService.getPassportById(id);
+        if (passportById != null){
+            if (serialNumber != null && serialNumber != ""){
+                passportById.setSerialNumber(serialNumber);
+            }
+            if (issuer != null && issuer != ""){
+                passportById.setIssuer(issuer);
+            }
+            try {
+                if (issueDate != null && issueDate != "") {
+                    Date _issueDate = dateValidator.validate(issueDate);
+                    passportById.setIssueDate(_issueDate);
+                }
+                if (expireDate != null && expireDate != "") {
+                    Date _expireDate = dateValidator.validate(expireDate);
+                    passportById.setExpireDate(_expireDate);
+                }
+            }catch (ParseException e){
+                List<String> inputDates = new ArrayList<>();
+                inputDates.add(issueDate);
+                inputDates.add(expireDate);
+                model.addAttribute("inputDates", inputDates);
+                return "passport/error/invalidDate";
+            }
+            passportService.savePassport(passportById);
+        }
+        model.addAttribute("passport", passportById);
+        return "passport/updatePassport";
+    }
+
+    @RequestMapping(value = "/deletePassport", method = GET)
+    public String deletePassport(@RequestParam(name = "id") int id,
+                                 Model model){
+        Passport passport = passportService.deletePassport(id);
+        model.addAttribute("passport", passport);
+        return "passport/deletePassport";
     }
 
     @RequestMapping(value = "/passport", method = GET)
