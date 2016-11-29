@@ -5,7 +5,7 @@
     
   </head>
   <body>
-    <p align="center"><a href="/user">User menu</a></p>
-    ${user} has been updated
+    <p align="center"><a href="/hotel">Hotel menu</a></p>
+    ${hotel} has been updated
   </body>
 </html>

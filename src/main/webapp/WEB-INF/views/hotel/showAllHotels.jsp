@@ -9,6 +9,7 @@
     <title>Hotel info</title>
   </head>
   <body>
+  <p align="center"><a href="/hotel">Hotel menu</a></p>
 
   <%
     List<Hotel> allHotels = (List<Hotel>)request.getAttribute("allHotels");

@@ -6,6 +6,7 @@
     <title>User info</title>
   </head>
   <body>
+    <p align="center"><a href="/user">User menu</a></p>
     ${user}
   </body>
 </html>

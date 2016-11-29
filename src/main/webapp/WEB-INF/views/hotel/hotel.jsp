@@ -38,6 +38,23 @@
         <input type="submit" value="Create">
     </form><br>
 
+      <b>Update hotel:</b><br>
+        <form action="/updateHotel" method="get">
+            id = <input type="text" name="id">
+            name = <input type="text" name="name">
+            rate = <input type="text" name="rate" list="ratelist">
+                <datalist id="ratelist">
+                    <option value="FIVE" selected>FIVE</option>
+                    <option value="FOUR">FOUR</option>
+                    <option value="THREE">THREE</option>
+                    <option value="TWO">TWO</option>
+                    <option value="ONE">ONE</option>
+                </datalist>
+            country = <input type="text" name="country">
+            region = <input type="text" name="region">
+        <input type="submit" value="Update">
+        </form><br>
+
     <b>Delete hotel:</b><br>
     <form action="/deleteHotel" method="get">
         id = <input type="text" name="id">

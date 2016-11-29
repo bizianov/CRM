@@ -58,6 +58,12 @@ public class HotelViewResolverTest {
                 .andExpect(view().name("hotel/deleteHotel"));
     }
 
+    @Test
+    public void updateHotel() throws Exception {
+        mockMvc.perform(get("/updateHotel?id=0"))
+                .andExpect(view().name("hotel/updateHotel"));
+    }
+
     @Before
     public void setup(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

@@ -40,6 +40,10 @@ public class HotelService {
         return hotelDao.findByRegion(region);
     }
 
+    public Hotel saveHotel(Hotel hotel){
+        return hotelDao.save(hotel);
+    }
+
     public Hotel deleteHotel(int id){
         Hotel hotelById = findHotelById(id);
         if (hotelById != null){

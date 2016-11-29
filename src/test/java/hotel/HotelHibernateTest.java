@@ -67,4 +67,17 @@ public class HotelHibernateTest {
         assertNull(hotelById);
     }
 
+    @Test
+    public void updateHotel(){
+        Hotel hotel = new Hotel("hotel0", Rate.FOUR, "Germany", "Munich");
+        Hotel savedHotel = entityManager.persist(hotel);
+        int id = savedHotel.getId();
+        savedHotel.setRate(1);
+        savedHotel.setRegion("Berlin");
+        hotelService.saveHotel(savedHotel);
+        Hotel hotelById = hotelService.findHotelById(id);
+        assertEquals(hotelById.getRegion(),"Berlin");
+        assertEquals(hotelById.getRate(), 1);
+    }
+
 }

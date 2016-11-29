@@ -44,8 +44,7 @@ public class UserService {
     }
 
     public User saveUser(User user){
-        User savedUser = userDao.save(user);
-        return savedUser;
+        return userDao.save(user);
     }
 
     public List<User> getAllUsers(){

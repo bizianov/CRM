@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +40,35 @@ public class HotelController {
         Hotel hotel = hotelService.createHotel(name, Rate.valueOf(rate), country, region);
         model.addAttribute("hotel", hotel);
         return "hotel/showHotel";
+    }
+
+    @RequestMapping(value = "/updateHotel", method = GET)
+    @Transactional
+    public String updateHotel(@RequestParam(name = "id") int id,
+                              @RequestParam(name = "name", required = false) String name,
+                              @RequestParam(name = "rate", required = false) String rate,
+                              @RequestParam(name = "country", required = false) String country,
+                              @RequestParam(name = "region", required = false) String region,
+                              Model model){
+        Hotel hotelById = hotelService.findHotelById(id);
+        if (hotelById != null) {
+            if (name != null && name != "") {
+                hotelById.setName(name);
+            }
+            if (rate != null && rate != "") {
+                Rate newRate = Rate.valueOf(rate);
+                hotelById.setRate(newRate.getRate());
+            }
+            if (country != null && country != "") {
+                hotelById.setCountry(country);
+            }
+            if (region != null && region != "") {
+                hotelById.setRegion(region);
+            }
+        }
+        hotelService.saveHotel(hotelById);
+        model.addAttribute("hotel", hotelById);
+        return "hotel/updateHotel";
     }
 
     @RequestMapping(value = "/getHotelById", method = GET)

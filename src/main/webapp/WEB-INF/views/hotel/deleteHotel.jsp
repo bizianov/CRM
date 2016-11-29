@@ -5,6 +5,7 @@
     
   </head>
   <body>
+    <p align="center"><a href="/hotel">Hotel menu</a></p>
     ${hotel} has been deleted
   </body>
 </html>
