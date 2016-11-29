@@ -10,6 +10,7 @@ import project.service.HotelService;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
@@ -40,13 +41,15 @@ public class HotelViewResolverTest {
     @Test
     public void getHotelsByCountry() throws Exception {
         mockMvc.perform(get("/getHotelsByCountry?country=Egypt"))
-                .andExpect(view().name("hotel/showAllHotels"));
+                .andExpect(view().name("hotel/showAllHotels"))
+                .andExpect(model().attributeExists("allHotels"));
     }
 
     @Test
     public void getHotelsByRegion() throws Exception {
         mockMvc.perform(get("/getHotelsByRegion?region=Hurgada"))
-                .andExpect(view().name("hotel/showAllHotels"));
+                .andExpect(view().name("hotel/showAllHotels"))
+                .andExpect(model().attributeExists("allHotels"));
     }
 
     @Test
