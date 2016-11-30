@@ -1,13 +1,13 @@
 package project.model.passport;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import lombok.*;
-import project.model.tourist.Tourist;
-import project.utils.date.DateUtils;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
+import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * Created by slava23 on 11/29/2016.
