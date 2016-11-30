@@ -2,6 +2,7 @@ package project.model.passport;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import project.utils.date.DateUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,10 @@ public class Passport {
         this.issuer = issuer;
         this.issueDate = issueDate;
         this.expireDate = expireDate;
+    }
+
+    public boolean isDueToExpire(){
+        return DateUtils.addMonths(new Date(), EXPIRE_PERIOD).after(this.getExpireDate());
     }
 
     public int getId() {

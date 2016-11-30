@@ -5,11 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.model.passport.Passport;
 import project.model.passport.PassportDao;
-import project.utils.date.DateUtils;
-import project.utils.predicate.PassportExpirePredicate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +16,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class PassportService {
-
-    private static final int EXPIRE_PERIOD = 12;
 
     @Autowired
     private PassportDao passportDao;
@@ -34,8 +28,7 @@ public class PassportService {
         Iterable<Passport> all = passportDao.findAll();
         List<Passport> passportsDueToExpire = Lists.newArrayList(all)
                 .stream()
-                .filter(passport -> DateUtils.addMonths(new Date(), EXPIRE_PERIOD)
-                                              .after(passport.getExpireDate()))
+                .filter(Passport::isDueToExpire)
                 .collect(Collectors.toList());
         return passportsDueToExpire;
     }
