@@ -1,5 +1,7 @@
 package project.model.user;
 
+import com.google.common.base.MoreObjects;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -81,11 +83,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", enabled=" + enabled +
-                ", roles=" + roles +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("username", username)
+                .add("enabled", enabled)
+                .add("roles", roles)
+                .toString();
     }
 }

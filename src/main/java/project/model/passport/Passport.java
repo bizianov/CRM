@@ -1,5 +1,8 @@
 package project.model.passport;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +15,8 @@ import java.util.Date;
 
 @Entity
 public class Passport {
+
+    private static final int EXPIRE_PERIOD = 12;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,11 +78,11 @@ public class Passport {
 
     @Override
     public String toString() {
-        return "Passport{" +
-                "serialNumber='" + serialNumber + '\'' +
-                ", issuer='" + issuer + '\'' +
-                ", issueDate=" + issueDate +
-                ", expireDate=" + expireDate +
-                '}';
+        return MoreObjects.toStringHelper(this)
+                .add("serialNumber", serialNumber)
+                .add("issuer", issuer)
+                .add("issueDate", issueDate)
+                .add("expireDate", expireDate)
+                .toString();
     }
 }

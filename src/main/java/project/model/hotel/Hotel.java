@@ -1,5 +1,7 @@
 package project.model.hotel;
 
+import com.google.common.base.MoreObjects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,16 +30,6 @@ public class Hotel {
         this.rate = rate.getRate();
         this.country = country;
         this.region = region;
-    }
-
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "name='" + name + '\'' +
-                ", rate=" + rate +
-                ", country='" + country + '\'' +
-                ", region='" + region + '\'' +
-                '}';
     }
 
     public int getId() {
@@ -78,5 +70,15 @@ public class Hotel {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("name", name)
+                .add("rate", rate)
+                .add("country", country)
+                .add("region", region)
+                .toString();
     }
 }

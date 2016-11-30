@@ -1,5 +1,6 @@
 package project.service;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -48,10 +49,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers(){
-        List<User> allUsers = new ArrayList<>();
-        Iterable<User> all = userDao.findAll();
-        all.forEach(user -> allUsers.add(user));
-        return allUsers;
+        return Lists.newArrayList(userDao.findAll());
     }
 
     public UserDao getUserDao() {
