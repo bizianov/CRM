@@ -95,14 +95,14 @@ public class UserController {
                              Model model){
         User userById = userService.getUserById(id);
         if (userById != null) {
-            if (name != null && name != "") {
+            if (name != null && !name.isEmpty()) {
                 userById.setUsername(name);
             }
-            if (enabled != null && enabled != "") {
+            if (enabled != null && !enabled.isEmpty()) {
                 logger.info("enabled was set to {}", enabled);
                 userById.setEnabled(Boolean.parseBoolean(enabled));
             }
-            if (password != null && password != "") {
+            if (password != null && !password.isEmpty()) {
                 userById.setPassword(passwordEncoder.encode(password));
             }
             userService.saveUser(userById);

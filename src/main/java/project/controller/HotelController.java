@@ -52,17 +52,17 @@ public class HotelController {
                               Model model){
         Hotel hotelById = hotelService.findHotelById(id);
         if (hotelById != null) {
-            if (name != null && name != "") {
+            if (name != null && !name.isEmpty()) {
                 hotelById.setName(name);
             }
-            if (rate != null && rate != "") {
+            if (rate != null && !rate.isEmpty()) {
                 Rate newRate = Rate.valueOf(rate);
                 hotelById.setRate(newRate.getRate());
             }
-            if (country != null && country != "") {
+            if (country != null && !country.isEmpty()) {
                 hotelById.setCountry(country);
             }
-            if (region != null && region != "") {
+            if (region != null && !region.isEmpty()) {
                 hotelById.setRegion(region);
             }
             hotelService.saveHotel(hotelById);

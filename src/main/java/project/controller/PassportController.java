@@ -80,18 +80,18 @@ public class PassportController {
                                  Model model){
         Passport passportById = passportService.getPassportById(id);
         if (passportById != null){
-            if (serialNumber != null && serialNumber != ""){
+            if (serialNumber != null && !serialNumber.isEmpty()){
                 passportById.setSerialNumber(serialNumber);
             }
-            if (issuer != null && issuer != ""){
+            if (issuer != null && !issuer.isEmpty()){
                 passportById.setIssuer(issuer);
             }
             try {
-                if (issueDate != null && issueDate != "") {
+                if (issueDate != null && !issueDate.isEmpty()) {
                     Date _issueDate = dateValidator.validate(issueDate);
                     passportById.setIssueDate(_issueDate);
                 }
-                if (expireDate != null && expireDate != "") {
+                if (expireDate != null && !expireDate.isEmpty()) {
                     Date _expireDate = dateValidator.validate(expireDate);
                     passportById.setExpireDate(_expireDate);
                 }
