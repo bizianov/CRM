@@ -19,8 +19,8 @@
     <form action="/createPassport" method="get">
         S/N = <input type="text" name="serialNumber">
         issue = <input type="text" name="issuer">
-        issue date = <input type="text" name="issueDate">
-        expire date = <input type="text" name="expireDate">
+        issue date = <input type="text" name="issueDate" placeholder="2016-05-16">
+        expire date = <input type="text" name="expireDate" placeholder="2016-05-16">
         <input type="submit" value="Create">
     </form><br>
 
@@ -29,8 +29,8 @@
         id = <input type="text" name="id">
         S/N = <input type="text" name="serialNumber">
         issue = <input type="text" name="issuer">
-        issue date = <input type="text" name="issueDate">
-        expire date = <input type="text" name="expireDate">
+        issue date = <input type="text" name="issueDate" placeholder="2016-05-16">
+        expire date = <input type="text" name="expireDate" placeholder="2016-05-16">
     <input type="submit" value="Update">
     </form><br>
 
