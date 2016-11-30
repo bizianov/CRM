@@ -34,7 +34,7 @@ public class PassportService {
     }
 
     public Passport createPassport(String serialNumber, String issuer, Date issueDate, Date expireDate){
-        Passport passport = new Passport(serialNumber, issuer, issueDate, expireDate);
+        Passport passport = Passport.of(serialNumber, issuer, issueDate, expireDate);
         passportDao.save(passport);
         return passport;
     }

@@ -19,7 +19,7 @@ public class HotelService {
     private HotelDao hotelDao;
 
     public Hotel createHotel(String name, Rate rate, String country, String region){
-        Hotel hotel = new Hotel(name, rate, country, region);
+        Hotel hotel = Hotel.of(name, rate.getRate(), country, region);
         hotelDao.save(hotel);
         return hotel;
     }

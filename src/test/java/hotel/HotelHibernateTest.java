@@ -41,7 +41,7 @@ public class HotelHibernateTest {
 
     @Test
     public void findHotelById(){
-        Hotel hotel = new Hotel("hotel0", Rate.FOUR, "Germany", "Munich");
+        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
         Hotel savedHotel = entityManager.persist(hotel);
         int id = savedHotel.getId();
         Hotel hotelById = hotelService.findHotelById(id);
@@ -50,7 +50,7 @@ public class HotelHibernateTest {
 
     @Test
     public void findHotelByName(){
-        Hotel hotel = new Hotel("hotel0", Rate.FOUR, "Germany", "Munich");
+        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
         Hotel savedHotel = entityManager.persist(hotel);
         String hotelName = savedHotel.getName();
         Hotel hotelByName = hotelService.findHotelByName(hotelName);
@@ -59,7 +59,7 @@ public class HotelHibernateTest {
 
     @Test
     public void deleteHotel(){
-        Hotel hotel = new Hotel("hotel0", Rate.FOUR, "Germany", "Munich");
+        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
         Hotel savedHotel = entityManager.persist(hotel);
         int id = savedHotel.getId();
         hotelService.deleteHotel(id);
@@ -69,7 +69,7 @@ public class HotelHibernateTest {
 
     @Test
     public void updateHotel(){
-        Hotel hotel = new Hotel("hotel0", Rate.FOUR, "Germany", "Munich");
+        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
         Hotel savedHotel = entityManager.persist(hotel);
         int id = savedHotel.getId();
         savedHotel.setRate(1);

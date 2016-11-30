@@ -44,7 +44,7 @@ public class PassportHibernateTest {
 
     @Test
     public void findPassportById() throws ParseException {
-        Passport passport = new Passport("xxx","xxx",
+        Passport passport = Passport.of("xxx","xxx",
                 dateValidator.validate("2012-01-01"), dateValidator.validate("2022-01-01"));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
@@ -54,7 +54,7 @@ public class PassportHibernateTest {
 
     @Test
     public void updatePassport() throws ParseException {
-        Passport passport = new Passport("xxx","xxx",
+        Passport passport = Passport.of("xxx","xxx",
                 dateValidator.validate("2012-01-01"), dateValidator.validate("2022-01-01"));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
@@ -68,7 +68,7 @@ public class PassportHibernateTest {
 
     @Test
     public void deletePassport() throws ParseException{
-        Passport passport = new Passport("xxx","xxx",
+        Passport passport = Passport.of("xxx","xxx",
                 dateValidator.validate("2012-01-01"), dateValidator.validate("2022-01-01"));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
