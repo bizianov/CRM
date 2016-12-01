@@ -16,8 +16,6 @@ import java.util.List;
 @Service
 public class TouristService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TouristService.class);
-
     @Autowired
     private TouristDao touristDao;
 

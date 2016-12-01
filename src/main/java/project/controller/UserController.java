@@ -1,5 +1,6 @@
 package project.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 
 @Controller
+@Slf4j
 public class UserController {
-
-    private final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
 
@@ -41,7 +41,7 @@ public class UserController {
     @RequestMapping(value = "/getUserById", method = GET)
     public String getUserById(@RequestParam(value = "id") int id,
                               Model model){
-        logger.info("User with id={} was requested", id);
+        log.info("User with id={} was requested", id);
         User userById = userService.getUserById(id);
         model.addAttribute("user", userById);
         return "user/showUser";
@@ -50,7 +50,7 @@ public class UserController {
     @RequestMapping(value = "/getUserByName", method = GET)
     public String getUserByName(@RequestParam(value = "username") String name,
                                 Model model){
-        logger.info("User with name={} was requested", name);
+        log.info("User with name={} was requested", name);
         User userByName = userService.getUserByName(name);
         model.addAttribute("user", userByName);
         return "user/showUser";
@@ -99,7 +99,7 @@ public class UserController {
                 userById.setUsername(name);
             }
             if (enabled != null && !enabled.isEmpty()) {
-                logger.info("enabled was set to {}", enabled);
+                log.info("enabled was set to {}", enabled);
                 userById.setEnabled(Boolean.parseBoolean(enabled));
             }
             if (password != null && !password.isEmpty()) {

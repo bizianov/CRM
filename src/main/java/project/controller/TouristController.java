@@ -27,7 +27,6 @@ import static project.model.passport.Passport.DATE_PATTERN;
 @Controller
 public class TouristController {
 
-    private static final Logger logger = LoggerFactory.getLogger(TouristController.class);
     private TouristService touristService;
 
     public TouristController(TouristService touristService) {
