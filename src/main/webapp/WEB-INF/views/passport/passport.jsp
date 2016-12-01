@@ -21,6 +21,7 @@
         issue = <input type="text" name="issuer">
         issue date = <input type="text" name="issueDate" placeholder="2016-05-16">
         expire date = <input type="text" name="expireDate" placeholder="2016-05-16">
+        tourist id = <input type="text" name="tourist_id">
         <input type="submit" value="Create">
     </form><br>
 

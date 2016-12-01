@@ -32,7 +32,7 @@ public class Passport {
     @Convert(converter = LocalDateAttributeConverter.class)
     @NonNull private LocalDate issueDate;
     @ManyToOne
-    private Tourist tourist;
+    @NonNull private Tourist tourist;
 
     public boolean isDueToExpire(){
         return LocalDate.now().plusMonths(12).isAfter(expireDate);

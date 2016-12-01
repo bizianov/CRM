@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.model.passport.Passport;
+import project.model.tourist.Tourist;
 import project.service.PassportService;
+import project.service.TouristService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,10 +29,12 @@ import static project.model.passport.Passport.DATE_PATTERN;
 public class PassportController {
 
     private PassportService passportService;
+    private TouristService touristService;
 
     @Autowired
-    public PassportController(PassportService passportService) {
+    public PassportController(PassportService passportService, TouristService touristService) {
         this.passportService = passportService;
+        this.touristService = touristService;
     }
 
     @RequestMapping(value = "/getPassportById", method = GET)
@@ -53,20 +57,27 @@ public class PassportController {
                                  @RequestParam(name = "issuer")String issuer,
                                  @RequestParam(name = "issueDate")String issueDate,
                                  @RequestParam(name = "expireDate")String expireDate,
+                                 @RequestParam(name = "tourist_id") int tourist_id,
                                  Model model){
-        try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
-            LocalDate _issueDate = LocalDate.parse(issueDate, dtf);
-            LocalDate _expireDate = LocalDate.parse(expireDate, dtf);
-            Passport passport = passportService.createPassport(serialNumber, issuer, _issueDate, _expireDate);
-            model.addAttribute("passport", passport);
-            return "passport/showPassport";
-        } catch (DateTimeParseException e) {
-            List<String> inputDates = new ArrayList<>();
-            inputDates.add(issueDate);
-            inputDates.add(expireDate);
-            model.addAttribute("inputDates", inputDates);
-            return "passport/error/invalidDate";
+        Tourist touristById = touristService.findTouristById(tourist_id);
+        if (touristById != null) {
+            try {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
+                LocalDate _issueDate = LocalDate.parse(issueDate, dtf);
+                LocalDate _expireDate = LocalDate.parse(expireDate, dtf);
+                Passport passport = passportService.createPassport(serialNumber, issuer, _issueDate, _expireDate,touristById);
+                model.addAttribute("passport", passport);
+                return "passport/showPassport";
+            } catch (DateTimeParseException e) {
+                List<String> inputDates = new ArrayList<>();
+                inputDates.add(issueDate);
+                inputDates.add(expireDate);
+                model.addAttribute("inputDates", inputDates);
+                return "passport/error/invalidDate";
+            }
+        } else {
+            model.addAttribute("tourist_id", tourist_id);
+            return "passport/error/invalidTouristId";
         }
     }
 
@@ -133,4 +144,11 @@ public class PassportController {
         this.passportService = passportService;
     }
 
+    public TouristService getTouristService() {
+        return touristService;
+    }
+
+    public void setTouristService(TouristService touristService) {
+        this.touristService = touristService;
+    }
 }

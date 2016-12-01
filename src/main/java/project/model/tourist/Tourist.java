@@ -15,7 +15,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-@ToString(exclude = {"id","passports"})
+@ToString(exclude = {"id"})
 @EqualsAndHashCode(exclude = {"id","passports"})
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")

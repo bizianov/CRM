@@ -7,6 +7,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import project.controller.PassportController;
 import project.service.PassportService;
+import project.service.TouristService;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,8 +28,8 @@ public class PassportViewResolverTest {
 
     @Test
     public void createPassport() throws Exception {
-        mockMvc.perform(get("/createPassport?serialNumber=AA0897OM&issuer=2012&issueDate=2012-10-12&expireDate=2022-10-12"))
-                .andExpect(view().name("passport/showPassport"));
+        mockMvc.perform(get("/createPassport?serialNumber=AA0897OM&issuer=2012&issueDate=2012-10-12&expireDate=2022-10-12&tourist_id=-1"))
+                .andExpect(view().name("passport/error/invalidTouristId"));
     }
 
     @Test
@@ -50,7 +51,8 @@ public class PassportViewResolverTest {
         viewResolver.setSuffix(".jsp");
 
         PassportService passportService = mock(PassportService.class);
-        PassportController passportController = new PassportController(passportService);
+        TouristService touristService = mock(TouristService.class);
+        PassportController passportController = new PassportController(passportService, touristService);
         mockMvc = MockMvcBuilders.standaloneSetup(passportController)
                 .setViewResolvers(viewResolver)
                 .build();

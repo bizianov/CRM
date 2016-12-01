@@ -38,6 +38,24 @@ public class TouristViewResolverTest {
                 .andExpect(view().name("tourist/showTourist"));
     }
 
+    @Test
+    public void findTouristsByFirstName() throws Exception {
+        mockMvc.perform(get("/getTouristByFirstName?firstName=slava"))
+                .andExpect(view().name("tourist/showAllTourists"));
+    }
+
+    @Test
+    public void findTouristsByLastName() throws Exception {
+        mockMvc.perform(get("/getTouristByLastName?lastName=bizianov"))
+                .andExpect(view().name("tourist/showAllTourists"));
+    }
+
+    @Test
+    public void findTouristsByBirthday() throws Exception {
+        mockMvc.perform(get("/getTouristsByBirthday"))
+                .andExpect(view().name("tourist/showAllTourists"));
+    }
+
     @Before
     public void setup(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

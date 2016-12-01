@@ -16,14 +16,14 @@ import project.config.AppWebConfig;
 import project.model.passport.Passport;
 import project.security.SecurityConfig;
 import project.service.PassportService;
+import project.service.TouristService;
 
 import java.text.ParseException;
 import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.apache.commons.lang3.time.DateUtils.parseDate;
-import static project.model.passport.Passport.DATE_PATTERN;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by slava23 on 11/29/2016.
@@ -41,11 +41,13 @@ public class PassportHibernateTest {
     private TestEntityManager entityManager;
     @Autowired
     private PassportService passportService;
+    @Autowired
+    private TouristService touristService;
 
     @Test
     public void findPassportById() throws ParseException {
         Passport passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10));
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         Passport passportById = passportService.getPassportById(id);
@@ -55,7 +57,7 @@ public class PassportHibernateTest {
     @Test
     public void updatePassport() throws ParseException {
         Passport passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10));
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         savedPassport.setSerialNumber("yyy");
@@ -69,7 +71,7 @@ public class PassportHibernateTest {
     @Test
     public void deletePassport() throws ParseException{
         Passport passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10));
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         passportService.deletePassport(id);
