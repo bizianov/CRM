@@ -3,7 +3,6 @@ package project.model.tourist;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +15,4 @@ public interface TouristDao extends CrudRepository<Tourist, Integer> {
     List<Tourist> findByLastName(String lastName);
     Tourist findByPhone(String phone);
     Tourist findByEmail(String email);
-    List<Tourist> findByBirthday(Date birthday);
-
 }

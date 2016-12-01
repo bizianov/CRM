@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import project.model.passport.Passport;
 import project.service.PassportService;
 
-import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static project.model.passport.Passport.DATE_PATTERN;
 
 /**
@@ -55,12 +55,13 @@ public class PassportController {
                                  @RequestParam(name = "expireDate")String expireDate,
                                  Model model){
         try {
-            Date _issueDate = parseDate(issueDate,DATE_PATTERN);
-            Date _expireDate = parseDate(expireDate,DATE_PATTERN);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
+            LocalDate _issueDate = LocalDate.parse(issueDate, dtf);
+            LocalDate _expireDate = LocalDate.parse(expireDate, dtf);
             Passport passport = passportService.createPassport(serialNumber, issuer, _issueDate, _expireDate);
             model.addAttribute("passport", passport);
             return "passport/showPassport";
-        } catch (ParseException e) {
+        } catch (DateTimeParseException e) {
             List<String> inputDates = new ArrayList<>();
             inputDates.add(issueDate);
             inputDates.add(expireDate);
@@ -86,14 +87,16 @@ public class PassportController {
             }
             try {
                 if (issueDate != null && !issueDate.isEmpty()) {
-                    Date _issueDate = parseDate(issueDate,DATE_PATTERN);
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
+                    LocalDate _issueDate = LocalDate.parse(issueDate, dtf);
                     passportById.setIssueDate(_issueDate);
                 }
                 if (expireDate != null && !expireDate.isEmpty()) {
-                    Date _expireDate = parseDate(expireDate,DATE_PATTERN);
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
+                    LocalDate _expireDate = LocalDate.parse(expireDate, dtf);
                     passportById.setExpireDate(_expireDate);
                 }
-            }catch (ParseException e){
+            }catch (DateTimeParseException e){
                 List<String> inputDates = new ArrayList<>();
                 inputDates.add(issueDate);
                 inputDates.add(expireDate);

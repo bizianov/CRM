@@ -1,11 +1,11 @@
 package project.model.passport;
 
 import lombok.*;
+import project.config.LocalDateAttributeConverter;
+import project.model.tourist.Tourist;
 
 import javax.persistence.*;
-import java.util.Date;
-import org.apache.commons.lang3.time.DateUtils;
-import project.model.tourist.Tourist;
+import java.time.LocalDate;
 
 /**
  * Created by slava23 on 11/29/2016.
@@ -27,12 +27,14 @@ public class Passport {
     private int id;
     @NonNull private String serialNumber;
     @NonNull private String issuer;
-    @NonNull private Date issueDate;
-    @NonNull private Date expireDate;
+    @Convert(converter = LocalDateAttributeConverter.class)
+    @NonNull private LocalDate expireDate;
+    @Convert(converter = LocalDateAttributeConverter.class)
+    @NonNull private LocalDate issueDate;
     @ManyToOne
     private Tourist tourist;
 
     public boolean isDueToExpire(){
-        return DateUtils.addMonths(new Date(), EXPIRE_PERIOD).after(this.getExpireDate());
+        return LocalDate.now().plusMonths(12).isAfter(expireDate);
     }
 }

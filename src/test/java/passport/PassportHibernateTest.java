@@ -18,6 +18,7 @@ import project.security.SecurityConfig;
 import project.service.PassportService;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -44,7 +45,7 @@ public class PassportHibernateTest {
     @Test
     public void findPassportById() throws ParseException {
         Passport passport = Passport.of("xxx","xxx",
-                parseDate("2012-01-01",DATE_PATTERN), parseDate("2022-01-01",DATE_PATTERN));
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         Passport passportById = passportService.getPassportById(id);
@@ -54,7 +55,7 @@ public class PassportHibernateTest {
     @Test
     public void updatePassport() throws ParseException {
         Passport passport = Passport.of("xxx","xxx",
-                parseDate("2012-01-01",DATE_PATTERN), parseDate("2022-01-01",DATE_PATTERN));
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         savedPassport.setSerialNumber("yyy");
@@ -68,7 +69,7 @@ public class PassportHibernateTest {
     @Test
     public void deletePassport() throws ParseException{
         Passport passport = Passport.of("xxx","xxx",
-                parseDate("2012-01-01",DATE_PATTERN), parseDate("2022-01-01",DATE_PATTERN));
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         passportService.deletePassport(id);

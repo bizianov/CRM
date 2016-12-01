@@ -1,11 +1,12 @@
 package project.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.model.tourist.Tourist;
 import project.model.tourist.TouristDao;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Service
 public class TouristService {
+
+    private static final Logger logger = LoggerFactory.getLogger(TouristService.class);
 
     @Autowired
     private TouristDao touristDao;
@@ -38,7 +41,7 @@ public class TouristService {
         return touristDao.findByEmail(email);
     }
 
-    public List<Tourist> findTouristsByBirthday(Date birthday){
-        return touristDao.findByBirthday(birthday);
+    public Tourist saveTourist(Tourist tourist){
+        return touristDao.save(tourist);
     }
 }

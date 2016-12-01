@@ -41,9 +41,27 @@
 
     <b>Find tourist by birthday:</b><br>
          <form action="/getTouristByBirthday" method="get">
-         id = <input type="text" name="birthday">
+         id = <input type="text" name="birthday" placeholder="2016-05-16">
          <input type="submit" value="Find">
     </form>
-   
+
+    <b>Create tourist:</b><br>
+        <form action="/createTourist" method="get">
+        name = <input type="text" name="firstName">
+        surname = <input type="text" name="lastName">
+        phone = <input type="text" name="phone">
+        email = <input type="text" name="email">
+        birthday = <input type="text" name="birthday">
+        source = <input type="text" name="source" list="sourcelist">
+               <datalist id="sourcelist">
+                   <option value="REGULAR" selected>REGULAR</option>
+                   <option value="WEBSITE">WEBSITE</option>
+                   <option value="REFERRAL">REFERRAL</option>
+                   <option value="CASUAL">CASUAL</option>
+                   <option value="OTHER">OTHER</option>
+               </datalist>
+        <input type="submit" value="Create">
+    </form>
+
   </body>
 </html>

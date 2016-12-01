@@ -1,22 +1,23 @@
 package project.controller;
 
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import project.model.tourist.Source;
 import project.model.tourist.Tourist;
 import project.service.TouristService;
 
-import java.text.ParseException;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.apache.commons.lang3.time.DateUtils.parseDate;
 import static project.model.passport.Passport.DATE_PATTERN;
 
 /**
@@ -26,6 +27,7 @@ import static project.model.passport.Passport.DATE_PATTERN;
 @Controller
 public class TouristController {
 
+    private static final Logger logger = LoggerFactory.getLogger(TouristController.class);
     private TouristService touristService;
 
     public TouristController(TouristService touristService) {
@@ -72,15 +74,20 @@ public class TouristController {
         return "tourist/showAllTourists";
     }
 
-    @RequestMapping("/getTouristByBirthday")
-    public String findTouristByBirthday(@RequestParam(name = "birthday") String birthday,
-                                         Model model){
+    @RequestMapping("/createTourist")
+    public String createTourist(@RequestParam(name = "firstName") String firstName,
+                                @RequestParam(name = "lastName") String lastName,
+                                @RequestParam(name = "phone") String phone,
+                                @RequestParam(name = "email") String email,
+                                @RequestParam(name = "birthday") String birthday,
+                                @RequestParam(name = "source") String source,
+                                Model model){
         try {
-            Date _birthday = parseDate(birthday,DATE_PATTERN);
-            List<Tourist> touristsByBirthday = touristService.findTouristsByBirthday(_birthday);
-            model.addAttribute("allTourists", touristsByBirthday);
-            return "tourist/showAllTourists";
-        } catch (ParseException e) {
+            Tourist tourist = new Tourist(firstName, lastName, phone, email, LocalDate.parse(birthday, DateTimeFormatter.ofPattern(DATE_PATTERN)), Source.valueOf(source));
+            Tourist savedTourist = touristService.saveTourist(tourist);
+            model.addAttribute("tourist", savedTourist);
+            return "tourist/showTourist";
+        } catch (DateTimeParseException e) {
             model.addAttribute("birthday", birthday);
             return "tourist/error/invalidBirthday";
         }

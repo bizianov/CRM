@@ -1,11 +1,12 @@
 package project.model.tourist;
 
 import com.google.common.base.MoreObjects;
+import project.config.LocalDateAttributeConverter;
 import project.model.passport.Passport;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  * Created by slava23 on 11/30/2016.
@@ -21,7 +22,8 @@ public class Tourist {
     private String lastName;
     private String phone;
     private String email;
-    private Date birthday;
+    @Convert(converter = LocalDateAttributeConverter.class)
+    private LocalDate birthday;
     @OneToMany(targetEntity = Passport.class, mappedBy = "tourist")
     private Collection<Passport> passports;
     @Enumerated(EnumType.STRING)
@@ -30,13 +32,12 @@ public class Tourist {
     public Tourist() {
     }
 
-    public Tourist(String firstName, String lastName, String phone, String email, Date birthday, Collection<Passport> passports, Source source) {
+    public Tourist(String firstName, String lastName, String phone, String email, LocalDate birthday, Source source) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
         this.birthday = birthday;
-        this.passports = passports;
         this.source = source;
     }
 
@@ -80,11 +81,11 @@ public class Tourist {
         this.email = email;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

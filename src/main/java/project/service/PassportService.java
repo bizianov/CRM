@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import project.model.passport.Passport;
 import project.model.passport.PassportDao;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +33,7 @@ public class PassportService {
         return passportsDueToExpire;
     }
 
-    public Passport createPassport(String serialNumber, String issuer, Date issueDate, Date expireDate){
+    public Passport createPassport(String serialNumber, String issuer, LocalDate issueDate, LocalDate expireDate){
         Passport passport = Passport.of(serialNumber, issuer, issueDate, expireDate);
         passportDao.save(passport);
         return passport;
