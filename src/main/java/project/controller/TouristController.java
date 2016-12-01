@@ -83,7 +83,7 @@ public class TouristController {
                                 @RequestParam(name = "source") String source,
                                 Model model){
         try {
-            Tourist tourist = new Tourist(firstName, lastName, phone, email, LocalDate.parse(birthday, DateTimeFormatter.ofPattern(DATE_PATTERN)), Source.valueOf(source));
+            Tourist tourist = Tourist.of(firstName, lastName, phone, email, LocalDate.parse(birthday, DateTimeFormatter.ofPattern(DATE_PATTERN)), Source.valueOf(source));
             Tourist savedTourist = touristService.saveTourist(tourist);
             model.addAttribute("tourist", savedTourist);
             return "tourist/showTourist";

@@ -38,7 +38,7 @@ public class TouristHibernateTest {
 
     @Test
     public void createTourist() {
-        Tourist tourist = new Tourist("x","y","050","1@1", LocalDate.of(1988,05,16), Source.CASUAL);
+        Tourist tourist = Tourist.of("x","y","050","1@1", LocalDate.of(1988,05,16), Source.CASUAL);
         Tourist savedTourist = entityManager.persist(tourist);
         assertNotNull(savedTourist);
     }
