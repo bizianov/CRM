@@ -1,10 +1,6 @@
 package project.model.user;
 
-import com.google.common.base.MoreObjects;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -19,6 +15,7 @@ import java.util.Set;
 @ToString(exclude = {"id","password"})
 @EqualsAndHashCode(exclude = {"id","password"})
 @NoArgsConstructor
+@RequiredArgsConstructor(staticName = "of")
 public class User {
 
     private static final String DEFAULT_PASSWORD = "123456";
@@ -26,23 +23,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String username;
-    private String password;
-    private boolean enabled;
+    @NonNull private String username;
+    @NonNull private String password;
+    @NonNull private boolean enabled;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "role")
+    @NonNull
     private Set<String> roles;
 
     public User(String username) {
         this(username, DEFAULT_PASSWORD, true,
                 new HashSet<>(Arrays.asList(Roles.USER.getRole())));
-    }
-
-    public User(String username, String password, boolean enabled, Set<String> roles) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.roles = roles;
     }
 }
