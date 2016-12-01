@@ -5,7 +5,7 @@
     
   </head>
   <body>
-      <a href="">Tourist Menu</a><br>
+      <a href="/tourist">Tourist Menu</a><br>
       <a href="/passport">Passport Menu</a><br>
       <a href="/hotel">Hotel Menu</a><br>
       <a href="">Tour Menu</a><br>

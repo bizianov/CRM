@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.model.passport.Passport;
 import project.service.PassportService;
-import project.validator.DateValidator;
-import project.validator.Validator;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.apache.commons.lang3.time.DateUtils.parseDate;
+import static project.model.passport.Passport.DATE_PATTERN;
 
 /**
  * Created by slava23 on 11/29/2016.
@@ -27,12 +27,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 public class PassportController {
 
     private PassportService passportService;
-    private DateValidator dateValidator;
 
     @Autowired
-    public PassportController(PassportService passportService, DateValidator validator) {
+    public PassportController(PassportService passportService) {
         this.passportService = passportService;
-        this.dateValidator = validator;
     }
 
     @RequestMapping(value = "/getPassportById", method = GET)
@@ -57,8 +55,8 @@ public class PassportController {
                                  @RequestParam(name = "expireDate")String expireDate,
                                  Model model){
         try {
-            Date _issueDate = dateValidator.validate(issueDate);
-            Date _expireDate = dateValidator.validate(expireDate);
+            Date _issueDate = parseDate(issueDate,DATE_PATTERN);
+            Date _expireDate = parseDate(expireDate,DATE_PATTERN);
             Passport passport = passportService.createPassport(serialNumber, issuer, _issueDate, _expireDate);
             model.addAttribute("passport", passport);
             return "passport/showPassport";
@@ -88,11 +86,11 @@ public class PassportController {
             }
             try {
                 if (issueDate != null && !issueDate.isEmpty()) {
-                    Date _issueDate = dateValidator.validate(issueDate);
+                    Date _issueDate = parseDate(issueDate,DATE_PATTERN);
                     passportById.setIssueDate(_issueDate);
                 }
                 if (expireDate != null && !expireDate.isEmpty()) {
-                    Date _expireDate = dateValidator.validate(expireDate);
+                    Date _expireDate = parseDate(expireDate,DATE_PATTERN);
                     passportById.setExpireDate(_expireDate);
                 }
             }catch (ParseException e){
@@ -132,11 +130,4 @@ public class PassportController {
         this.passportService = passportService;
     }
 
-    public Validator getDateValidator() {
-        return dateValidator;
-    }
-
-    public void setDateValidator(DateValidator dateValidator) {
-        this.dateValidator = dateValidator;
-    }
 }

@@ -11,18 +11,18 @@ import java.util.Date;
  * Created by slava23 on 11/30/2016.
  */
 
-/*@Entity*/
+@Entity
 public class Tourist {
 
-   /* @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
     private String phone;
     private String email;
     private Date birthday;
-    /*@OneToMany(targetEntity = Passport.class, mappedBy = "tourist")*/
+    @OneToMany(targetEntity = Passport.class, mappedBy = "tourist")
     private Collection<Passport> passports;
     @Enumerated(EnumType.STRING)
     private Source source;

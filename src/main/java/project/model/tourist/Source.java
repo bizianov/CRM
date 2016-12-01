@@ -5,18 +5,10 @@ package project.model.tourist;
  */
 public enum Source {
 
-    REGULAR("regular customer"),
-    WEBSITE("came from web site"),
-    REFERRAL("someone recommended us"),
-    CASUAL("passing by person");
+    REGULAR,
+    WEBSITE,
+    REFERRAL,
+    CASUAL,
+    OTHER;
 
-    private String reason;
-
-    Source(String reason) {
-        this.reason = reason;
-    }
-
-    public String getReason() {
-        return reason;
-    }
 }

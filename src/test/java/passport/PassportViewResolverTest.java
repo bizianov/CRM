@@ -7,7 +7,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import project.controller.PassportController;
 import project.service.PassportService;
-import project.validator.DateValidator;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -51,8 +50,7 @@ public class PassportViewResolverTest {
         viewResolver.setSuffix(".jsp");
 
         PassportService passportService = mock(PassportService.class);
-        DateValidator dateValidator = mock(DateValidator.class);
-        PassportController passportController = new PassportController(passportService, dateValidator);
+        PassportController passportController = new PassportController(passportService);
         mockMvc = MockMvcBuilders.standaloneSetup(passportController)
                 .setViewResolvers(viewResolver)
                 .build();

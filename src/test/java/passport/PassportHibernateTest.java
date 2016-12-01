@@ -16,12 +16,13 @@ import project.config.AppWebConfig;
 import project.model.passport.Passport;
 import project.security.SecurityConfig;
 import project.service.PassportService;
-import project.validator.DateValidator;
 
 import java.text.ParseException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.apache.commons.lang3.time.DateUtils.parseDate;
+import static project.model.passport.Passport.DATE_PATTERN;
 
 /**
  * Created by slava23 on 11/29/2016.
@@ -39,13 +40,11 @@ public class PassportHibernateTest {
     private TestEntityManager entityManager;
     @Autowired
     private PassportService passportService;
-    @Autowired
-    private DateValidator dateValidator;
 
     @Test
     public void findPassportById() throws ParseException {
         Passport passport = Passport.of("xxx","xxx",
-                dateValidator.validate("2012-01-01"), dateValidator.validate("2022-01-01"));
+                parseDate("2012-01-01",DATE_PATTERN), parseDate("2022-01-01",DATE_PATTERN));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         Passport passportById = passportService.getPassportById(id);
@@ -55,7 +54,7 @@ public class PassportHibernateTest {
     @Test
     public void updatePassport() throws ParseException {
         Passport passport = Passport.of("xxx","xxx",
-                dateValidator.validate("2012-01-01"), dateValidator.validate("2022-01-01"));
+                parseDate("2012-01-01",DATE_PATTERN), parseDate("2022-01-01",DATE_PATTERN));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         savedPassport.setSerialNumber("yyy");
@@ -69,7 +68,7 @@ public class PassportHibernateTest {
     @Test
     public void deletePassport() throws ParseException{
         Passport passport = Passport.of("xxx","xxx",
-                dateValidator.validate("2012-01-01"), dateValidator.validate("2022-01-01"));
+                parseDate("2012-01-01",DATE_PATTERN), parseDate("2022-01-01",DATE_PATTERN));
         Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         passportService.deletePassport(id);
