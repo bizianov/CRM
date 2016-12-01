@@ -39,9 +39,8 @@
          <input type="submit" value="Find">
     </form>
 
-    <b>Find tourist by birthday:</b><br>
-         <form action="/getTouristByBirthday" method="get">
-         id = <input type="text" name="birthday" placeholder="2016-05-16">
+    <b>Find birthday today</b><br>
+         <form action="/getTouristsByBirthday" method="get">
          <input type="submit" value="Find">
     </form>
 

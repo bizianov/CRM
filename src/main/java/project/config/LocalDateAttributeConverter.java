@@ -18,6 +18,6 @@ public class LocalDateAttributeConverter implements AttributeConverter<LocalDate
 
     @Override
     public LocalDate convertToEntityAttribute(Date date) {
-        return (date == null ? null : date.toLocalDate());
+        return (date == null ? null : date.toLocalDate().plusDays(1));
     }
 }

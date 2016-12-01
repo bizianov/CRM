@@ -73,6 +73,13 @@ public class TouristController {
         return "tourist/showAllTourists";
     }
 
+    @RequestMapping("/getTouristsByBirthday")
+    public String findTouristsByBirthday(Model model){
+        List<Tourist> touristsByBirthday = touristService.findTouristsByBirthday();
+        model.addAttribute("allTourists", touristsByBirthday);
+        return "tourist/showAllTourists";
+    }
+
     @RequestMapping("/createTourist")
     public String createTourist(@RequestParam(name = "firstName") String firstName,
                                 @RequestParam(name = "lastName") String lastName,
