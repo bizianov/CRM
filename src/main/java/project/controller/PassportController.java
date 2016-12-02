@@ -87,9 +87,17 @@ public class PassportController {
                                  @RequestParam(name = "issuer", required = false) String issuer,
                                  @RequestParam(name = "issueDate", required = false) String issueDate,
                                  @RequestParam(name = "expireDate", required = false) String expireDate,
+                                 @RequestParam(name = "tourist_id", required = false) Integer tourist_id,
                                  Model model){
         Passport passportById = passportService.getPassportById(id);
         if (passportById != null){
+            Tourist touristById = touristService.findTouristById(tourist_id);
+            if (touristById == null){
+                model.addAttribute("tourist_id",tourist_id);
+                return "passport/error/invalidTouristId";
+            } else {
+                passportById.setTourist(touristById);
+            }
             if (serialNumber != null && !serialNumber.isEmpty()){
                 passportById.setSerialNumber(serialNumber);
             }

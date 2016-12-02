@@ -1,5 +1,6 @@
 package passport;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import project.Application;
 import project.config.AppRootConfig;
 import project.config.AppWebConfig;
 import project.model.passport.Passport;
+import project.model.tourist.Source;
+import project.model.tourist.Tourist;
 import project.security.SecurityConfig;
 import project.service.PassportService;
 import project.service.TouristService;
@@ -41,20 +44,24 @@ public class PassportHibernateTest {
     private PassportService passportService;
     @Autowired
     private TouristService touristService;
+    private Passport passport, savedPassport;
+
+    @Before
+    public void setup(){
+        Tourist tourist = Tourist.of("tFirstName","tLastName","tPhone","tEmail",
+                LocalDate.of(1988,05,15), Source.CASUAL);
+        Passport passport = Passport.of("xxx","xxx",
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), tourist);
+        savedPassport = entityManager.persist(passport);
+    }
 
     @Test
     public void createPassport(){
-        Passport passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
-        Passport savedPassport = entityManager.persist(passport);
         assertNotNull(savedPassport);
     }
 
     @Test
     public void findPassportById() throws ParseException {
-        Passport passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
-        Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         Passport passportById = passportService.getPassportById(id);
         assertEquals(passportById.getSerialNumber(),"xxx");
@@ -62,9 +69,6 @@ public class PassportHibernateTest {
 
     @Test
     public void updatePassport() throws ParseException {
-        Passport passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
-        Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         savedPassport.setSerialNumber("yyy");
         savedPassport.setIssuer("yyy");
@@ -76,9 +80,6 @@ public class PassportHibernateTest {
 
     @Test
     public void deletePassport() throws ParseException{
-        Passport passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
-        Passport savedPassport = entityManager.persist(passport);
         int id = savedPassport.getId();
         passportService.deletePassport(id);
         Passport passportById = passportService.getPassportById(id);
