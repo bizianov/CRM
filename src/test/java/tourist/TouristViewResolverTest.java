@@ -56,6 +56,18 @@ public class TouristViewResolverTest {
                 .andExpect(view().name("tourist/showAllTourists"));
     }
 
+    @Test
+    public void createTourist() throws Exception {
+        mockMvc.perform(get("/createTourist?firstName=q&lastName=q&phone=q&email=q&birthday=2000-12-21&source=WEBSITE"))
+                .andExpect(view().name("tourist/showTourist"));
+    }
+
+    @Test
+    public void deleteTouristInvalidId() throws Exception {
+        mockMvc.perform(get("/deleteTourist?id=0"))
+                .andExpect(view().name("tourist/error/invalidTouristId"));
+    }
+
     @Before
     public void setup(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

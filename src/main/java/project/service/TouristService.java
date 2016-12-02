@@ -56,4 +56,13 @@ public class TouristService {
     public Tourist saveTourist(Tourist tourist){
         return touristDao.save(tourist);
     }
+
+    public Tourist deleteTourist(int id){
+        Tourist touristById = touristDao.findOne(id);
+        if (touristById != null){
+            touristDao.delete(touristById);
+            return touristById;
+        }
+        return null;
+    }
 }

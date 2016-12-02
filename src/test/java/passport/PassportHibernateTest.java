@@ -21,9 +21,7 @@ import project.service.TouristService;
 import java.text.ParseException;
 import java.time.LocalDate;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by slava23 on 11/29/2016.
@@ -43,6 +41,14 @@ public class PassportHibernateTest {
     private PassportService passportService;
     @Autowired
     private TouristService touristService;
+
+    @Test
+    public void createPassport(){
+        Passport passport = Passport.of("xxx","xxx",
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), touristService.findTouristById(2));
+        Passport savedPassport = entityManager.persist(passport);
+        assertNotNull(savedPassport);
+    }
 
     @Test
     public void findPassportById() throws ParseException {

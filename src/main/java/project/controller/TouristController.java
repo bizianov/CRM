@@ -99,6 +99,19 @@ public class TouristController {
         }
     }
 
+    @RequestMapping("/deleteTourist")
+    public String deleteTourist(@RequestParam(name = "id") int id,
+                                Model model){
+        Tourist tourist = touristService.deleteTourist(id);
+        if (tourist != null){
+            model.addAttribute("tourist",tourist);
+            return "tourist/deleteTourist";
+        } else {
+            model.addAttribute("tourist_id", id);
+            return "tourist/error/invalidTouristId";
+        }
+    }
+
     @RequestMapping(value = "/tourist", method = GET)
     public String touristMenu(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -62,5 +62,11 @@
         <input type="submit" value="Create">
     </form>
 
+    <b>Delete tourist:<b><br>
+    <form action="/deleteTourist" method="get">
+        id = <input type="text" name="id">
+        <input type="submit" value="Delete">
+    </form>
+
   </body>
 </html>

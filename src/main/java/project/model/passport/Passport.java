@@ -28,9 +28,9 @@ public class Passport {
     @NonNull private String serialNumber;
     @NonNull private String issuer;
     @Convert(converter = LocalDateAttributeConverter.class)
-    @NonNull private LocalDate expireDate;
-    @Convert(converter = LocalDateAttributeConverter.class)
     @NonNull private LocalDate issueDate;
+    @Convert(converter = LocalDateAttributeConverter.class)
+    @NonNull private LocalDate expireDate;
     @ManyToOne
     @NonNull private Tourist tourist;
 

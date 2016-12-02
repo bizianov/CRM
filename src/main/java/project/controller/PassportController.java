@@ -65,7 +65,7 @@ public class PassportController {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_PATTERN);
                 LocalDate _issueDate = LocalDate.parse(issueDate, dtf);
                 LocalDate _expireDate = LocalDate.parse(expireDate, dtf);
-                Passport passport = passportService.createPassport(serialNumber, issuer, _issueDate, _expireDate,touristById);
+                Passport passport = passportService.createPassport(serialNumber, issuer, _issueDate, _expireDate, touristById);
                 model.addAttribute("passport", passport);
                 return "passport/showPassport";
             } catch (DateTimeParseException e) {

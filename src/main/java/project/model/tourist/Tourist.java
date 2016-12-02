@@ -16,7 +16,7 @@ import java.util.Collection;
 @Entity
 @Data
 @ToString(exclude = {"id"})
-@EqualsAndHashCode(exclude = {"id","passports"})
+@EqualsAndHashCode(exclude = {"id"})
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of")
 public class Tourist {
@@ -30,8 +30,8 @@ public class Tourist {
     @NonNull private String email;
     @Convert(converter = LocalDateAttributeConverter.class)
     @NonNull private LocalDate birthday;
-    @OneToMany(targetEntity = Passport.class, mappedBy = "tourist")
-    private Collection<Passport> passports;
+    /*@OneToMany(targetEntity = Passport.class, mappedBy = "tourist")
+    private Collection<Passport> passports;*/
     @Enumerated(EnumType.STRING)
     @NonNull private Source source;
 
