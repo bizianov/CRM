@@ -40,7 +40,7 @@ public class Tour {
     private boolean isAvia;
     private boolean visaRequired;
 
-    private double priceNetto;
     @NonNull private double priceBrutto;
+    private double priceNetto;
     private double profit;
 }
