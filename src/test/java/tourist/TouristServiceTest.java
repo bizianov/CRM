@@ -34,7 +34,7 @@ import static org.junit.Assert.*;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = {AppWebConfig.class, AppRootConfig.class, SecurityConfig.class, Application.class})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class TouristHibernateTest {
+public class TouristServiceTest {
 
     @Autowired
     private TestEntityManager entityManager;

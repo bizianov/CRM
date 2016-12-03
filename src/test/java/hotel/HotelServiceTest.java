@@ -1,5 +1,7 @@
 package hotel;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import project.Application;
 import project.config.AppRootConfig;
 import project.config.AppWebConfig;
 import project.model.hotel.Hotel;
+import project.model.hotel.HotelDao;
 import project.model.hotel.Rate;
 import project.security.SecurityConfig;
 import project.service.HotelService;
@@ -27,40 +30,44 @@ import static org.junit.Assert.assertNull;
  */
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
 @WebAppConfiguration
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = {AppWebConfig.class, AppRootConfig.class, SecurityConfig.class, Application.class})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class HotelHibernateTest {
+public class HotelServiceTest {
 
     @Autowired
-    private TestEntityManager entityManager;
-    @Autowired
     private HotelService hotelService;
+    private Hotel hotel;
+    private Hotel savedHotel;
+
+    @Before
+    public void setUp(){
+        hotel = Hotel.of("hotelZ", Rate.FOUR.getRate(), "Germany", "Munich");
+        savedHotel = hotelService.saveHotel(hotel);
+    }
+
+    @After
+    public void tearDown(){
+        hotelService.deleteHotel(hotel.getId());
+    }
 
     @Test
     public void findHotelById(){
-        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
-        Hotel savedHotel = entityManager.persist(hotel);
+
         int id = savedHotel.getId();
         Hotel hotelById = hotelService.findHotelById(id);
-        assertEquals(hotelById.getName(), "hotel0");
+        assertEquals(hotelById.getName(), "hotelZ");
     }
 
     @Test
     public void findHotelByName(){
-        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
-        Hotel savedHotel = entityManager.persist(hotel);
         String hotelName = savedHotel.getName();
         Hotel hotelByName = hotelService.findHotelByName(hotelName);
-        assertEquals(hotelByName.getName(),"hotel0");
+        assertEquals(hotelByName.getName(),"hotelZ");
     }
 
     @Test
     public void deleteHotel(){
-        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
-        Hotel savedHotel = entityManager.persist(hotel);
         int id = savedHotel.getId();
         hotelService.deleteHotel(id);
         Hotel hotelById = hotelService.findHotelById(id);
@@ -69,8 +76,6 @@ public class HotelHibernateTest {
 
     @Test
     public void updateHotel(){
-        Hotel hotel = Hotel.of("hotel0", Rate.FOUR.getRate(), "Germany", "Munich");
-        Hotel savedHotel = entityManager.persist(hotel);
         int id = savedHotel.getId();
         savedHotel.setRate(1);
         savedHotel.setRegion("Berlin");

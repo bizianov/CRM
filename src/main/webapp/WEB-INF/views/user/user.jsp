@@ -9,17 +9,30 @@
     <p align="center"><a href="/main.jsp">Main menu</a>
     <p align="right">You are logged in as <b>${userLoggedIn}</b>
     <a href="/login?logout">logout</a></p>
+
+    <hr>
+    <table>
+    <tr>
+    <td>
     <b>Find user by id:</b><br>
     <form action="/getUserById" method="get">
         id = <input type="text" name="id">
         <input type="submit" value="Find">
-    </form><br>
+    </form></td>
 
+    <td>
     <b>Find user by name:</b><br>
     <form action="/getUserByName" method="get">
         name = <input type="text" name="username">
         <input type="submit" value="Find">
-    </form><br>
+    </form></td></tr>
+    </table>
+
+    <b>Find all users</b>
+       <form action="/getAllUsers" method="get">
+       <input type="submit" value="Find">
+    </form>
+    <hr>
 
     <b>Create user:</b><br>
     <form action="/createUser" method="get">
@@ -27,13 +40,7 @@
         roles = <input type="checkbox" name="role" value="manager">manager
                 <input type="checkbox" name="role" value="admin">admin
         <input type="submit" value="Create">
-    </form><br>
-
-    <b>Delete user:</b><br>
-    <form action="/deleteUser" method="get">
-        id = <input type="text" name="id">
-        <input type="submit" value="Delete">
-    </form><br>
+    </form>
 
     <b>Update user:</b><br>
     <form action="/updateUser" method="get">
@@ -46,12 +53,13 @@
                   </datalist>
         password = <input type="password" name="password">
         <input type="submit" value="Update">
-    </form>
+    </form><hr>
 
-    <b>Find all users</b>
-    <form action="/getAllUsers" method="get">
-        <input type="submit" value="Find">
-    </form>
+    <b>Delete user:</b><br>
+        <form action="/deleteUser" method="get">
+            id = <input type="text" name="id">
+            <input type="submit" value="Delete">
+    </form><hr>
 
 </body>
 </html>

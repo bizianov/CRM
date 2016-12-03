@@ -30,7 +30,7 @@ import static org.junit.Assert.assertNull;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = {AppWebConfig.class, AppRootConfig.class, SecurityConfig.class, Application.class})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class UserHibernateTest {
+public class UserServiceTest {
 
     @Autowired
     private TestEntityManager entityManager;

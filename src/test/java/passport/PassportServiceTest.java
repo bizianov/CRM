@@ -36,7 +36,7 @@ import static org.junit.Assert.*;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = {AppWebConfig.class, AppRootConfig.class, SecurityConfig.class, Application.class})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class PassportHibernateTest {
+public class PassportServiceTest {
 
     @Autowired
     private TestEntityManager entityManager;
@@ -44,13 +44,14 @@ public class PassportHibernateTest {
     private PassportService passportService;
     @Autowired
     private TouristService touristService;
-    private Passport passport, savedPassport;
+    private Passport passport;
+    private Passport savedPassport;
 
     @Before
     public void setup(){
         Tourist tourist = Tourist.of("tFirstName","tLastName","tPhone","tEmail",
                 LocalDate.of(1988,05,15), Source.CASUAL);
-        Passport passport = Passport.of("xxx","xxx",
+        passport = Passport.of("xxx","xxx",
                 LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), tourist);
         savedPassport = entityManager.persist(passport);
     }
