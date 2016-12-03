@@ -30,8 +30,6 @@ public class Tourist {
     @NonNull private String email;
     @Convert(converter = LocalDateAttributeConverter.class)
     @NonNull private LocalDate birthday;
-    /*@OneToMany(targetEntity = Passport.class, mappedBy = "tourist")
-    private Collection<Passport> passports;*/
     @Enumerated(EnumType.STRING)
     @NonNull private Source source;
 
