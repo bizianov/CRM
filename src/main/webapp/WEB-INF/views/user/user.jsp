@@ -44,14 +44,14 @@
 
     <b>Update user:</b><br>
     <form action="/updateUser" method="get">
-        id = <input type="text" name="id">
-        name = <input type="text" name="username">
-        enabled = <input type="text" name="enabled" list="enabled">
+        id = <input type="text" name="id"><br>
+        name = <input type="text" name="username"><br>
+        enabled = <input type="text" name="enabled" list="enabled"><br>
                   <datalist id="enabled">
                       <option value="true" selected>true</option>
                       <option value="false">false</option>
                   </datalist>
-        password = <input type="password" name="password">
+        password = <input type="password" name="password"><br>
         <input type="submit" value="Update">
     </form><hr>
 

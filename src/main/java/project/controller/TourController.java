@@ -1,6 +1,8 @@
 package project.controller;
 
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,10 +21,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @Data
+@RequiredArgsConstructor(staticName = "of")
 public class TourController {
 
     @Autowired
-    private TourService tourService;
+    @NonNull private TourService tourService;
 
     @RequestMapping("/getTourById")
     public String TourById(@RequestParam(name = "id") int id,

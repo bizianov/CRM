@@ -43,4 +43,6 @@ public class Tour {
     @NonNull private double priceBrutto;
     private double priceNetto;
     private double profit;
+    @Convert(converter = LocalDateAttributeConverter.class)
+    @NonNull private LocalDate closureDate;
 }
