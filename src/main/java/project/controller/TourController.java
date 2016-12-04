@@ -89,6 +89,14 @@ public class TourController {
         return "tour/showTour";
     }
 
+    @RequestMapping("/deleteTour")
+    public String deleteTour(@RequestParam(name = "id") int id,
+                             Model model){
+        Tour deleteTour = tourService.deleteTour(id);
+        model.addAttribute("tour",deleteTour);
+        return "tour/deleteTour";
+    }
+
     @RequestMapping("/tour")
     public String passportMenu(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

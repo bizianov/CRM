@@ -90,4 +90,14 @@ public class TourService {
                 .collect(Collectors.toList());
     }
 
+    public Tour deleteTour(int id){
+        Tour tourById = findTourById(id);
+        if (tourById == null){
+            return null;
+        } else {
+            tourDao.delete(tourById);
+            return tourById;
+        }
+    }
+
 }

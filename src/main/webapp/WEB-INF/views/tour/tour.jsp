@@ -54,5 +54,11 @@
       </form>
       <hr>
 
+      <b>Delete tour:</b><br>
+          <form action="/deleteTour" method="get">
+              id = <input type="text" name="id">
+              <input type="submit" value="Delete">
+      </form><hr>
+
   </body>
 </html>
