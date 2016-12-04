@@ -6,7 +6,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import project.controller.TourController;
+import project.service.HotelService;
 import project.service.TourService;
+import project.service.TouristService;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -32,7 +34,9 @@ public class TourViewResolverTest {
         viewResolver.setSuffix(".jsp");
 
         TourService tourService = mock(TourService.class);
-        TourController tourController = TourController.of(tourService);
+        HotelService hotelService = mock(HotelService.class);
+        TouristService touristService = mock(TouristService.class);
+        TourController tourController = TourController.of(tourService,hotelService,touristService);
         mockMvc = MockMvcBuilders.standaloneSetup(tourController)
                 .setViewResolvers(viewResolver)
                 .build();

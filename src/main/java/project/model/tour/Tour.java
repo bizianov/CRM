@@ -37,8 +37,8 @@ public class Tour {
     @Enumerated(EnumType.STRING)
     @NonNull private TourOperator tourOperator;
 
-    private boolean isAvia;
-    private boolean visaRequired;
+    @NonNull private boolean isAvia;
+    @NonNull private boolean visaRequired;
 
     @NonNull private double priceBrutto;
     private double priceNetto;

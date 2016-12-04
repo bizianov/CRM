@@ -12,7 +12,6 @@ import project.model.tour.TourOperator;
 import project.model.tourist.Tourist;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +26,10 @@ public class TourService {
     @Getter
     @Setter
     private TourDao tourDao;
+
+    public Tour saveTour(Tour tour){
+        return tourDao.save(tour);
+    }
 
     public Tour findTourById(int id) {
         return tourDao.findOne(id);

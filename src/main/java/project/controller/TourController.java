@@ -10,10 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import project.model.hotel.Hotel;
 import project.model.tour.Tour;
+import project.model.tour.TourOperator;
+import project.model.tourist.Tourist;
+import project.service.HotelService;
 import project.service.TourService;
+import project.service.TouristService;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by slava23 on 12/3/2016.
@@ -26,6 +33,45 @@ public class TourController {
 
     @Autowired
     @NonNull private TourService tourService;
+    @Autowired
+    @NonNull private HotelService hotelService;
+    @Autowired
+    @NonNull private TouristService touristService;
+
+    @RequestMapping("/createTour")
+    public String createTour(Model model,
+                             @RequestParam(name = "startDate") String startDate,
+                             @RequestParam(name = "endDate") String endDate,
+                             @RequestParam(name = "tourOperator") String tourOperator,
+                             @RequestParam(name = "isAvia") String isAvia,
+                             @RequestParam(name = "visaRequired") String visaRequired,
+                             @RequestParam(name = "priceBrutto") double priceBrutto,
+                             @RequestParam(name = "hotelId") int hotelId,
+                             @RequestParam(name = "closureDate") String closureDate,
+                             @RequestParam(name = "touristId") int... touristId){
+        Hotel hotelById = hotelService.findHotelById(hotelId);
+        if (hotelById == null){
+            model.addAttribute("hotelId",hotelById);
+            return "tour/error/invalidHotelId";
+        }
+        List<Tourist> touristList = new ArrayList<>();
+        for (int i = 0; i < touristId.length; i++) {
+            Tourist touristById = touristService.findTouristById(touristId[i]);
+            if (touristById != null){
+                touristList.add(touristById);
+            } else {
+                model.addAttribute("touristId", touristId[i]);
+                return "tour/error/invalidTouristId";
+            }
+        }
+        Tour tour = Tour.of(LocalDate.parse(startDate),LocalDate.parse(endDate),
+                touristList,hotelById, TourOperator.valueOf(tourOperator),
+                Boolean.getBoolean(isAvia), Boolean.getBoolean(visaRequired),
+                priceBrutto,LocalDate.parse(closureDate));
+        Tour savedTour = tourService.saveTour(tour);
+        model.addAttribute("tour",savedTour);
+        return "tour/showTour";
+    }
 
     @RequestMapping("/getTourById")
     public String TourById(@RequestParam(name = "id") int id,
