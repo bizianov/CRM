@@ -179,6 +179,13 @@ public class TourController {
         }
     }
 
+    @RequestMapping("/getAllTours")
+    public String findAllTours(Model model){
+        List<Tour> allTours = tourService.findAll();
+        model.addAttribute("allTours",allTours);
+        return "tour/showAllTours";
+    }
+
 
     @RequestMapping("/deleteTour")
     public String deleteTour(@RequestParam(name = "id") int id,

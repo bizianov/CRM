@@ -33,6 +33,12 @@ public class TourViewResolverTest {
                 .andExpect(view().name("tour/deleteTour"));
     }
 
+    @Test
+    public void findAllTours() throws Exception {
+        mockMvc.perform(get("/getAllTours"))
+                .andExpect(view().name("tour/showAllTours"));
+    }
+
     @Before
     public void setup(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();

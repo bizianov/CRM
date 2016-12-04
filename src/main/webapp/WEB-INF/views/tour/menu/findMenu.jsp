@@ -22,4 +22,8 @@
        id = <input type="text" name="id">
     <input type="submit" value="Find">
     </form>
+
+    <b>Find all tours:</b><br>
+    <form action="/getAllTours" method="get">
+    <input type="submit" value="Find">
     <hr>
