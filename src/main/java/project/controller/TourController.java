@@ -48,21 +48,29 @@ public class TourController {
                              @RequestParam(name = "priceBrutto") double priceBrutto,
                              @RequestParam(name = "hotelId") int hotelId,
                              @RequestParam(name = "closureDate") String closureDate,
-                             @RequestParam(name = "touristId") int... touristId){
+                             @RequestParam(name = "touristId") List<String> touristIds){
         Hotel hotelById = hotelService.findHotelById(hotelId);
         if (hotelById == null){
             model.addAttribute("hotelId",hotelById);
             return "tour/error/invalidHotelId";
         }
         List<Tourist> touristList = new ArrayList<>();
-        for (int i = 0; i < touristId.length; i++) {
-            Tourist touristById = touristService.findTouristById(touristId[i]);
-            if (touristById != null){
-                touristList.add(touristById);
-            } else {
-                model.addAttribute("touristId", touristId[i]);
-                return "tour/error/invalidTouristId";
-            }
+        List<Integer> notFound = new ArrayList<>();
+        touristIds
+                .stream()
+                .forEach(s -> {
+                    if (s != null && !s.isEmpty()){
+                        Tourist touristById = touristService.findTouristById(Integer.parseInt(s));
+                        if (touristById != null){
+                            touristList.add(touristById);
+                        } else {
+                            notFound.add(Integer.parseInt(s));
+                        }
+                    }
+                });
+        if (!notFound.isEmpty()){
+            model.addAttribute("notFound", notFound);
+            return "tour/error/invalidTouristId";
         }
         Tour tour = Tour.of(LocalDate.parse(startDate),LocalDate.parse(endDate),
                 touristList,hotelById, TourOperator.valueOf(tourOperator),

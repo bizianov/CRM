@@ -9,7 +9,7 @@
     <p align="center"><a href="/tour">Tour menu</a></p>
     There is no tourist with id:
 
-    ${touristId}
+    ${notFound}
 
   </body>
 </html>

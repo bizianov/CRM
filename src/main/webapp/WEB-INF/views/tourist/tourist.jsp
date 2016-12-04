@@ -70,7 +70,7 @@
         surname = <input type="text" name="lastName"><br>
         phone = <input type="text" name="phone">
         email = <input type="text" name="email"><br>
-        birthday = <input type="text" name="birthday">
+        birthday = <input type="text" name="birthday" placeholder="2016-05-16">
         source = <input type="text" name="source" list="sourcelist"><br>
                <datalist id="sourcelist">
                    <option value="REGULAR" selected>REGULAR</option>
