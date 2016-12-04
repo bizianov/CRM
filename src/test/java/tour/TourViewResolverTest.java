@@ -33,12 +33,6 @@ public class TourViewResolverTest {
                 .andExpect(view().name("tour/deleteTour"));
     }
 
-    @Test
-    public void createTourInvalidHotelId() throws Exception {
-        mockMvc.perform(get("/createTour?startDate=2016-12-10&endDate=2016-12-20&tourOperator=TPG&isAvia=false&visaRequired=false&priceBrutto=1234&hotelId=-1&closureDate=2016-12-08&touristId=2&touristId=6"))
-                .andExpect(view().name("tour/error/invalidHotelId"));
-    }
-
     @Before
     public void setup(){
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
