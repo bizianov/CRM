@@ -11,19 +11,33 @@
     <a href="/login?logout">logout</a></p>
 
     <hr>
-    <b>Find tours by id:</b><br>
-    <form action="/getTourById" method="get">
-       id = <input type="text" name="id">
+    <b>Find tours:</b><br>
+    <form action="/getToursByParameters" method="get">
+       <input type="checkbox" name="byTourist">byTourist
+       <input type="text" name="touristId"><br>
+       <input type="checkbox" name="tourOperator">byOperator
+       <input type="text" name="tourOperator" list="tourOperatorList">
+          <datalist id="tourOperatorList">
+              <option value="TPG" selected>TPG</option>
+              <option value="Anex">Anex</option>
+              <option value="TUI">TUI</option>
+              <option value="TEZTour">TEZTour</option>
+              <option value="Coral">Coral</option>
+              <option value="JoinUp">JoinUp</option>
+              <option value="Akkord">Akkord</option>
+          </datalist><br>
+       <input type="checkbox" name="hotelId">byHotel
+       <input type="text" name="byHotel"><br>
+       <input type="checkbox" name="countryId">byCountry
+       <input type="text" name="byCountry"><br>
+       <input type="checkbox" name="regionId">byRegion
+       <input type="text" name="byRegion"><br>
+       <input type="checkbox" name="startDate">byStart
+       <input type="text" name="startDate" placeholder="2016-05-16"><br>
+       <input type="checkbox" name="endDate">byEnd
+       <input type="text" name="endDate" placeholder="2016-05-16"><br>
+       <input type="checkbox" name="closureDate">byClosure
+       <input type="text" name="closureDate" placeholder="2016-05-16"><br>
        <input type="submit" value="Find">
     </form>
-
-    <b>Find tour by tourist:</b><br>
-    <form action="/getToursByTourist" method="get">
-       id = <input type="text" name="id">
-    <input type="submit" value="Find">
-    </form>
-
-    <b>Find all tours:</b><br>
-    <form action="/getAllTours" method="get">
-    <input type="submit" value="Find">
     <hr>

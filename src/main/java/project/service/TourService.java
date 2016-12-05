@@ -82,7 +82,7 @@ public class TourService {
                 .collect(Collectors.toList());
     }
 
-    public List<Tour> tourListDateProjection(List<Tour> tourList, LocalDate dateBefore, LocalDate dateAfter) {
+    public List<Tour> tourListDateProjection(LocalDate dateBefore, LocalDate dateAfter, List<Tour> tourList) {
         return tourList
                 .stream()
                 .filter(tour -> tour.getClosureDate().isAfter(dateAfter)
