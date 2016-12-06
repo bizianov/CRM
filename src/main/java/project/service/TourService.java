@@ -39,42 +39,42 @@ public class TourService {
         return Lists.newArrayList(tourDao.findAll());
     }
 
-    public List<Tour> findToursByTourist(Tourist tourist) {
-        return Lists.newArrayList(tourDao.findAll())
+    public List<Tour> filterToursByTourist(Tourist tourist, List<Tour> invokingList) {
+        return tourist != null ? invokingList
                 .stream()
                 .filter(tour -> tour.getTouristList().contains(tourist))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()) : Lists.newArrayList();
     }
 
-    public List<Tour> findToursByTourOperator(TourOperator tourOperator){
-        return Lists.newArrayList(tourDao.findAll())
+    public List<Tour> filterToursByTourOperator(TourOperator tourOperator, List<Tour> invokingList){
+        return invokingList
                 .stream()
                 .filter(tour -> tour.getTourOperator().equals(tourOperator))
                 .collect(Collectors.toList());
     }
 
-    public List<Tour> findToursByHotel (Hotel hotel){
-        return Lists.newArrayList(tourDao.findAll())
+    public List<Tour> filterToursByHotel (Hotel hotel, List<Tour> invokingList){
+        return hotel != null ? invokingList
                 .stream()
                 .filter(tour -> tour.getHotel().equals(hotel))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()) : Lists.newArrayList();
     }
 
-    public List<Tour> findToursByCountry(String country){
-        return Lists.newArrayList(tourDao.findAll())
+    public List<Tour> filterToursByCountry(String country, List<Tour> invokingList){
+        return country != null ? invokingList
                 .stream()
                 .filter(tour -> tour.getHotel().getCountry().equals(country))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()) : Lists.newArrayList();
     }
 
-    public List<Tour> findToursByRegion(String region){
-        return Lists.newArrayList(tourDao.findAll())
+    public List<Tour> filterToursByRegion(String region, List<Tour> invokingList){
+        return region != null ? invokingList
                 .stream()
                 .filter(tour -> tour.getHotel().getRegion().equals(region))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()) : Lists.newArrayList();
     }
 
-    public List<Tour> findToursByYearMonth(int year, int month) {
+    public List<Tour> filterToursByYearMonth(int year, int month) {
         return Lists.newArrayList(tourDao.findAll())
                 .stream()
                 .filter(tour -> tour.getClosureDate().getMonthValue() == month
@@ -82,11 +82,24 @@ public class TourService {
                 .collect(Collectors.toList());
     }
 
-    public List<Tour> tourListDateProjection(LocalDate dateBefore, LocalDate dateAfter, List<Tour> tourList) {
-        return tourList
+    public List<Tour> filterToursByStartDate(LocalDate dateAfter, List<Tour> invokingList) {
+        return invokingList
                 .stream()
-                .filter(tour -> tour.getClosureDate().isAfter(dateAfter)
-                        && tour.getClosureDate().isBefore(dateBefore))
+                .filter(tour -> tour.getStartDate().isAfter(dateAfter))
+                .collect(Collectors.toList());
+    }
+
+    public List<Tour> filterToursByEndDate(LocalDate dateBefore, List<Tour> invokingList) {
+        return invokingList
+                .stream()
+                .filter(tour -> tour.getStartDate().isBefore(dateBefore))
+                .collect(Collectors.toList());
+    }
+
+    public List<Tour> filterToursByClosureDate(LocalDate start, LocalDate end, List<Tour> invokingList) {
+        return invokingList
+                .stream()
+                .filter(tour -> tour.getClosureDate().isAfter(start) && tour.getClosureDate().isBefore(end))
                 .collect(Collectors.toList());
     }
 

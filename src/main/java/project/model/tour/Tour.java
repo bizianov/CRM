@@ -20,6 +20,9 @@ import java.util.List;
 @ToString(exclude = {"id","isAvia","visaRequired","priceNetto","profit"})
 @EqualsAndHashCode(exclude = {"id","isAvia","visaRequired","priceNetto","profit"})
 public class Tour {
+
+    public static final LocalDate DAY0 = LocalDate.of(2014,06,01);
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

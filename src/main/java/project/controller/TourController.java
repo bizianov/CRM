@@ -22,6 +22,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static project.model.tour.Tour.DAY0;
+
 /**
  * Created by slava23 on 12/3/2016.
  */
@@ -168,56 +170,104 @@ public class TourController {
         return "tour/showTour";
     }
 
-    @RequestMapping("/getToursByTourist")
-    public String findToursByTourist(@RequestParam(name = "id") int id,
-                                     @RequestParam(name = "startDate", required = false) String startDate,
-                                     @RequestParam(name = "endDate", required = false) String endDate,
-                                     @RequestParam(name = "filterByDate", required = false) String filterByDate,
-                                     Model model) {
-        Tourist touristById = touristService.findTouristById(id);
-        if (touristById != null) {
-            List<Tour> toursByTourist = tourService.findToursByTourist(touristById);
-            if (Boolean.parseBoolean(filterByDate)) {
-                toursByTourist = tourService.tourListDateProjection(
-                        LocalDate.parse(startDate), LocalDate.parse(endDate), toursByTourist);
-            }
-            model.addAttribute("allTours", toursByTourist);
-            return "tour/showAllTours";
-        } else {
-            model.addAttribute("touristId", id);
-            return "tour/error/invalidTouristId";
-        }
-    }
-
     @RequestMapping("/getToursByParameters")
     public String findToursByParameters(@RequestParam(name = "touristId", required = false) Integer touristId,
                                         @RequestParam(name = "byTourist", required = false) String byTourist,
+                                        @RequestParam(name = "tourOperator", required = false) String tourOperator,
+                                        @RequestParam(name = "byTourOperator", required = false) String byTourOperator,
+                                        @RequestParam(name = "hotelId", required = false) Integer hotelId,
+                                        @RequestParam(name = "byHotel", required = false) String byHotel,
+                                        @RequestParam(name = "country", required = false) String country,
+                                        @RequestParam(name = "byCountry", required = false) String byCountry,
+                                        @RequestParam(name = "region", required = false) String region,
+                                        @RequestParam(name = "byRegion", required = false) String byRegion,
+                                        @RequestParam(name = "startDate", required = false) String startDate,
+                                        @RequestParam(name = "byStartDate", required = false) String byStartDate,
+                                        @RequestParam(name = "endDate", required = false) String endDate,
+                                        @RequestParam(name = "byEndDate", required = false) String byEndDate,
+                                        @RequestParam(name = "closureDateStart", required = false) String closureDateStart,
+                                        @RequestParam(name = "closureDateEnd", required = false) String closureDateEnd,
+                                        @RequestParam(name = "byClosureDate", required = false) String byClosureDate,
                                         Model model) {
+        Boolean filtered = false;
+        List<Tour> resultList = new ArrayList<>();
+        List<Tour> invokingList = new ArrayList<>();
+
         if (byTourist != null) {
             if (touristId != null) {
+                invokingList = filtered == false ? tourService.findAll() : resultList;
                 Tourist touristById = touristService.findTouristById(touristId);
-                List<Tour> toursByTourist = tourService.findToursByTourist(touristById);
-                model.addAttribute("allTours", toursByTourist);
-                return "tour/showAllTours";
-            } else {
-                model.addAttribute("touristId", touristId);
-                return "tour/error/invalidTouristId";
+                resultList = tourService.filterToursByTourist(touristById, invokingList);
+                filtered = true;
             }
         }
-        return "tour/error/noTourFound";
+
+        if (byTourOperator != null){
+            if (tourOperator != null && !tourOperator.isEmpty()) {
+                invokingList = filtered == false ? tourService.findAll() : resultList;
+                resultList = tourService.filterToursByTourOperator(TourOperator.valueOf(tourOperator), invokingList);
+                filtered = true;
+            }
+        }
+
+        if (byHotel != null) {
+            if (hotelId != null) {
+                invokingList = filtered == false ? tourService.findAll() : resultList;
+                Hotel hotelById = hotelService.findHotelById(hotelId);
+                resultList = tourService.filterToursByHotel(hotelById, invokingList);
+                filtered = true;
+            }
+        }
+
+        if (byCountry != null){
+            if (country != null && !country.isEmpty()){
+                invokingList = filtered == false ? tourService.findAll() : resultList;
+                resultList = tourService.filterToursByCountry(country, invokingList);
+                filtered = true;
+            }
+        }
+
+        if (byRegion != null){
+            if (region != null && !region.isEmpty()){
+                invokingList = filtered == false ? tourService.findAll() : resultList;
+                resultList = tourService.filterToursByRegion(region, invokingList);
+                filtered = true;
+            }
+        }
+
+        if (byStartDate != null){
+            if (startDate != null && !startDate.isEmpty()){
+                invokingList = filtered == false ? tourService.findAll() : resultList;
+                resultList = tourService.filterToursByStartDate(LocalDate.parse(startDate),invokingList);
+                filtered = true;
+            }
+        }
+
+        if (byEndDate != null){
+            if (endDate != null && !endDate.isEmpty()){
+                invokingList = filtered == false ? tourService.findAll() : resultList;
+                resultList = tourService.filterToursByEndDate(LocalDate.parse(endDate),invokingList);
+                filtered = true;
+            }
+        }
+
+        if (byClosureDate != null){
+            LocalDate start = closureDateStart == null || closureDateStart.isEmpty() ? DAY0 : LocalDate.parse(closureDateStart);
+            LocalDate end = closureDateEnd == null || closureDateEnd.isEmpty() ? LocalDate.now() : LocalDate.parse(closureDateEnd);
+            invokingList = filtered == false ? tourService.findAll() : resultList;
+            resultList = tourService.filterToursByClosureDate(start, end, invokingList);
+            filtered = true;
+        }
+
+        model.addAttribute("allTours", resultList);
+        return "tour/showAllTours";
     }
 
-    @RequestMapping("/getAllTours")
-    public String findAllTours(@RequestParam(name = "startDate", required = false) String startDate,
-                               @RequestParam(name = "endDate", required = false) String endDate,
-                               @RequestParam(name = "filterByDate", required = false) String filterByDate,
-                               Model model) {
-        List<Tour> allTours = tourService.findAll();
-        if (Boolean.parseBoolean(filterByDate)) {
-            allTours = tourService.tourListDateProjection(
-                    LocalDate.parse(startDate), LocalDate.parse(endDate), allTours);
-        }
-        model.addAttribute("allTours", allTours);
+    @RequestMapping("/getAllToursCurrentMonth")
+    public String findAllTours(Model model) {
+        List<Tour> resultList = tourService.filterToursByYearMonth(
+                LocalDate.now().getYear(), LocalDate.now().getMonthValue());
+        model.addAttribute("allTours", resultList);
         return "tour/showAllTours";
     }
 

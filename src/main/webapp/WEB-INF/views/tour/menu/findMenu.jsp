@@ -15,7 +15,7 @@
     <form action="/getToursByParameters" method="get">
        <input type="checkbox" name="byTourist">byTourist
        <input type="text" name="touristId"><br>
-       <input type="checkbox" name="tourOperator">byOperator
+       <input type="checkbox" name="byTourOperator">byOperator
        <input type="text" name="tourOperator" list="tourOperatorList">
           <datalist id="tourOperatorList">
               <option value="TPG" selected>TPG</option>
@@ -26,18 +26,19 @@
               <option value="JoinUp">JoinUp</option>
               <option value="Akkord">Akkord</option>
           </datalist><br>
-       <input type="checkbox" name="hotelId">byHotel
-       <input type="text" name="byHotel"><br>
-       <input type="checkbox" name="countryId">byCountry
-       <input type="text" name="byCountry"><br>
-       <input type="checkbox" name="regionId">byRegion
-       <input type="text" name="byRegion"><br>
-       <input type="checkbox" name="startDate">byStart
+       <input type="checkbox" name="byHotel">byHotel
+       <input type="text" name="hotelId"><br>
+       <input type="checkbox" name="byCountry">byCountry
+       <input type="text" name="country"><br>
+       <input type="checkbox" name="byRegion">byRegion
+       <input type="text" name="region"><br>
+       <input type="checkbox" name="byStartDate">byStart
        <input type="text" name="startDate" placeholder="2016-05-16"><br>
-       <input type="checkbox" name="endDate">byEnd
+       <input type="checkbox" name="byEndDate">byEnd
        <input type="text" name="endDate" placeholder="2016-05-16"><br>
-       <input type="checkbox" name="closureDate">byClosure
-       <input type="text" name="closureDate" placeholder="2016-05-16"><br>
+       <input type="checkbox" name="byClosureDate">byClosure
+       <input type="text" name="closureDateStart" placeholder="2016-05-16"> -
+       <input type="text" name="closureDateEnd" placeholder="2016-05-16"><br>
        <input type="submit" value="Find">
     </form>
     <hr>

@@ -35,7 +35,7 @@ public class TourViewResolverTest {
 
     @Test
     public void findAllTours() throws Exception {
-        mockMvc.perform(get("/getAllTours"))
+        mockMvc.perform(get("/getAllToursCurrentMonth"))
                 .andExpect(view().name("tour/showAllTours"));
     }
 
