@@ -7,6 +7,19 @@
   </head>
   <body>
     <p align="center"><a href="/user">User menu</a></p>
-    ${user}
+    <table border="1">
+        <tr>
+            <th bgcolor="#00FF00"><b>ID</b></th>
+            <th bgcolor="#00FF00"><b>USERNAME</b></th>
+            <th bgcolor="#00FF00"><b>ENABLED</b></th>
+            <th bgcolor="#00FF00"><b>ROLES</b></th>
+        </tr>
+        <tr>
+            <td>${user.id}</td>
+            <td>${user.username}</td>
+            <td>${user.enabled}</td>
+            <td>${user.roles}</td>
+        </tr>
+    </table>
   </body>
 </html>
