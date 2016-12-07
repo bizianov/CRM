@@ -1,6 +1,7 @@
 package project.service;
 
 import com.google.common.collect.Lists;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Data
 @Slf4j
 public class TouristService {
 

@@ -13,13 +13,18 @@
   <%
     List<User> allUsers = (List<User>)request.getAttribute("allUsers");
     out.print("<table border=\"1\">");
-    out.print("<tr><th bgcolor=\"#00FF00\">ID</th><th bgcolor=\"#00FF00\">USERNAME</th><th bgcolor=\"#00FF00\">ENABLED</th><th bgcolor=\"#00FF00\">ROLES</th></tr><br>");
+    out.print("<tr><th bgcolor=\"#01DF3A\">ID</th>" +
+              "<th bgcolor=\"#01DF3A\">USERNAME</th>" +
+              "<th bgcolor=\"#01DF3A\">ENABLED</th>" +
+              "<th bgcolor=\"#01DF3A\">ROLES</th></tr><br>");
     for(User user : allUsers){
-            out.print("<tr><td>"+ user.getId() +"</td><td>" + user.getUsername()+ "</td><td>" + user.isEnabled() + "</td><td>" + user.getRoles()+"</td></tr><br>");
+            out.print("<tr><td bgcolor=\"#E6E6E6\">"+ user.getId() +
+                      "</td><td bgcolor=\"#E6E6E6\">" + user.getUsername()+
+                      "</td><td bgcolor=\"#E6E6E6\">" + user.isEnabled() +
+                      "</td><td bgcolor=\"#E6E6E6\">" + user.getRoles()+"</td></tr><br>");
         }
     out.print("</table>");
   %>
-
 
   </body>
 </html>

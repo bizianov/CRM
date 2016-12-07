@@ -1,5 +1,6 @@
 package project.controller;
 
+import com.google.common.collect.Lists;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -91,56 +92,60 @@ public class TourController {
 
     @RequestMapping("/createTourWithParameters")
     public String createTourWithParameters(Model model,
-                                           @RequestParam(name = "startDate") String startDate,@RequestParam(name = "endDate") String endDate,@RequestParam(name = "closureDate") String closureDate,
-                                           @RequestParam(name = "tourOperator") String tourOperator,@RequestParam(name = "isAvia") String isAvia,
-                                           @RequestParam(name = "visaRequired") String visaRequired,@RequestParam(name = "priceBrutto") double priceBrutto,
+                                           @RequestParam(name = "startDate") String startDate, @RequestParam(name = "endDate") String endDate, @RequestParam(name = "closureDate") String closureDate,
+                                           @RequestParam(name = "tourOperator") String tourOperator, @RequestParam(name = "isAvia") String isAvia,
+                                           @RequestParam(name = "visaRequired") String visaRequired, @RequestParam(name = "priceBrutto") double priceBrutto,
                                            @RequestParam(name = "hotelId", required = false) Integer hotelId,
-                                           @RequestParam(name = "name", required = false) String name,@RequestParam(name = "rate", required = false) String rate,
-                                           @RequestParam(name = "country", required = false) String country,@RequestParam(name = "region", required = false) String region,
-                                           @RequestParam(name = "id_1", required = false) Integer id_1,@RequestParam(name = "firstName_1", required = false) String firstName_1,@RequestParam(name = "lastName_1", required = false) String lastName_1,
-                                           @RequestParam(name = "phone_1", required = false) String phone_1,@RequestParam(name = "email_1", required = false) String email_1,
-                                           @RequestParam(name = "birthday_1", required = false) String birthday_1,@RequestParam(name = "source_1", required = false) String source_1,
-                                           @RequestParam(name = "id_2", required = false) Integer id_2,@RequestParam(name = "firstName_2", required = false) String firstName_2,@RequestParam(name = "lastName_2", required = false) String lastName_2,
-                                           @RequestParam(name = "phone_2", required = false) String phone_2,@RequestParam(name = "email_2", required = false) String email_2,
-                                           @RequestParam(name = "birthday_2", required = false) String birthday_2,@RequestParam(name = "source_2", required = false) String source_2,
-                                           @RequestParam(name = "id_3", required = false) Integer id_3,@RequestParam(name = "firstName_3", required = false) String firstName_3,@RequestParam(name = "lastName_3", required = false) String lastName_3,
-                                           @RequestParam(name = "phone_3", required = false) String phone_3,@RequestParam(name = "email_3", required = false) String email_3,
-                                           @RequestParam(name = "birthday_3", required = false) String birthday_3,@RequestParam(name = "source_3", required = false) String source_3,
-                                           @RequestParam(name = "id_4", required = false) Integer id_4,@RequestParam(name = "firstName_4", required = false) String firstName_4,@RequestParam(name = "lastName_4", required = false) String lastName_4,
-                                           @RequestParam(name = "phone_4", required = false) String phone_4,@RequestParam(name = "email_4", required = false) String email_4,
-                                           @RequestParam(name = "birthday_4", required = false) String birthday_4,@RequestParam(name = "source_4", required = false) String source_4
-                                           ){
+                                           @RequestParam(name = "name", required = false) String name, @RequestParam(name = "rate", required = false) String rate,
+                                           @RequestParam(name = "country", required = false) String country, @RequestParam(name = "region", required = false) String region,
+                                           @RequestParam(name = "id_1", required = false) Integer id_1, @RequestParam(name = "firstName_1", required = false) String firstName_1, @RequestParam(name = "lastName_1", required = false) String lastName_1,
+                                           @RequestParam(name = "phone_1", required = false) String phone_1, @RequestParam(name = "email_1", required = false) String email_1,
+                                           @RequestParam(name = "birthday_1", required = false) String birthday_1, @RequestParam(name = "source_1", required = false) String source_1,
+                                           @RequestParam(name = "id_2", required = false) Integer id_2, @RequestParam(name = "firstName_2", required = false) String firstName_2, @RequestParam(name = "lastName_2", required = false) String lastName_2,
+                                           @RequestParam(name = "phone_2", required = false) String phone_2, @RequestParam(name = "email_2", required = false) String email_2,
+                                           @RequestParam(name = "birthday_2", required = false) String birthday_2, @RequestParam(name = "source_2", required = false) String source_2,
+                                           @RequestParam(name = "id_3", required = false) Integer id_3, @RequestParam(name = "firstName_3", required = false) String firstName_3, @RequestParam(name = "lastName_3", required = false) String lastName_3,
+                                           @RequestParam(name = "phone_3", required = false) String phone_3, @RequestParam(name = "email_3", required = false) String email_3,
+                                           @RequestParam(name = "birthday_3", required = false) String birthday_3, @RequestParam(name = "source_3", required = false) String source_3,
+                                           @RequestParam(name = "id_4", required = false) Integer id_4, @RequestParam(name = "firstName_4", required = false) String firstName_4, @RequestParam(name = "lastName_4", required = false) String lastName_4,
+                                           @RequestParam(name = "phone_4", required = false) String phone_4, @RequestParam(name = "email_4", required = false) String email_4,
+                                           @RequestParam(name = "birthday_4", required = false) String birthday_4, @RequestParam(name = "source_4", required = false) String source_4
+    ) {
         Hotel targetHotel = null;
         List<Tourist> targetTouristList = new ArrayList<>();
-        List<Integer> touristIds = Arrays.asList(id_1,id_2,id_3,id_4);
-        List<String> touristFirstNames = Arrays.asList(firstName_1,firstName_2,firstName_3,firstName_4);
-        List<String> touristLastNames = Arrays.asList(lastName_1,lastName_2,lastName_3,lastName_4);
-        List<String> touristPhones = Arrays.asList(phone_1,phone_2,phone_3,phone_4);
-        List<String> touristEmails = Arrays.asList(email_1,email_2,email_3,email_4);
-        List<String> touristBirthdays = Arrays.asList(birthday_1,birthday_2,birthday_3,birthday_4);
-        List<String> touristSources = Arrays.asList(source_1,source_2,source_3,source_4);
+        List<Integer> touristIds = Arrays.asList(id_1, id_2, id_3, id_4);
+        List<String> touristFirstNames = Arrays.asList(firstName_1, firstName_2, firstName_3, firstName_4);
+        List<String> touristLastNames = Arrays.asList(lastName_1, lastName_2, lastName_3, lastName_4);
+        List<String> touristPhones = Arrays.asList(phone_1, phone_2, phone_3, phone_4);
+        List<String> touristEmails = Arrays.asList(email_1, email_2, email_3, email_4);
+        List<String> touristBirthdays = Arrays.asList(birthday_1, birthday_2, birthday_3, birthday_4);
+        List<String> touristSources = Arrays.asList(source_1, source_2, source_3, source_4);
 
-        if (hotelId != null){
+        if (hotelId != null) {
             Hotel hotelById = hotelService.findHotelById(hotelId);
-            if (hotelById == null){
-                model.addAttribute("hotelId",hotelId);
+            if (hotelById == null) {
+                model.addAttribute("hotelId", hotelId);
                 return "tour/error/invalidHotelId";
             } else {
                 targetHotel = hotelById;
             }
         } else {
-            if (!name.isEmpty() && !rate.isEmpty() && !country.isEmpty() && !region.isEmpty()){
-                Hotel hotel = Hotel.of(name, Rate.valueOf(rate).getRate(),country,region);
-                Hotel savedHotel = hotelService.saveHotel(hotel);
-                targetHotel = savedHotel;
+            if (!name.isEmpty() && !rate.isEmpty() && !country.isEmpty() && !region.isEmpty()) {
+                Hotel hotel = Hotel.of(name, Rate.valueOf(rate).getRate(), country, region);
+                if (Lists.newArrayList(hotelService.getHotelDao().findAll()).contains(hotel)) {
+                    targetHotel = hotelService.findHotelByName(hotel.getName());
+                } else {
+                    Hotel savedHotel = hotelService.saveHotel(hotel);
+                    targetHotel = savedHotel;
+                }
             }
         }
 
-        for (int i=0; i<4; i++){
+        for (int i = 0; i < 4; i++) {
             Integer touristId = touristIds.get(i);
-            if (touristId != null){
+            if (touristId != null) {
                 Tourist touristById = touristService.findTouristById(touristId);
-                if (touristById != null){
+                if (touristById != null) {
                     targetTouristList.add(touristById);
                 } else {
                     model.addAttribute("touristId", touristId);
@@ -148,21 +153,25 @@ public class TourController {
                 }
             } else {
                 if (!touristFirstNames.get(i).isEmpty() && !touristLastNames.get(i).isEmpty() && !touristPhones.get(i).isEmpty()
-                        && !touristEmails.get(i).isEmpty() && !touristBirthdays.get(i).isEmpty() && touristBirthdays.get(i) != null && !touristSources.get(i).isEmpty()){
-                    Tourist tourist = Tourist.of(touristFirstNames.get(i),touristLastNames.get(i),touristPhones.get(i),
-                            touristEmails.get(i),LocalDate.parse(touristBirthdays.get(i)), Source.valueOf(touristSources.get(i)));
-                    Tourist savedTourist = touristService.saveTourist(tourist);
-                    targetTouristList.add(savedTourist);
+                        && !touristEmails.get(i).isEmpty() && !touristBirthdays.get(i).isEmpty() && touristBirthdays.get(i) != null && !touristSources.get(i).isEmpty()) {
+                    Tourist tourist = Tourist.of(touristFirstNames.get(i), touristLastNames.get(i), touristPhones.get(i),
+                            touristEmails.get(i), LocalDate.parse(touristBirthdays.get(i)), Source.valueOf(touristSources.get(i)));
+                    if (Lists.newArrayList(touristService.getTouristDao().findAll()).contains(tourist)) {
+                        targetTouristList.add(tourist);
+                    } else {
+                        Tourist savedTourist = touristService.saveTourist(tourist);
+                        targetTouristList.add(savedTourist);
+                    }
                 }
             }
         }
 
-        if (targetHotel != null && !targetTouristList.isEmpty()){
-            Tour targetTour = Tour.of(LocalDate.parse(startDate), LocalDate.parse(endDate),targetTouristList,targetHotel,
-                    TourOperator.valueOf(tourOperator),Boolean.parseBoolean(isAvia),Boolean.parseBoolean(visaRequired),
-                    priceBrutto,LocalDate.parse(closureDate));
+        if (targetHotel != null && !targetTouristList.isEmpty()) {
+            Tour targetTour = Tour.of(LocalDate.parse(startDate), LocalDate.parse(endDate), targetTouristList, targetHotel,
+                    TourOperator.valueOf(tourOperator), Boolean.parseBoolean(isAvia), Boolean.parseBoolean(visaRequired),
+                    priceBrutto, LocalDate.parse(closureDate));
             tourService.saveTour(targetTour);
-            model.addAttribute("tour",targetTour);
+            model.addAttribute("tour", targetTour);
         } else {
             return "tour/error/noTourFound";
         }
@@ -286,7 +295,7 @@ public class TourController {
             }
         }
 
-        if (byTourOperator != null){
+        if (byTourOperator != null) {
             if (tourOperator != null && !tourOperator.isEmpty()) {
                 invokingList = filtered == false ? tourService.findAll() : resultList;
                 resultList = tourService.filterToursByTourOperator(TourOperator.valueOf(tourOperator), invokingList);
@@ -303,39 +312,39 @@ public class TourController {
             }
         }
 
-        if (byCountry != null){
-            if (country != null && !country.isEmpty()){
+        if (byCountry != null) {
+            if (country != null && !country.isEmpty()) {
                 invokingList = filtered == false ? tourService.findAll() : resultList;
                 resultList = tourService.filterToursByCountry(country, invokingList);
                 filtered = true;
             }
         }
 
-        if (byRegion != null){
-            if (region != null && !region.isEmpty()){
+        if (byRegion != null) {
+            if (region != null && !region.isEmpty()) {
                 invokingList = filtered == false ? tourService.findAll() : resultList;
                 resultList = tourService.filterToursByRegion(region, invokingList);
                 filtered = true;
             }
         }
 
-        if (byStartDate != null){
-            if (startDate != null && !startDate.isEmpty()){
+        if (byStartDate != null) {
+            if (startDate != null && !startDate.isEmpty()) {
                 invokingList = filtered == false ? tourService.findAll() : resultList;
-                resultList = tourService.filterToursByStartDate(LocalDate.parse(startDate),invokingList);
+                resultList = tourService.filterToursByStartDate(LocalDate.parse(startDate), invokingList);
                 filtered = true;
             }
         }
 
-        if (byEndDate != null){
-            if (endDate != null && !endDate.isEmpty()){
+        if (byEndDate != null) {
+            if (endDate != null && !endDate.isEmpty()) {
                 invokingList = filtered == false ? tourService.findAll() : resultList;
-                resultList = tourService.filterToursByEndDate(LocalDate.parse(endDate),invokingList);
+                resultList = tourService.filterToursByEndDate(LocalDate.parse(endDate), invokingList);
                 filtered = true;
             }
         }
 
-        if (byClosureDate != null){
+        if (byClosureDate != null) {
             LocalDate start = closureDateStart == null || closureDateStart.isEmpty() ? DAY0 : LocalDate.parse(closureDateStart);
             LocalDate end = closureDateEnd == null || closureDateEnd.isEmpty() ? LocalDate.now() : LocalDate.parse(closureDateEnd);
             invokingList = filtered == false ? tourService.findAll() : resultList;

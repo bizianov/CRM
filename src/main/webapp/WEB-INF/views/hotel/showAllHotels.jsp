@@ -13,8 +13,18 @@
 
   <%
     List<Hotel> allHotels = (List<Hotel>)request.getAttribute("allHotels");
+    out.print("<table border=\"1\">");
+    out.print("<tr><th bgcolor=\"#01DF3A\">ID</th>" +
+              "<th bgcolor=\"#01DF3A\">NAME</th>" +
+              "<th bgcolor=\"#01DF3A\">RATE</th>" +
+              "<th bgcolor=\"#01DF3A\">COUNTRY</th>" +
+              "<th bgcolor=\"#01DF3A\">REGION</th></tr><br>");
     for(Hotel hotel : allHotels){
-            out.println(hotel + "<br>");
+            out.print("<tr><td bgcolor=\"#E6E6E6\">"+ hotel.getId() +
+                      "</td><td bgcolor=\"#E6E6E6\">" + hotel.getName()+
+                      "</td><td bgcolor=\"#E6E6E6\">" + hotel.getRate() +
+                      "</td><td bgcolor=\"#E6E6E6\">" + hotel.getCountry()+
+                      "</td><td bgcolor=\"#E6E6E6\">" + hotel.getRegion()+"</td></tr><br>");
         }
   %>
 
