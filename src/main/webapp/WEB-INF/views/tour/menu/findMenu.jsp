@@ -11,7 +11,7 @@
     <a href="/login?logout">logout</a></p>
 
     <hr>
-    <b>Find tours:</b><br>
+    <b>Find tours:</b><br><br>
     <form action="/getToursByParameters" method="get">
        <input type="checkbox" name="byTourist">byTourist
        <input type="text" name="touristId"><br>
@@ -38,7 +38,7 @@
        <input type="text" name="endDate" placeholder="2016-05-16"><br>
        <input type="checkbox" name="byClosureDate">byClosure
        <input type="text" name="closureDateStart" placeholder="2016-05-16"> -
-       <input type="text" name="closureDateEnd" placeholder="2016-05-16"><br>
-       <input type="submit" value="Find">
-    </form>
+       <input type="text" name="closureDateEnd" placeholder="2016-05-16"><br><br>
+       <input type="submit" value="Find tours">
     <hr>
+    </form>
