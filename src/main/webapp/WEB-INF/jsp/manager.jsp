@@ -10,6 +10,6 @@
       <a href="/hotel">Hotel Menu</a><br>
       <a href="/tour">Tour Menu</a><br>
       <a href="">Document Menu</a><br>
-      <a href="">Feedback Menu</a><br>
+      <a href="/feedback">Feedback Menu</a><br>
   </body>
 </html>

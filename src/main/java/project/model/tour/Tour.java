@@ -1,7 +1,7 @@
 package project.model.tour;
 
 import lombok.*;
-import project.config.LocalDateAttributeConverter;
+import project.converter.LocalDateAttributeConverter;
 import project.model.hotel.Hotel;
 import project.model.tourist.Tourist;
 

@@ -1,13 +1,10 @@
 package project.model.tourist;
 
-import com.google.common.base.MoreObjects;
 import lombok.*;
-import project.config.LocalDateAttributeConverter;
-import project.model.passport.Passport;
+import project.converter.LocalDateAttributeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
 
 /**
  * Created by slava23 on 11/30/2016.
