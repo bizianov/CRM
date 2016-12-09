@@ -1,34 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page import="java.util.*" %>
-<%@ page import="project.model.tourist.Tourist" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
-  <head>
+<head>
     <title>Tourist info</title>
-  </head>
-  <body>
-    <p align="center"><a href="/tourist">Tourist menu</a></p>
+</head>
+<body>
+<p align="center"><a href="/tourist">Tourist menu</a></p>
 
-  <%
-    List<Tourist> allTourists = (List<Tourist>)request.getAttribute("allTourists");
-    out.print("<table border=\"1\">");
-        out.print("<tr><th bgcolor=\"#01DF3A\">ID</th>" +
-                  "<th bgcolor=\"#01DF3A\">FIRST NAME</th>" +
-                  "<th bgcolor=\"#01DF3A\">LAST NAME</th>" +
-                  "<th bgcolor=\"#01DF3A\">PHONE</th>" +
-                  "<th bgcolor=\"#01DF3A\">EMAIL</th>" +
-                  "<th bgcolor=\"#01DF3A\">BIRTHDAY</th>" +
-                  "<th bgcolor=\"#01DF3A\">SOURCE</th></tr><br>");
-    out.print("</table>");
-    for(Tourist tourist : allTourists){ %>
-                ${tourist}
-            <%
-        }
+<table border="1">
+    <tr>
+        <th bgcolor="#01DF3A"><b>ID</b></th>
+        <th bgcolor="#01DF3A"><b>FIRST NAME</b></th>
+        <th bgcolor="#01DF3A"><b>LAST NAME</b></th>
+        <th bgcolor="#01DF3A"><b>PHONE</b></th>
+        <th bgcolor="#01DF3A"><b>EMAIL</b></th>
+        <th bgcolor="#01DF3A"><b>BIRTHDAY</b></th>
+        <th bgcolor="#01DF3A"><b>SOURCE</b></th>
+    </tr>
+    <c:forEach items="${allTourists}" var="tourist">
+        <tr>
+            <td bgcolor="#E6E6E6">${tourist.id}</td>
+            <td bgcolor="#E6E6E6">${tourist.firstName}</td>
+            <td bgcolor="#E6E6E6">${tourist.lastName}</td>
+            <td bgcolor="#E6E6E6">${tourist.phone}</td>
+            <td bgcolor="#E6E6E6">${tourist.email}</td>
+            <td bgcolor="#E6E6E6">${tourist.birthday}</td>
+            <td bgcolor="#E6E6E6">${tourist.source}</td>
+        </tr>
+    </c:forEach>
+</table>
 
-  %>
 
-
-  </body>
+</body>
 </html>
