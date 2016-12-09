@@ -13,9 +13,20 @@
 
   <%
     List<Tourist> allTourists = (List<Tourist>)request.getAttribute("allTourists");
-    for(Tourist tourist : allTourists){
-            out.println(tourist + "<br>");
+    out.print("<table border=\"1\">");
+        out.print("<tr><th bgcolor=\"#01DF3A\">ID</th>" +
+                  "<th bgcolor=\"#01DF3A\">FIRST NAME</th>" +
+                  "<th bgcolor=\"#01DF3A\">LAST NAME</th>" +
+                  "<th bgcolor=\"#01DF3A\">PHONE</th>" +
+                  "<th bgcolor=\"#01DF3A\">EMAIL</th>" +
+                  "<th bgcolor=\"#01DF3A\">BIRTHDAY</th>" +
+                  "<th bgcolor=\"#01DF3A\">SOURCE</th></tr><br>");
+    out.print("</table>");
+    for(Tourist tourist : allTourists){ %>
+                ${tourist}
+            <%
         }
+
   %>
 
 

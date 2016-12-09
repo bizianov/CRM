@@ -23,7 +23,7 @@ public class Tourist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Getter private int id;
     @NonNull private String firstName;
     @NonNull private String lastName;
     @NonNull private String phone;
