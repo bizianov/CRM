@@ -5,26 +5,27 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
-  <head>
+<head>
     <title>User info</title>
-  </head>
-  <body>
-    <p align="center"><a href="/user">User menu</a></p>
-  <%
-    List<User> allUsers = (List<User>)request.getAttribute("allUsers");
-    out.print("<table border=\"1\">");
-    out.print("<tr><th bgcolor=\"#01DF3A\">ID</th>" +
-              "<th bgcolor=\"#01DF3A\">USERNAME</th>" +
-              "<th bgcolor=\"#01DF3A\">ENABLED</th>" +
-              "<th bgcolor=\"#01DF3A\">ROLES</th></tr><br>");
-    for(User user : allUsers){
-            out.print("<tr><td bgcolor=\"#E6E6E6\">"+ user.getId() +
-                      "</td><td bgcolor=\"#E6E6E6\">" + user.getUsername()+
-                      "</td><td bgcolor=\"#E6E6E6\">" + user.isEnabled() +
-                      "</td><td bgcolor=\"#E6E6E6\">" + user.getRoles()+"</td></tr><br>");
-        }
-    out.print("</table>");
-  %>
+</head>
+<body>
+<p align="center"><a href="/user">User menu</a></p>
+<table border="1">
+    <tr>
+        <th bgcolor="#01DF3A"><b>ID</b></th>
+        <th bgcolor="#01DF3A"><b>USERNAME</b></th>
+        <th bgcolor="#01DF3A"><b>ENABLED</b></th>
+        <th bgcolor="#01DF3A"><b>ROLES</b></th>
+    </tr>
+    <c:forEach items="${allUsers}" var="user">
+        <tr>
+            <td bgcolor="#E6E6E6">${user.id}</td>
+            <td bgcolor="#E6E6E6">${user.username}</td>
+            <td bgcolor="#E6E6E6">${user.enabled}</td>
+            <td bgcolor="#E6E6E6">${user.roles}</td>
+        </tr>
+    </c:forEach>
+</table>
 
-  </body>
+</body>
 </html>
