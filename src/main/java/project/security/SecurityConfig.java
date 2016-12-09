@@ -5,10 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -21,6 +23,11 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = {"project"})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static final String USERS_BY_USERNAME_QUERY =
+            "SELECT username, password, enabled FROM user WHERE username = ?";
+    private static final String AUTHORITIES_BY_USERNAME_QUERY =
+            "SELECT username, role FROM user INNER JOIN user_roles ON id=user_id WHERE username = ?";
+
     @Autowired
     private DataSource dataSource;
 
@@ -30,8 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .jdbcAuthentication()
              .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select username, password, enabled from User where username = ?")
-                .authoritiesByUsernameQuery("select username, role from UserRoles where username = ?");
+                .usersByUsernameQuery(USERS_BY_USERNAME_QUERY)
+                .authoritiesByUsernameQuery(AUTHORITIES_BY_USERNAME_QUERY);
     }
 
     @Bean

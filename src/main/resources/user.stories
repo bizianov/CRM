@@ -46,6 +46,7 @@ updateUser
 deleteUser
 getUserById
 getUserByName
+getAllUsers
 
 ------ACCOUNTING------
 createAccounting
