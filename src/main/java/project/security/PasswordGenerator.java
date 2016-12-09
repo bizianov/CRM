@@ -1,5 +1,6 @@
 package project.security;
 
+import com.sun.xml.internal.fastinfoset.util.CharArray;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -8,11 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public class PasswordGenerator {
     public static void main(String[] args) {
-
-        String password = "1234567";
+        String password = "12345";
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         String encode = encoder.encode(password);
         System.out.println(encode);
-
+        System.out.println(encoder.matches(password, "$2a$10$0272Ula5X2Kb4yA4mHf6VeeMrkSouLeXMQxWMmb7i2Pg0XUS5Pepq"));
     }
 }
