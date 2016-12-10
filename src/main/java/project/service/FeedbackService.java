@@ -30,6 +30,10 @@ public class FeedbackService {
         return feedbackDao.findOne(id);
     }
 
+    public Feedback saveFeedback(Feedback feedback){
+        return feedbackDao.save(feedback);
+    }
+
     public List<Feedback> findFeedbackByTourist(Tourist tourist) {
         return tourist != null ? Lists.newArrayList(feedbackDao.findAll())
                 .stream()

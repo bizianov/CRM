@@ -27,5 +27,5 @@ public class Feedback {
     @NonNull private Tour tour;
     @NonNull private String message;
     @Convert(converter = LocalDateAttributeConverter.class)
-    private LocalDate date;
+    @NonNull private LocalDate date;
 }

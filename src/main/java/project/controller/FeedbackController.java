@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.model.feedback.Feedback;
 import project.model.hotel.Hotel;
+import project.model.tour.Tour;
 import project.model.tourist.Tourist;
 import project.service.FeedbackService;
 import project.service.HotelService;
+import project.service.TourService;
 import project.service.TouristService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -35,6 +38,8 @@ public class FeedbackController {
     private TouristService touristService;
     @NonNull
     private HotelService hotelService;
+    @NonNull
+    private TourService tourService;
 
     @RequestMapping("/getFeedbackById")
     public String findFeedbackById(@RequestParam(name = "id") int id,
@@ -60,6 +65,20 @@ public class FeedbackController {
         List<Feedback> feedbackByHotel = feedbackService.findFeedbackByHotel(hotelById);
         model.addAttribute("allFeedbacks", feedbackByHotel);
         return "feedback/showAllFeedbacks";
+    }
+
+    @RequestMapping("/createFeedback")
+    public String createFeedback(@RequestParam(name = "tourId") int id,
+                                 @RequestParam(name = "message") String message,
+                                 Model model){
+        Tour tourById = tourService.findTourById(id);
+        if (tourById == null){
+            model.addAttribute("tourId", id);
+            return "feedback/error/invalidTourId";
+        }
+        Feedback savedFeedback = feedbackService.saveFeedback(Feedback.of(tourById,message, LocalDate.now()));
+        model.addAttribute("feedback", savedFeedback);
+        return "feedback/showFeedback";
     }
 
     @RequestMapping(value = "/feedback", method = GET)

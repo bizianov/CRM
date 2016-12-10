@@ -8,6 +8,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import project.controller.FeedbackController;
 import project.service.FeedbackService;
 import project.service.HotelService;
+import project.service.TourService;
 import project.service.TouristService;
 
 import static org.mockito.Mockito.mock;
@@ -48,8 +49,9 @@ public class FeedbackViewResolverTest {
         FeedbackService feedbackService = mock(FeedbackService.class);
         TouristService touristService = mock(TouristService.class);
         HotelService hotelService = mock(HotelService.class);
+        TourService tourService = mock(TourService.class);
         FeedbackController feedbackController =
-                FeedbackController.of(feedbackService,touristService,hotelService);
+                FeedbackController.of(feedbackService,touristService,hotelService,tourService);
         mockMvc = MockMvcBuilders.standaloneSetup(feedbackController)
                 .setViewResolvers(viewResolver)
                 .build();
