@@ -82,9 +82,11 @@ public class FeedbackController {
     }
 
     @RequestMapping(value = "/feedback", method = GET)
-    public String feedbackMenu(Model model){
+    public String feedbackMenu(@RequestParam(name = "tourId", required = false) Integer tourId,
+                               Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userLoggedIn = authentication.getName();
+        model.addAttribute("tourId",tourId);
         model.addAttribute("userLoggedIn", userLoggedIn);
         return "feedback/feedback";
     }

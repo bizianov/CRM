@@ -13,7 +13,14 @@
 <hr>
 <b>Leave feedback:</b><br><br>
 <form action="/createFeedback" method="get">
-    tour id = <input type="text" name="tourId"><br><br>
+    <c:choose>
+        <c:when test="${tourId != null}">
+            tour id = <input type="text" name="tourId" value="${tourId}"><br><br>
+        </c:when>
+        <c:otherwise>
+            tour id = <input type="text" name="tourId"><br><br>
+        </c:otherwise>
+    </c:choose>
     <textarea name="message" rows="5" cols="90" placeholder="leave feedback.."></textarea><br><br>
     <input type="submit" value="Create">
 </form>

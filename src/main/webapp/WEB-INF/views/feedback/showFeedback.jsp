@@ -14,7 +14,7 @@
     </tr>
     <tr>
         <td bgcolor="#E6E6E6">${feedback.id}</td>
-        <td bgcolor="#E6E6E6">${feedback.tour.id}</td>
+        <td bgcolor="#E6E6E6"><a href="/getTourById?id=${feedback.tour.id}">${feedback.tour.id}</a></td>
         <td bgcolor="#E6E6E6">${feedback.message}</td>
     </tr>
 </table>
