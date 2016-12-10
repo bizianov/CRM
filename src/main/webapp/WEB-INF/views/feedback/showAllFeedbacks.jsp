@@ -4,10 +4,10 @@
 
 <html>
 <head>
-    <title>Hotel info</title>
+    <title>Feedback info</title>
 </head>
 <body>
-<p align="center"><a href="/hotel">Hotel menu</a></p>
+<p align="center"><a href="/feedback">Feedback menu</a></p>
 
 <table border="1">
     <tr>

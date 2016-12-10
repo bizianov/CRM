@@ -31,18 +31,18 @@ public class FeedbackService {
     }
 
     public List<Feedback> findFeedbackByTourist(Tourist tourist) {
-        return Lists.newArrayList(feedbackDao.findAll())
+        return tourist != null ? Lists.newArrayList(feedbackDao.findAll())
                 .stream()
                 .filter(feedback -> feedback.getTour().getTouristList().contains(tourist))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()) : Lists.newArrayList();
 
     }
 
     public List<Feedback> findFeedbackByHotel(Hotel hotel) {
-        return Lists.newArrayList(feedbackDao.findAll())
+        return hotel != null ? Lists.newArrayList(feedbackDao.findAll())
                 .stream()
                 .filter(feedback -> feedback.getTour().getHotel().equals(hotel))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()) : Lists.newArrayList();
     }
 
     public List<Feedback> findFeedbackByPeriod(LocalDate start, LocalDate end) {
