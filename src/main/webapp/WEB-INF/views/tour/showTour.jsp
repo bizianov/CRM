@@ -74,7 +74,7 @@
         <td bgcolor="#E6E6E6">${tour.avia}</td>
         <td bgcolor="#E6E6E6">${tour.priceBrutto}</td>
         <td bgcolor="#E6E6E6">${tour.closureDate}</td>
-        <td bgcolor="#E6E6E6"><a href="/feedback?tourId=${tour.id}">leave</a></td>
+        <td bgcolor="#E6E6E6"><a href="/feedback?tourId=${tour.id}">leave feedback</a></td>
     </tr>
 </table>
 
