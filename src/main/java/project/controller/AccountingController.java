@@ -25,7 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @Data
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
 public class AccountingController {
 
     @NonNull
