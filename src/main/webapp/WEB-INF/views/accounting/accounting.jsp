@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Feedback panel</title>
+    <title>Accounting panel</title>
 </head>
 <body>
 <p align="center"><a href="/main.jsp">Main menu</a>

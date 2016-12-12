@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Hotel info</title>
+    <title>All Hotels</title>
 </head>
 <body>
 <p align="center"><a href="/hotel">Hotel menu</a></p>

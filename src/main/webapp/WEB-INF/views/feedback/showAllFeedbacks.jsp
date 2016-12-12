@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Feedback info</title>
+    <title>AllFeedbacks</title>
 </head>
 <body>
 <p align="center"><a href="/feedback">Feedback menu</a></p>

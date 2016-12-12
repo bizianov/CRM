@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>User info</title>
+    <title>Expire passports</title>
 </head>
 <body>
 <p align="center"><a href="/passport">Passport menu</a></p>

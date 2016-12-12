@@ -2,7 +2,8 @@
 
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>Passport updated</title>
 </head>
 <body>
 <p align="center"><a href="/passport">Passport menu</a></p>

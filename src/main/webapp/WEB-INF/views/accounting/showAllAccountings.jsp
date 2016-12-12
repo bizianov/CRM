@@ -2,7 +2,8 @@
 
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>All Accountings</title>
 </head>
 <body>
 <p align="center"><a href="/accounting">Accounting menu</a></p>
