@@ -13,11 +13,11 @@
 
 <b>Create accounting:</b><br>
 <form action="/createAccounting" method="get">
-    tour id = <input type="text" name="tourId">
+    tour id = <input type="text" name="tourId"><br>
     tpa = <input type="text" name="tpaNumber">
     tpg = <input type="text" name="tpgNumber">
-    to = <input type="text" name="tourOperatorNumber">
-    direct = <input type="text" name="isDirectPayment" list="isDirect">
+    to = <input type="text" name="tourOperatorNumber"><br>
+    direct = <input type="text" name="isDirectPayment" list="isDirect"><br>
     <datalist id="isDirect">
         <option value="true">true</option>
         <option value="false">false</option>
@@ -31,9 +31,29 @@
     <datalist id="paper">
         <option value="true">true</option>
         <option value="false">false</option>
-    </datalist>
+    </datalist><br>
     <input type="submit" value="Create">
 </form>
+
+<hr>
+<b>Find accounting by id:</b>
+<form action="/getAccountingById" method="get">
+    id = <input type="text" name="id">
+    <input type="submit" value="Find">
+</form>
+
+<b>Find accounting by tour:</b>
+<form action="/getAccountingByTour" method="get">
+    id = <input type="text" name="id">
+    <input type="submit" value="Find">
+</form>
+
+<b>Find accounting by tourist:</b>
+<form action="/getAccountingByTourist" method="get">
+    last name = <input type="text" name="lastName">
+    <input type="submit" value="Find">
+</form>
+<hr>
 
 </body>
 </html>

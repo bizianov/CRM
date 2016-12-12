@@ -3,6 +3,7 @@ package project.controller;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import project.model.tour.Tour;
 import project.service.AccountingService;
 import project.service.TourService;
 
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 /**
@@ -22,7 +25,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @Data
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AccountingController {
 
     @NonNull
@@ -55,6 +58,52 @@ public class AccountingController {
             model.addAttribute("tourId", tourId);
             return "accounting/error/invalidTourId";
         }
+    }
+
+    @RequestMapping("/getAccountingById")
+    public String findAccountingById(@RequestParam(name = "id") int id,
+                                     Model model){
+        Accounting accountingById = accountingService.findAccountingById(id);
+        model.addAttribute("accounting", accountingById);
+        return "accounting/showAccounting";
+    }
+
+    @RequestMapping("/getAccountingByTour")
+    public String findAccountingByTour(@RequestParam(name = "id") int id, Model model){
+        Tour tourById = tourService.findTourById(id);
+        if (tourById == null){
+            model.addAttribute("tourId", id);
+            return "accounting/error/invalidTourId";
+        } else {
+            Accounting accountingByTour = accountingService.findAccountingByTour(tourById);
+            model.addAttribute("accounting", accountingByTour);
+            return "accounting/showAccounting";
+        }
+    }
+
+    @RequestMapping("/getAccountingByTourist")
+    public String findAccountingByTourist(@RequestParam(name = "lastName") String lastName, Model model){
+        List<Accounting> accountingByTouristLastName = accountingService.findAccountingByTouristLastName(lastName);
+        model.addAttribute("allAccountings", accountingByTouristLastName);
+        return "accounting/showAllAccountings";
+    }
+
+    @RequestMapping("/receivedElectronicActs")
+    public String updateElectronicActs(@RequestParam(name = "id") int id, Model model){
+        Accounting accountingById = accountingService.findAccountingById(id);
+        accountingById.setElectronicAct(true);
+        accountingService.saveAccounting(accountingById);
+        model.addAttribute("accounting",accountingById);
+        return "accounting/showAccounting";
+    }
+
+    @RequestMapping("/receivedPaperActs")
+    public String updatePaperActs(@RequestParam(name = "id") int id, Model model){
+        Accounting accountingById = accountingService.findAccountingById(id);
+        accountingById.setPaperAct(true);
+        accountingService.saveAccounting(accountingById);
+        model.addAttribute("accounting",accountingById);
+        return "accounting/showAccounting";
     }
 
     @RequestMapping(value = "/accounting", method = GET)
