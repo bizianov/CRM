@@ -2,7 +2,8 @@
 
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>Tourist deleted</title>
 </head>
 <body>
 <p align="center"><a href="/tourist">Tourist menu</a></p>

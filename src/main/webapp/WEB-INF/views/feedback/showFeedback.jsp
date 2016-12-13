@@ -2,7 +2,8 @@
 
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>Feedback</title>
 </head>
 <body>
 <p align="center"><a href="/feedback">Feedback menu</a></p>

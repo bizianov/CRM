@@ -3,6 +3,7 @@
 
 <html>
 <head>
+    <title>CRM</title>
     <p align="center"><b>TPG AGENCY</b></p>
 </head>
 <body>

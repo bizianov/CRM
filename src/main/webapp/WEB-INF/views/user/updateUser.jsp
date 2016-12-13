@@ -2,7 +2,8 @@
 
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>User panel</title>
 </head>
 <body>
 <p align="center"><a href="/user">User menu</a></p>
