@@ -1,7 +1,7 @@
 package project.model.passport;
 
 import lombok.*;
-import project.config.LocalDateAttributeConverter;
+import project.converter.LocalDateAttributeConverter;
 import project.model.tourist.Tourist;
 
 import javax.persistence.*;

@@ -2,7 +2,8 @@
 
 <html>
   <head>
-    
+    <meta charset="UTF-8">
+    <title>Tour deleted</title>
   </head>
   <body>
     <p align="center"><a href="/tour">Tour menu</a></p>

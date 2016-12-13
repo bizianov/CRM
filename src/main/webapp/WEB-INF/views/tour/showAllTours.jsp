@@ -3,7 +3,8 @@
 
 <html>
 <head>
-    <title>Tour info</title>
+    <meta charset="UTF-8">
+    <title>All Tours</title>
 </head>
 <body>
 <p align="center"><a href="/tour">Tour menu</a></p>
@@ -20,6 +21,8 @@
         <th bgcolor="#01DF3A">AVIA</th>
         <th bgcolor="#01DF3A">PRICE</th>
         <th bgcolor="#01DF3A">CLOSURE</th>
+        <th bgcolor="#01DF3A">FEEDBACK</th>
+        <th bgcolor="#01DF3A">ACCOUNTING</th>
     </tr>
     <c:forEach items="${allTours}" var="tour">
         <tr>
@@ -76,6 +79,8 @@
             <td bgcolor="#E6E6E6">${tour.avia}</td>
             <td bgcolor="#E6E6E6">${tour.priceBrutto}</td>
             <td bgcolor="#E6E6E6">${tour.closureDate}</td>
+            <td bgcolor="#E6E6E6"><a href="/feedback?tourId=${tour.id}">leave feedback</a></td>
+            <td bgcolor="#E6E6E6"><a href="/getAccountingByTour?id=${tour.id}">update acts</a></td>
         </tr>
     </c:forEach>
 </table>

@@ -2,7 +2,8 @@
 
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>Tour</title>
 </head>
 <body>
 <p align="center"><a href="/tour">Tour menu</a></p>
@@ -18,6 +19,9 @@
         <th bgcolor="#01DF3A">VISA</th>
         <th bgcolor="#01DF3A">AVIA</th>
         <th bgcolor="#01DF3A">PRICE</th>
+        <th bgcolor="#01DF3A">CLOSURE</th>
+        <th bgcolor="#01DF3A">FEEDBACK</th>
+        <th bgcolor="#01DF3A">ACCOUNTING</th>
     </tr>
     <tr>
         <td bgcolor="#E6E6E6"><b>${tour.id}</b></td>
@@ -71,6 +75,9 @@
         <td bgcolor="#E6E6E6">${tour.visaRequired}</td>
         <td bgcolor="#E6E6E6">${tour.avia}</td>
         <td bgcolor="#E6E6E6">${tour.priceBrutto}</td>
+        <td bgcolor="#E6E6E6">${tour.closureDate}</td>
+        <td bgcolor="#E6E6E6"><a href="/feedback?tourId=${tour.id}">leave feedback</a></td>
+        <td bgcolor="#E6E6E6"><a href="/getAccountingByTour?id=${tour.id}">update acts</a></td>
     </tr>
 </table>
 
