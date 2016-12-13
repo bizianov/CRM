@@ -1,4 +1,4 @@
-package project.config;
+package project.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

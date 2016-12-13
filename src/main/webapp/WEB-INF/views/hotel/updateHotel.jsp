@@ -2,7 +2,8 @@
 
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <title>Hotel updated</title>
 </head>
 <body>
 <p align="center"><a href="/hotel">Hotel menu</a></p>
