@@ -48,6 +48,13 @@ public class AccountingService {
                 .collect(Collectors.toList());
     }
 
+    public List<Accounting> findOpenedAccounting(){
+        return Lists.newArrayList(accountingDao.findAll())
+                .stream()
+                .filter(Accounting -> !Accounting.isPaperAct())
+                .collect(Collectors.toList());
+    }
+
     public List<Accounting> findAccountingByTouristLastName(String lastName){
         return Lists.newArrayList(accountingDao.findAll())
                 .stream()

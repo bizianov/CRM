@@ -2,6 +2,8 @@ package accounting;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -35,6 +37,18 @@ public class AccountingViewResolverTest {
     @Test
     public void findAccountingByTourist() throws Exception {
         mockMvc.perform(get("/getAccountingByTourist?lastName=q"))
+                .andExpect(view().name("accounting/showAllAccountings"));
+    }
+
+    @Test
+    public void findOpenedAccountings() throws Exception {
+        mockMvc.perform(get("/getOpenedAccountings"))
+                .andExpect(view().name("accounting/showAllAccountings"));
+    }
+
+    @Test
+    public void findAccountingsByDate() throws Exception {
+        mockMvc.perform(get("/getAccountingsByDate?year=2016&month=11"))
                 .andExpect(view().name("accounting/showAllAccountings"));
     }
 

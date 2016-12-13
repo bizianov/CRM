@@ -17,6 +17,7 @@
         <th bgcolor="#01DF3A"><b>IS DIRECT</b></th>
         <th bgcolor="#01DF3A"><b>ELECTRONIC ACT</b></th>
         <th bgcolor="#01DF3A"><b>PAPER ACT</b></th>
+        <th bgcolor="#01DF3A"><b>RECEIVED</b></th>
     </tr>
     <c:forEach items="${allAccountings}" var="accounting">
         <tr>

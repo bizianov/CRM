@@ -1,6 +1,7 @@
 package project.controller;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @Data
+@NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
 public class AccountingController {
 
@@ -85,6 +87,22 @@ public class AccountingController {
     public String findAccountingByTourist(@RequestParam(name = "lastName") String lastName, Model model){
         List<Accounting> accountingByTouristLastName = accountingService.findAccountingByTouristLastName(lastName);
         model.addAttribute("allAccountings", accountingByTouristLastName);
+        return "accounting/showAllAccountings";
+    }
+
+    @RequestMapping("/getOpenedAccountings")
+    public String findOpenedAccounting(Model model){
+        List<Accounting> openedAccountings = accountingService.findOpenedAccounting();
+        model.addAttribute("allAccountings", openedAccountings);
+        return "accounting/showAllAccountings";
+    }
+
+    @RequestMapping("/getAccountingsByDate")
+    public String findAccountingByDate(@RequestParam(name = "year") int year,
+                                       @RequestParam(name = "month") int month,
+                                       Model model){
+        List<Accounting> accountingsByDate = accountingService.findAccountingByDate(year, month);
+        model.addAttribute("allAccountings", accountingsByDate);
         return "accounting/showAllAccountings";
     }
 
