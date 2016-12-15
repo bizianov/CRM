@@ -40,9 +40,6 @@ public class NotificationController {
 
     @RequestMapping(value = "/notifications")
     public String notificationMenu(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userLoggedIn = authentication.getName();
-        model.addAttribute("userLoggedIn", userLoggedIn);
         model.addAttribute("oneDayToFlightTours",oneDayToFlightTours());
         model.addAttribute("threeDaysToFlightTours",threeDaysToFlightTours());
         model.addAttribute("returnToday", returnToday());
@@ -55,7 +52,7 @@ public class NotificationController {
     private List<Tour> oneDayToFlightTours(){
         return tourService.findAll()
                 .stream()
-                .filter(tour -> tour.getStartDate().equals(LocalDate.now().plusDays(1)))
+                .filter(tour -> tour.getStartDate().isEqual(LocalDate.now().plusDays(1)))
                 .collect(Collectors.toList());
     }
 
@@ -86,5 +83,29 @@ public class NotificationController {
 
     private List<Passport> passportsDueToExpire(){
         return passportService.getPassportsDueToExpire();
+    }
+
+    public TourService getTourService() {
+        return tourService;
+    }
+
+    public void setTourService(TourService tourService) {
+        this.tourService = tourService;
+    }
+
+    public PassportService getPassportService() {
+        return passportService;
+    }
+
+    public void setPassportService(PassportService passportService) {
+        this.passportService = passportService;
+    }
+
+    public TouristService getTouristService() {
+        return touristService;
+    }
+
+    public void setTouristService(TouristService touristService) {
+        this.touristService = touristService;
     }
 }
