@@ -9,7 +9,7 @@
       <a href="/passport">Passport Menu</a><br>
       <a href="/hotel">Hotel Menu</a><br>
       <a href="/tour">Tour Menu</a><br>
-      <a href="">Document Menu</a><br>
       <a href="/feedback">Feedback Menu</a><br>
+      <a href="/notifications"><font color="red"><b>Notifications</b></font></a><br>
   </body>
 </html>
