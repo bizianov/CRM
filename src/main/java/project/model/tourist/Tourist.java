@@ -1,6 +1,7 @@
 package project.model.tourist;
 
 import lombok.*;
+import project.converter.BirthdayConverter;
 import project.converter.LocalDateAttributeConverter;
 
 import javax.persistence.*;
@@ -25,7 +26,7 @@ public class Tourist {
     @NonNull private String lastName;
     @NonNull private String phone;
     @NonNull private String email;
-    @Convert(converter = LocalDateAttributeConverter.class)
+    @Convert(converter = BirthdayConverter.class)
     @NonNull private LocalDate birthday;
     @Enumerated(EnumType.STRING)
     @NonNull private Source source;
