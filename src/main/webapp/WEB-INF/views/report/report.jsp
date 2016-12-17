@@ -11,6 +11,10 @@
     <a href="/login?logout">logout</a></p>
 
 <hr>
-    <a href="/generateMonthlyReport">Generate monthly report</a>
+<a href="/generateDailyReport">Generate daily report</a><br>
+<a href="/generateWeeklyReport">Generate weekly report</a><br>
+<a href="/generateMonthlyReport">Generate monthly report</a><br>
+<hr>
+
 </body>
 </html>

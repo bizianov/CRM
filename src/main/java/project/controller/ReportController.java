@@ -40,4 +40,16 @@ public class ReportController {
         reportService.generateMonthlyReport();
         return "report/reportReady";
     }
+
+    @RequestMapping("/generateWeeklyReport")
+    public String generateWeeklyReport(Model model) throws IOException {
+        reportService.generateWeeklyReport();
+        return "report/reportReady";
+    }
+
+    @RequestMapping("/generateDailyReport")
+    public String generateDailyReport(Model model) throws IOException {
+        reportService.generateDailyReport();
+        return "report/reportReady";
+    }
 }
