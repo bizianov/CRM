@@ -100,7 +100,8 @@ public class TourService {
     public List<Tour> filterToursByClosureDate(LocalDate start, LocalDate end, List<Tour> invokingList) {
         return invokingList
                 .stream()
-                .filter(tour -> tour.getClosureDate().isAfter(start) && tour.getClosureDate().isBefore(end))
+                .filter(tour -> tour.getClosureDate().isAfter(start.minusDays(1))
+                        && tour.getClosureDate().isBefore(end.plusDays(1)))
                 .collect(Collectors.toList());
     }
 
