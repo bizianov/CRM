@@ -67,4 +67,8 @@ public class TouristService {
         }
         return null;
     }
+
+    public List<Tourist> findAll(){
+        return Lists.newArrayList(touristDao.findAll());
+    }
 }
