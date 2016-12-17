@@ -16,5 +16,4 @@ import static org.springframework.context.annotation.ComponentScan.Filter;
         @Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)
 })
 public class AppRootConfig {
-
 }
