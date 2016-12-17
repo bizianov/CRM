@@ -39,8 +39,6 @@ import static org.junit.Assert.*;
 public class PassportServiceTest {
 
     @Autowired
-    private TestEntityManager entityManager;
-    @Autowired
     private PassportService passportService;
     @Autowired
     private TouristService touristService;
@@ -51,9 +49,10 @@ public class PassportServiceTest {
     public void setup(){
         Tourist tourist = Tourist.of("tFirstName","tLastName","tPhone","tEmail",
                 LocalDate.of(1988,05,15), Source.CASUAL);
-        passport = Passport.of("xxx","xxx",
-                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), tourist);
-        savedPassport = entityManager.persist(passport);
+        Tourist savedTourist = touristService.saveTourist(tourist);
+        passport = Passport.of("zzz","zzz",
+                LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), savedTourist);
+        savedPassport = passportService.savePassport(passport);
     }
 
     @Test
@@ -65,7 +64,7 @@ public class PassportServiceTest {
     public void findPassportById() throws ParseException {
         int id = savedPassport.getId();
         Passport passportById = passportService.getPassportById(id);
-        assertEquals(passportById.getSerialNumber(),"xxx");
+        assertEquals(passportById.getSerialNumber(),"zzz");
     }
 
     @Test

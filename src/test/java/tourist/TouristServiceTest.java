@@ -37,15 +37,13 @@ import static org.junit.Assert.*;
 public class TouristServiceTest {
 
     @Autowired
-    private TestEntityManager entityManager;
-    @Autowired
     private TouristService touristService;
     private Tourist tourist, savedTourist;
 
     @Before
     public void setup(){
         tourist = Tourist.of("first name","last name","phone","test@test", LocalDate.of(1988,05,16), Source.CASUAL);
-        savedTourist = entityManager.persist(tourist);
+        savedTourist = touristService.saveTourist(tourist);
     }
 
     @Test
@@ -96,7 +94,7 @@ public class TouristServiceTest {
     @Test
     public void findTouristsByBirthday(){
         Tourist tourist = Tourist.of("bFirstName","bLastName","bPhone","bEmail",LocalDate.now(),Source.OTHER);
-        Tourist savedTourist = entityManager.persist(tourist);
+        Tourist savedTourist = touristService.saveTourist(tourist);
         List<Tourist> touristsByBirthday = touristService.findTouristsByBirthday();
         assertTrue(touristsByBirthday.contains(savedTourist));
     }
