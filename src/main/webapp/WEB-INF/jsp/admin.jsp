@@ -7,6 +7,6 @@
   <body>
     <a href="/user">User Menu</a><br>
     <a href="/accounting">Accounting Menu</a><br>
-    <a href="">Report Menu</a><br>
+    <a href="/report">Report Menu</a><br>
   </body>
 </html>

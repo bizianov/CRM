@@ -11,6 +11,7 @@ import project.model.tour.TourDao;
 import project.model.tour.TourOperator;
 import project.model.tourist.Tourist;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -99,7 +100,24 @@ public class TourService {
     public List<Tour> filterToursByClosureDate(LocalDate start, LocalDate end, List<Tour> invokingList) {
         return invokingList
                 .stream()
-                .filter(tour -> tour.getClosureDate().isAfter(start) && tour.getClosureDate().isBefore(end))
+                .filter(tour -> tour.getClosureDate().isAfter(start.minusDays(1))
+                        && tour.getClosureDate().isBefore(end.plusDays(1)))
+                .collect(Collectors.toList());
+    }
+
+    public List<Tour> findToursSoldToday(){
+        return Lists.newArrayList(tourDao.findAll())
+                .stream()
+                .filter(tour -> tour.getClosureDate().isEqual(LocalDate.now()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Tour> findToursSoldCurrentWeek(){
+        return Lists.newArrayList(tourDao.findAll())
+                .stream()
+                .filter(tour ->
+                        tour.getClosureDate().isAfter((LocalDate.now().with(DayOfWeek.MONDAY)).minusDays(1))
+                && tour.getClosureDate().isBefore((LocalDate.now().with(DayOfWeek.SUNDAY)).plusDays(1)))
                 .collect(Collectors.toList());
     }
 
