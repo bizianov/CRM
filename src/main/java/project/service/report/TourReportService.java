@@ -1,18 +1,19 @@
 package project.service.report;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import project.model.hotel.Hotel;
 import project.model.tour.Tour;
 import project.model.tourist.Tourist;
 import project.service.TourService;
-import project.service.TouristService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,16 +29,22 @@ import java.util.List;
 
 @Service
 @Data
-@AllArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
 public class TourReportService {
 
+    @NonNull
     private TourService tourService;
 
-    private static final String SALES_TEMPLATE_PATH = "D:\\java\\projects\\report\\template\\SalesReportTemplate.xls";
-    private static final String MONTHLY_RESULT_PATH = "D:\\java\\projects\\report\\result\\MonthlySalesReport.xls";
-    private static final String WEEKLY_RESULT_PATH = "D:\\java\\projects\\report\\result\\WeeklySalesReport.xls";
-    private static final String DAILY_RESULT_PATH = "D:\\java\\projects\\report\\result\\DailySalesReport.xls";
-    private static final String CUSTOM_RESULT_PATH = "D:\\java\\projects\\report\\result\\CustomSalesReport.xls";
+    @Value("${report.tour.sales.template.path}")
+    private String SALES_TEMPLATE_PATH;
+    @Value("${report.tour.monthly.result.path}")
+    private String MONTHLY_RESULT_PATH;
+    @Value("${report.tour.weekly.result.path}")
+    private String WEEKLY_RESULT_PATH;
+    @Value("${report.tour.daily.result.path}")
+    private String DAILY_RESULT_PATH;
+    @Value("${report.tour.custom.result.path}")
+    private String CUSTOM_RESULT_PATH;
 
     public void generateMonthlyReport() throws IOException {
         List<Tour> tours =
@@ -125,7 +132,6 @@ public class TourReportService {
             currentRow.createCell(column++).setCellValue(tour.getPriceBrutto());
             currentRow.createCell(column++).setCellValue(String.valueOf(tour.getClosureDate()));
 
-            column = 0;
         }
         workbook.write(outputStream);
     }

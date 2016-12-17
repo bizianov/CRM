@@ -1,12 +1,14 @@
 package project.service.report;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import project.model.tourist.Tourist;
 import project.service.TouristService;
@@ -24,13 +26,15 @@ import java.util.List;
 
 @Service
 @Data
-@AllArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
 public class TouristReportService {
 
+    @NonNull
     private TouristService touristService;
-
-    private static final String CONTACTS_TEMPLATE_PATH = "D:\\java\\projects\\report\\template\\ContactsTemplate.xls";
-    private static final String CONTACTS_RESULT_PATH = "D:\\java\\projects\\report\\result\\ContactsReport.xls";
+    @Value("${report.contacts.template.path}")
+    public String CONTACTS_TEMPLATE_PATH;
+    @Value("${report.contacts.result.path}")
+    public String CONTACTS_RESULT_PATH;
 
     public void exportContacts() throws IOException {
         try(InputStream inputStream = Files.newInputStream(Paths.get(CONTACTS_TEMPLATE_PATH));
