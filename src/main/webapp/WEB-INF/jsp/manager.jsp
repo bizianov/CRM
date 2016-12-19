@@ -11,6 +11,6 @@
       <a href="/tour">Tour Menu</a><br>
       <a href="/feedback">Feedback Menu</a><br>
       <a href="/notifications"><font color="red"><b>Notifications</b></font></a><br>
-      <a href="/weather?city=Kiev">Weather Menu</a><br>
+      <a href="/weather">Weather Menu</a><br>
   </body>
 </html>
