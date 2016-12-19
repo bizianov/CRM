@@ -3,12 +3,8 @@ package project.service.weather;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -22,44 +18,19 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class CurrentWeatherService {
+public class CurrentWeatherService extends WeatherService{
 
-    @Value("${weather.website.base.url}")
-    private String baseUrl;
-    @Value("${weather.app.id}")
-    private String appId;
-    public static final String QUERY_FOR_CITY = "SELECT id FROM weather WHERE city = :city_param";
-    public static final Double KELVIN = 273.0;
-
-
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    private RestTemplate restTemplate = new RestTemplate();
+    @Value("${weather.current.url}")
+    private String currentUrl;
 
     public Map<String, Double> getWeather(String city) throws IOException {
-        Integer cityId = getCityId(city);
-        if (cityId == null){
+        String url = buildUrl(currentUrl, city);
+        log.info("URL for RestTemplate is {}", url);
+        if (url.isEmpty()){
             return Collections.emptyMap();
         }
-        StringBuilder builder = new StringBuilder(baseUrl)
-                .append("?id=")
-                .append(cityId)
-                .append("&appid=")
-                .append(appId);
-        String url = builder.toString();
-        log.info("URL for RestTemplate is {}", url);
         String rawWeather = restTemplate.getForObject(url, String.class);
         return parseRawValues(rawWeather);
-    }
-
-    private Integer getCityId(String city){
-        Map<String, String> namedParametersMap = Collections.singletonMap("city_param", city);
-        try {
-            Integer cityId = namedParameterJdbcTemplate.queryForObject(QUERY_FOR_CITY, namedParametersMap, Integer.class);
-            return cityId;
-        } catch (EmptyResultDataAccessException e){
-            return null;
-        }
     }
 
     private Map<String, Double> parseRawValues(String rawValues) throws IOException {
