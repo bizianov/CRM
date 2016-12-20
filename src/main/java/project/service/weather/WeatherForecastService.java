@@ -44,9 +44,11 @@ public class WeatherForecastService extends WeatherService {
            JsonNode next = elements.next();
            String date = String.valueOf(next.get("dt_txt"));
            double temperature = next.get("main").path("temp").doubleValue();
+           String falls = next.get("weather").findValue("main").toString();
            List<String> currentList = new ArrayList<>();
            currentList.add(date);
            currentList.add(String.valueOf(Double.valueOf(new DecimalFormat("##.#").format(temperature - KELVIN))));
+           currentList.add(falls);
            if (currentList.get(0).contains("12:00") || currentList.get(0).contains("18:00")) {
                weatherForecast.add(currentList);
            }

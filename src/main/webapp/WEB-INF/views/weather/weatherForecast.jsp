@@ -20,11 +20,13 @@ Weather forecast for <b>${city}:</b><br><br>
         <tr>
             <th bgcolor="#a9a9a9">Date/time</th>
             <th bgcolor="#a9a9a9">Temperature</th>
+            <th bgcolor="#a9a9a9">Falls</th>
         </tr>
         <c:forEach items="${forecast}" var="list">
             <tr>
                 <td>${list[0]}</td>
                 <td>${list[1]}</td>
+                <td>${list[2]}</td>
             </tr>
         </c:forEach>
     </table>
