@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,7 @@ public class ReportController {
     @NonNull
     private TourService tourService;
 
+    //@Secured("ROLE_ADMIN")
     @RequestMapping(value = "/report", method = GET)
     public String reportMenu(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

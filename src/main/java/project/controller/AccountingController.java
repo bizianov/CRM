@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@Secured("ROLE_ADMIN")
 public class AccountingController {
 
     @NonNull

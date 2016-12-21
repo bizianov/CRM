@@ -39,13 +39,13 @@ public class WeatherController {
             Map<String, Double> weatherValues = currentWeatherService.getWeather(city);
             model.addAttribute("city", city);
             if (weatherValues.isEmpty() || weatherValues == null){
-                return "weather/error";
+                return "weather/error/error";
             }
             model.addAttribute("weatherValues", weatherValues);
             return "weather/currentWeather";
         } catch (IOException e){
             model.addAttribute("city", city);
-            return "weather/error";
+            return "weather/error/error";
         }
     }
 
@@ -58,7 +58,7 @@ public class WeatherController {
             return "weather/weatherForecast";
         } catch (IOException e) {
             model.addAttribute("city", city);
-            return "weather/error";
+            return "weather/error/error";
         }
     }
 
