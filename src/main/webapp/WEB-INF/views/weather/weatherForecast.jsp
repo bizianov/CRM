@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Test</title>
+    <title>Weather forecast</title>
 </head>
 <body>
 <p align="center"><a href="/weather">Weather menu</a></p>

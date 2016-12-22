@@ -11,6 +11,8 @@ import project.model.tourist.Tourist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -33,11 +35,15 @@ public class AccountingService {
     }
 
     public Accounting findAccountingByTour(Tour tour) {
-        return Lists.newArrayList(accountingDao.findAll())
+        Optional<Accounting> result = Lists.newArrayList(accountingDao.findAll())
                 .stream()
                 .filter(accounting -> accounting.getTour().equals(tour))
-                .findFirst()
-                .get();
+                .findFirst();
+        if (result.isPresent()){
+            return result.get();
+        } else {
+            return null;
+        }
     }
 
     public List<Accounting> findAccountingByDate(int year, int month) {

@@ -23,6 +23,9 @@ public class WeatherForecastService extends WeatherService {
    public List<List<String>> getWeatherForecast(String city) throws IOException {
        String url = buildUrl(forecastUrl, city);
        log.info("URL for RestTemplate is {}", url);
+       if (url.isEmpty()){
+           throw new IOException("Incorrect city name");
+       }
        String rawWeatherForecast = restTemplate.getForObject(url, String.class);
        return parseRawWeatherForecast(rawWeatherForecast);
    }

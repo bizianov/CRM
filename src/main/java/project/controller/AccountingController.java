@@ -80,6 +80,9 @@ public class AccountingController {
             return "accounting/error/invalidTourId";
         } else {
             Accounting accountingByTour = accountingService.findAccountingByTour(tourById);
+            if (accountingByTour == null){
+                return "accounting/accounting";
+            }
             model.addAttribute("accounting", accountingByTour);
             return "accounting/showAccounting";
         }
