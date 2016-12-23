@@ -1,5 +1,9 @@
 package project.controller;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,19 +30,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 
 @Controller
-@Slf4j
 @Secured("ROLE_ADMIN")
+@Data
+@Slf4j
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class UserController {
 
+    @NonNull
     private UserService userService;
-
-    @Autowired
+    @NonNull
     private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping(value = "/getUserById", method = GET)
     public String getUserById(@RequestParam(value = "id") int id,

@@ -34,16 +34,11 @@ public class AccountingService {
         return accountingDao.findOne(id);
     }
 
-    public Accounting findAccountingByTour(Tour tour) {
-        Optional<Accounting> result = Lists.newArrayList(accountingDao.findAll())
+    public Optional<Accounting> findAccountingByTour(Tour tour) {
+        return Lists.newArrayList(accountingDao.findAll())
                 .stream()
                 .filter(accounting -> accounting.getTour().equals(tour))
                 .findFirst();
-        if (result.isPresent()){
-            return result.get();
-        } else {
-            return null;
-        }
     }
 
     public List<Accounting> findAccountingByDate(int year, int month) {

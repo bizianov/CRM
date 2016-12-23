@@ -1,6 +1,7 @@
 package project.controller;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * Created by slava23 on 12/16/2016.
  */
 
+@Controller
 @Data
 @RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
-@Controller
+@NoArgsConstructor
 public class ReportController {
 
     @NonNull

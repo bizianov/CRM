@@ -18,6 +18,7 @@ import project.service.AccountingService;
 import project.service.TourService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -79,11 +80,11 @@ public class AccountingController {
             model.addAttribute("tourId", id);
             return "accounting/error/invalidTourId";
         } else {
-            Accounting accountingByTour = accountingService.findAccountingByTour(tourById);
-            if (accountingByTour == null){
+            Optional<Accounting> accountingByTour = accountingService.findAccountingByTour(tourById);
+            if (!accountingByTour.isPresent()){
                 return "accounting/accounting";
             }
-            model.addAttribute("accounting", accountingByTour);
+            model.addAttribute("accounting", accountingByTour.get());
             return "accounting/showAccounting";
         }
     }

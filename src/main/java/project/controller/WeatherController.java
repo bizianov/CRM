@@ -1,6 +1,7 @@
 package project.controller;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Controller
 @Data
 @RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class WeatherController {
 
     @NonNull

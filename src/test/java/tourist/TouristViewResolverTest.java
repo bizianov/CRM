@@ -75,7 +75,7 @@ public class TouristViewResolverTest {
         viewResolver.setSuffix(".jsp");
 
         TouristService touristService = mock(TouristService.class);
-        TouristController touristController = new TouristController(touristService);
+        TouristController touristController = TouristController.of(touristService);
         mockMvc = MockMvcBuilders.standaloneSetup(touristController)
                 .setViewResolvers(viewResolver)
                 .build();

@@ -5,8 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,29 +81,5 @@ public class NotificationController {
 
     private List<Passport> passportsDueToExpire(){
         return passportService.getPassportsDueToExpire();
-    }
-
-    public TourService getTourService() {
-        return tourService;
-    }
-
-    public void setTourService(TourService tourService) {
-        this.tourService = tourService;
-    }
-
-    public PassportService getPassportService() {
-        return passportService;
-    }
-
-    public void setPassportService(PassportService passportService) {
-        this.passportService = passportService;
-    }
-
-    public TouristService getTouristService() {
-        return touristService;
-    }
-
-    public void setTouristService(TouristService touristService) {
-        this.touristService = touristService;
     }
 }
