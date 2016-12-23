@@ -39,7 +39,6 @@ public class ReportController {
     @NonNull
     private TourService tourService;
 
-    //@Secured("ROLE_ADMIN")
     @RequestMapping(value = "/report", method = GET)
     public String reportMenu(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

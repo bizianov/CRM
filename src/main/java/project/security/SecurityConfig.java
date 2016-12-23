@@ -1,5 +1,8 @@
 package project.security;
 
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +24,8 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 @ComponentScan(basePackages = {"project"})
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String USERS_BY_USERNAME_QUERY =
@@ -28,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String AUTHORITIES_BY_USERNAME_QUERY =
             "SELECT username, role FROM user INNER JOIN user_roles ON id=user_id WHERE username = ?";
 
-    @Autowired
+    @NonNull
     private DataSource dataSource;
 
     @Override
