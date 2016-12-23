@@ -1,8 +1,10 @@
 package project.controller;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -29,7 +31,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 @Data
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class FeedbackController {
 
     @NonNull

@@ -1,5 +1,9 @@
 package project.controller;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,14 +26,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 
 @Controller
+@Data
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class HotelController {
 
+    @NonNull
     private HotelService hotelService;
-
-    @Autowired
-    public HotelController(HotelService hotelService) {
-        this.hotelService = hotelService;
-    }
 
     @RequestMapping(value = "/createHotel", method = GET)
     public String createHotel(@RequestParam(name = "name") String name,
@@ -117,13 +120,5 @@ public class HotelController {
         Hotel hotel = hotelService.deleteHotel(id);
         model.addAttribute("hotel", hotel);
         return "hotel/deleteHotel";
-    }
-
-    public HotelService getHotelService() {
-        return hotelService;
-    }
-
-    public void setHotelService(HotelService hotelService) {
-        this.hotelService = hotelService;
     }
 }

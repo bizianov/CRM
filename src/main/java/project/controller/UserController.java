@@ -1,9 +1,12 @@
 package project.controller;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,18 +28,17 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  */
 
 @Controller
+@Secured("ROLE_ADMIN")
+@Data
 @Slf4j
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class UserController {
 
+    @NonNull
     private UserService userService;
-
-    @Autowired
+    @NonNull
     private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping(value = "/getUserById", method = GET)
     public String getUserById(@RequestParam(value = "id") int id,
@@ -124,13 +126,5 @@ public class UserController {
         String userLoggedIn = authentication.getName();
         model.addAttribute("userLoggedIn", userLoggedIn);
         return "user/user";
-    }
-
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
     }
 }

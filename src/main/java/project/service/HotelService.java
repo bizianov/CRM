@@ -1,5 +1,6 @@
 package project.service;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.model.hotel.Hotel;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 
 @Service
+@Data
 public class HotelService {
 
     @Autowired
@@ -50,13 +52,5 @@ public class HotelService {
             hotelDao.delete(hotelById);
         }
         return hotelById;
-    }
-
-    public HotelDao getHotelDao() {
-        return hotelDao;
-    }
-
-    public void setHotelDao(HotelDao hotelDao) {
-        this.hotelDao = hotelDao;
     }
 }

@@ -2,6 +2,7 @@ package project.controller;
 
 import com.google.common.collect.Lists;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +35,14 @@ import static project.model.tour.Tour.DAY0;
 
 @Controller
 @Data
-@RequiredArgsConstructor(staticName = "of")
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class TourController {
 
-    @Autowired
     @NonNull
     private TourService tourService;
-    @Autowired
     @NonNull
     private HotelService hotelService;
-    @Autowired
     @NonNull
     private TouristService touristService;
 

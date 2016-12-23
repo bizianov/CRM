@@ -1,6 +1,7 @@
 package project.service;
 
 import com.google.common.collect.Lists;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.model.passport.Passport;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Data
 public class PassportService {
 
     @Autowired
@@ -50,13 +52,5 @@ public class PassportService {
             passportDao.delete(passportById);
         }
         return passportById;
-    }
-
-    public PassportDao getPassportDao() {
-        return passportDao;
-    }
-
-    public void setPassportDao(PassportDao passportDao) {
-        this.passportDao = passportDao;
     }
 }
