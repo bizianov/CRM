@@ -10,7 +10,7 @@
 
 <p align="center"><a href="/main.jsp">Main menu</a>
 <p align="right">You are logged in as <b>${userLoggedIn}</b>
-    <a href="/login?logout">logout</a></p>
+    <a href="/logout">logout</a></p>
 
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 <hr>
