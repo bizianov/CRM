@@ -1,13 +1,13 @@
 package project.service;
 
 import com.google.common.collect.Lists;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import project.model.user.User;
 import project.model.user.UserDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,12 +15,17 @@ import java.util.List;
  */
 
 @Service
+@Data
 public class UserService {
 
     @Autowired
     private UserDao userDao;
     @Autowired
     private PasswordEncoder encoder;
+
+    public User saveUser(User user){
+        return userDao.save(user);
+    }
 
     public User getUserById(int id){
         return userDao.findOne(id);
@@ -44,19 +49,7 @@ public class UserService {
         return userById;
     }
 
-    public User saveUser(User user){
-        return userDao.save(user);
-    }
-
     public List<User> getAllUsers(){
         return Lists.newArrayList(userDao.findAll());
-    }
-
-    public UserDao getUserDao() {
-        return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
     }
 }

@@ -3,6 +3,7 @@ package user;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -61,7 +62,8 @@ public class UserViewResolverTest {
         viewResolver.setSuffix(".jsp");
 
         UserService mockUserService = mock(UserService.class);
-        UserController userController = new UserController(mockUserService);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        UserController userController = UserController.of(mockUserService, bCryptPasswordEncoder);
         mockMvc = MockMvcBuilders.standaloneSetup(userController)
                 .setViewResolvers(viewResolver)
                 .build();

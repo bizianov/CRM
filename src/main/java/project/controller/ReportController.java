@@ -1,6 +1,7 @@
 package project.controller;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.model.tour.Tour;
-import project.service.report.TourReportService;
 import project.service.TourService;
+import project.service.report.TourReportService;
 import project.service.report.TouristReportService;
 
 import java.io.IOException;
@@ -25,9 +26,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * Created by slava23 on 12/16/2016.
  */
 
+@Controller
 @Data
 @RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
-@Controller
+@NoArgsConstructor
 public class ReportController {
 
     @NonNull

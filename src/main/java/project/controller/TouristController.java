@@ -1,7 +1,10 @@
 package project.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,13 +28,13 @@ import static project.model.passport.Passport.DATE_PATTERN;
  */
 
 @Controller
+@Data
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class TouristController {
 
+    @NonNull
     private TouristService touristService;
-
-    public TouristController(TouristService touristService) {
-        this.touristService = touristService;
-    }
 
     @RequestMapping("/getTouristById")
     public String findTouristById(@RequestParam(name = "id") int id,
@@ -118,13 +121,5 @@ public class TouristController {
         String userLoggedIn = authentication.getName();
         model.addAttribute("userLoggedIn", userLoggedIn);
         return "tourist/tourist";
-    }
-
-    public TouristService getTouristService() {
-        return touristService;
-    }
-
-    public void setTouristService(TouristService touristService) {
-        this.touristService = touristService;
     }
 }

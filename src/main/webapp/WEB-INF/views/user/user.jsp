@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <html lang="en">
 
 <head>
@@ -9,8 +10,9 @@
 <body>
 <p align="center"><a href="/main.jsp">Main menu</a>
 <p align="right">You are logged in as <b>${userLoggedIn}</b>
-    <a href="/login?logout">logout</a></p>
+    <a href="/logout">logout</a></p>
 
+<sec:authorize access="hasRole('ROLE_ADMIN')">
 <hr>
 <table>
     <tr>
@@ -66,6 +68,7 @@
     <input type="submit" value="Delete">
 </form>
 <hr>
+</sec:authorize>
 
 </body>
 </html>

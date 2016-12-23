@@ -7,7 +7,7 @@
 <body>
 <p align="center"><a href="/main.jsp">Main menu</a>
 <hr>
-<b>1 day to flight</b>
+<font color="blue"><b>1 day to flight</b></font>
 <table>
     <tr>
         <th bgcolor="#01DF3A">ID</th>
@@ -20,8 +20,7 @@
         <th bgcolor="#01DF3A">AVIA</th>
         <th bgcolor="#01DF3A">PRICE</th>
         <th bgcolor="#01DF3A">CLOSURE</th>
-        <th bgcolor="#01DF3A">FEEDBACK</th>
-        <th bgcolor="#01DF3A">ACCOUNTING</th>
+        <th bgcolor="#01DF3A">WEATHER</th>
     </tr>
     <c:forEach items="${oneDayToFlightTours}" var="tour">
         <tr>
@@ -78,13 +77,12 @@
             <td bgcolor="#E6E6E6">${tour.avia}</td>
             <td bgcolor="#E6E6E6">${tour.priceBrutto}</td>
             <td bgcolor="#E6E6E6">${tour.closureDate}</td>
-            <td bgcolor="#E6E6E6"><a href="/feedback?tourId=${tour.id}">leave feedback</a></td>
-            <td bgcolor="#E6E6E6"><a href="/getAccountingByTour?id=${tour.id}">update acts</a></td>
+            <td bgcolor="#E6E6E6"><a href="/weatherForecast?city=${tour.hotel.region}">Forecast</a></td>
         </tr>
     </c:forEach>
 </table>
 <hr>
-<b>3 days to flight</b>
+<font color="blue"><b>3 days to flight</b></font>
 <table>
     <tr>
         <th bgcolor="#01DF3A">ID</th>
@@ -97,8 +95,7 @@
         <th bgcolor="#01DF3A">AVIA</th>
         <th bgcolor="#01DF3A">PRICE</th>
         <th bgcolor="#01DF3A">CLOSURE</th>
-        <th bgcolor="#01DF3A">FEEDBACK</th>
-        <th bgcolor="#01DF3A">ACCOUNTING</th>
+        <th bgcolor="#01DF3A">WEATHER</th>
     </tr>
     <c:forEach items="${threeDaysToFlightTours}" var="tour">
         <tr>
@@ -155,13 +152,12 @@
             <td bgcolor="#E6E6E6">${tour.avia}</td>
             <td bgcolor="#E6E6E6">${tour.priceBrutto}</td>
             <td bgcolor="#E6E6E6">${tour.closureDate}</td>
-            <td bgcolor="#E6E6E6"><a href="/feedback?tourId=${tour.id}">leave feedback</a></td>
-            <td bgcolor="#E6E6E6"><a href="/getAccountingByTour?id=${tour.id}">update acts</a></td>
+            <td bgcolor="#E6E6E6"><a href="/weatherForecast?city=${tour.hotel.region}">Forecast</a></td>
         </tr>
     </c:forEach>
 </table>
 <hr>
-<b>Return today</b>
+<font color="blue"><b>Return today</b></font>
 <table>
     <tr>
         <th bgcolor="#01DF3A">ID</th>
@@ -238,7 +234,7 @@
     </c:forEach>
 </table>
 <hr>
-<b>Birthday today</b>
+<font color="blue"><b>Birthday today</b></font>
 <table border="1">
     <tr>
         <th bgcolor="#01DF3A"><b>ID</b></th>
@@ -262,7 +258,7 @@
     </c:forEach>
 </table>
 <hr>
-<b>Ask for feedback</b>
+<font color="blue"><b>Ask for feedback</b></font>
 <table>
     <tr>
         <th bgcolor="#01DF3A">ID</th>
@@ -339,7 +335,7 @@
     </c:forEach>
 </table>
 <hr>
-<b>Passports due to expire</b>
+<font color="blue"><b>Passports due to expire</b></font>
 <table border="1">
     <tr>
         <th bgcolor="#01DF3A">ID</th>

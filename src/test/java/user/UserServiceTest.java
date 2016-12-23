@@ -1,5 +1,6 @@
 package user;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,14 +34,17 @@ import static org.junit.Assert.assertNull;
 public class UserServiceTest {
 
     @Autowired
-    private TestEntityManager entityManager;
-    @Autowired
     private UserService userService;
+    private User savedUser;
+
+    @Before
+    public void setup(){
+        User user = new User("testUser");
+        savedUser = userService.saveUser(user);
+    }
 
     @Test
     public void findUserById(){
-        User user = new User("testUser");
-        User savedUser = entityManager.persist(user);
         int id = savedUser.getId();
         User userById = userService.getUserById(id);
         assertEquals(userById.getUsername(),"testUser");
@@ -48,8 +52,6 @@ public class UserServiceTest {
 
     @Test
     public void findUserByName(){
-        User user = new User("testUser");
-        User savedUser = entityManager.persist(user);
         String username = savedUser.getUsername();
         User userByName = userService.getUserByName(username);
         assertEquals(userByName.getUsername(),"testUser");
@@ -57,8 +59,6 @@ public class UserServiceTest {
 
     @Test
     public void deleteUser(){
-        User user = new User("testUser");
-        User savedUser = entityManager.persist(user);
         int id = savedUser.getId();
         userService.deleteUser(id);
         User userById = userService.getUserById(id);
@@ -67,8 +67,6 @@ public class UserServiceTest {
 
     @Test
     public void updateUser(){
-        User user = new User("testUser");
-        User savedUser = entityManager.persist(user);
         int id = savedUser.getId();
         savedUser.setUsername("testUserNew");
         userService.saveUser(savedUser);

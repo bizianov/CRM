@@ -1,5 +1,9 @@
 package project.controller;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,16 +30,15 @@ import static project.model.passport.Passport.DATE_PATTERN;
  */
 
 @Controller
+@Data
+@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@NoArgsConstructor
 public class PassportController {
 
+    @NonNull
     private PassportService passportService;
+    @NonNull
     private TouristService touristService;
-
-    @Autowired
-    public PassportController(PassportService passportService, TouristService touristService) {
-        this.passportService = passportService;
-        this.touristService = touristService;
-    }
 
     @RequestMapping(value = "/getPassportById", method = GET)
     public String getPassportById(@RequestParam(name = "id") int id,
@@ -142,21 +145,5 @@ public class PassportController {
         String userLoggedIn = authentication.getName();
         model.addAttribute("userLoggedIn", userLoggedIn);
         return "passport/passport";
-    }
-
-    public PassportService getPassportService() {
-        return passportService;
-    }
-
-    public void setPassportService(PassportService passportService) {
-        this.passportService = passportService;
-    }
-
-    public TouristService getTouristService() {
-        return touristService;
-    }
-
-    public void setTouristService(TouristService touristService) {
-        this.touristService = touristService;
     }
 }

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import project.service.AccountingService;
 import project.service.TourService;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -28,6 +30,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
+@Secured("ROLE_ADMIN")
 public class AccountingController {
 
     @NonNull
@@ -77,8 +80,11 @@ public class AccountingController {
             model.addAttribute("tourId", id);
             return "accounting/error/invalidTourId";
         } else {
-            Accounting accountingByTour = accountingService.findAccountingByTour(tourById);
-            model.addAttribute("accounting", accountingByTour);
+            Optional<Accounting> accountingByTour = accountingService.findAccountingByTour(tourById);
+            if (!accountingByTour.isPresent()){
+                return "accounting/accounting";
+            }
+            model.addAttribute("accounting", accountingByTour.get());
             return "accounting/showAccounting";
         }
     }
