@@ -15,7 +15,7 @@ import java.util.*;
  */
 @Service
 @Slf4j
-public class WeatherForecastService extends WeatherService {
+public class ForecastWeatherService extends WeatherService {
 
     @Value("${weather.forecast.url}")
     private String forecastUrl;

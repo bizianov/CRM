@@ -1,6 +1,5 @@
 package project.security;
 
-import com.sun.xml.internal.fastinfoset.util.CharArray;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
