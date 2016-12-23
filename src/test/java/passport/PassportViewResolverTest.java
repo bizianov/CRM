@@ -52,7 +52,7 @@ public class PassportViewResolverTest {
 
         PassportService passportService = mock(PassportService.class);
         TouristService touristService = mock(TouristService.class);
-        PassportController passportController = new PassportController(passportService, touristService);
+        PassportController passportController = PassportController.of(passportService, touristService);
         mockMvc = MockMvcBuilders.standaloneSetup(passportController)
                 .setViewResolvers(viewResolver)
                 .build();

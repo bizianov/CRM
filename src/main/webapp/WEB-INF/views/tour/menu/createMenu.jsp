@@ -8,7 +8,7 @@
 <body>
 <p align="center"><a href="/tour">Tour menu</a>
 <p align="right">You are logged in as <b>${userLoggedIn}</b>
-    <a href="/login?logout">logout</a></p>
+    <a href="/logout">logout</a></p>
 
 <hr>
 <form action="/createTourWithParameters" method="get">

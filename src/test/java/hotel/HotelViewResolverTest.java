@@ -71,7 +71,7 @@ public class HotelViewResolverTest {
         viewResolver.setSuffix(".jsp");
 
         HotelService hotelService = mock(HotelService.class);
-        HotelController hotelController = new HotelController(hotelService);
+        HotelController hotelController = HotelController.of(hotelService);
         mockMvc = MockMvcBuilders.standaloneSetup(hotelController)
                 .setViewResolvers(viewResolver)
                 .build();
