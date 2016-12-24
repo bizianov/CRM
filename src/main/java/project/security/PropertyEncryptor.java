@@ -9,10 +9,10 @@ public class PropertyEncryptor {
 
     private static String password = "key";
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
         textEncryptor.setPassword(password);
         String myEncryptedText = textEncryptor.encrypt("your_password");
         System.out.println(myEncryptedText);
-    }
+    }*/
 }
