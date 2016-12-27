@@ -38,12 +38,14 @@ public class TouristServiceTest {
 
     @Autowired
     private TouristService touristService;
+    @Autowired
+    private TestEntityManager testEntityManager;
     private Tourist tourist, savedTourist;
 
     @Before
     public void setup(){
         tourist = Tourist.of("first name","last name","phone","test@test", LocalDate.of(1988,05,16), Source.CASUAL);
-        savedTourist = touristService.saveTourist(tourist);
+        savedTourist = testEntityManager.persist(tourist);
     }
 
     @Test
@@ -89,13 +91,5 @@ public class TouristServiceTest {
     public void findTouristsByLastName(){
         List<Tourist> touristsByLastName = touristService.findTouristsByLastName(savedTourist.getLastName());
         assertTrue(touristsByLastName.contains(savedTourist));
-    }
-
-    @Test
-    public void findTouristsByBirthday(){
-        Tourist tourist = Tourist.of("bFirstName","bLastName","bPhone","bEmail",LocalDate.now(),Source.OTHER);
-        Tourist savedTourist = touristService.saveTourist(tourist);
-        List<Tourist> touristsByBirthday = touristService.findTouristsByBirthday();
-        assertTrue(touristsByBirthday.contains(savedTourist));
     }
 }

@@ -21,7 +21,7 @@ import javax.sql.DataSource;
  * Created by slava23 on 10/19/2016.
  */
 
-@Configuration
+//@Configuration
 @EnableWebSecurity
 @ComponentScan(basePackages = {"project"})
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

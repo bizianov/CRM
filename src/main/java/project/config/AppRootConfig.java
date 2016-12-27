@@ -18,19 +18,10 @@ import static org.springframework.context.annotation.ComponentScan.Filter;
 @ComponentScan(basePackages = {"project"}, excludeFilters = {
         @Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class)
 })
-@PropertySource("classpath:application.properties")
 public class AppRootConfig {
-
-    @Autowired
-    private DataSource dataSource;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer placeHolderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(){
-        return new NamedParameterJdbcTemplate(dataSource);
     }
 }

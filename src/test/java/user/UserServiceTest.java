@@ -35,12 +35,14 @@ public class UserServiceTest {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private TestEntityManager testEntityManager;
     private User savedUser;
 
     @Before
     public void setup(){
         User user = new User("testUser");
-        savedUser = userService.saveUser(user);
+        savedUser = testEntityManager.persist(user);
     }
 
     @Test

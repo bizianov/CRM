@@ -21,7 +21,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * Created by slava23 on 11/24/2016.
@@ -69,5 +70,14 @@ public class SecurityTest {
         mvc
                 .perform(logout())
                 .andExpect(unauthenticated());
+    }
+
+    @Test
+    public void authorization() throws Exception {
+        mvc
+                .perform(formLogin().user("anfisa").password("123456"));
+        mvc
+                .perform(get("/accounting"))
+                .andExpect(status().isFound());
     }
 }

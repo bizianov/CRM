@@ -30,20 +30,24 @@ import static org.junit.Assert.assertNull;
  */
 
 @RunWith(SpringRunner.class)
+@DataJpaTest
 @WebAppConfiguration
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(classes = {AppWebConfig.class, AppRootConfig.class, SecurityConfig.class, Application.class})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 public class HotelServiceTest {
 
     @Autowired
     private HotelService hotelService;
+    @Autowired
+    private TestEntityManager testEntityManager;
     private Hotel hotel;
     private Hotel savedHotel;
 
     @Before
     public void setUp(){
         hotel = Hotel.of("hotelZ", Rate.FOUR.getRate(), "Germany", "Munich");
-        savedHotel = hotelService.saveHotel(hotel);
+        savedHotel = testEntityManager.persist(hotel);
     }
 
     @After

@@ -41,7 +41,7 @@ public class PassportServiceTest {
     @Autowired
     private PassportService passportService;
     @Autowired
-    private TouristService touristService;
+    private TestEntityManager testEntityManager;
     private Passport passport;
     private Passport savedPassport;
 
@@ -49,10 +49,10 @@ public class PassportServiceTest {
     public void setup(){
         Tourist tourist = Tourist.of("tFirstName","tLastName","tPhone","tEmail",
                 LocalDate.of(1988,05,15), Source.CASUAL);
-        Tourist savedTourist = touristService.saveTourist(tourist);
+        Tourist savedTourist = testEntityManager.persist(tourist);
         passport = Passport.of("zzz","zzz",
                 LocalDate.of(2012,10,10), LocalDate.of(2022,10,10), savedTourist);
-        savedPassport = passportService.savePassport(passport);
+        savedPassport = testEntityManager.persist(passport);
     }
 
     @Test
