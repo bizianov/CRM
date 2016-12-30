@@ -22,19 +22,37 @@
         </tr>
         <tr>
             <th>Operator:</th>
-            <td><sf:input path="operator"/></td>
+            <td><sf:input path="operatorPattern"/></td>
         </tr>
         <tr>
-            <th>Hotel Id:</th>
-            <td><sf:input path="hotelId"/></td>
+            <th>Hotel:</th>
+            <td><sf:input path="hotelNamePattern"/></td>
         </tr>
         <tr>
             <th>Country:</th>
-            <td><sf:input path="country"/></td>
+            <td><sf:input path="countryPattern"/></td>
         </tr>
         <tr>
             <th>Region:</th>
-            <td><sf:input path="region"/></td>
+            <td><sf:input path="regionPattern"/></td>
+        </tr>
+        <tr>
+            <th>Start date:</th>
+            <td><sf:input path="fromStartDate"/></td>
+            <td> - </td>
+            <td><sf:input path="toStartDate"/></td>
+        </tr>
+        <tr>
+            <th>End date:</th>
+            <td><sf:input path="fromEndDate"/></td>
+            <td> - </td>
+            <td><sf:input path="toEndDate"/></td>
+        </tr>
+        <tr>
+            <th>Closure date:</th>
+            <td><sf:input path="fromClosureDate"/></td>
+            <td> - </td>
+            <td><sf:input path="toClosureDate"/></td>
         </tr>
         <tr>
             <td></td>

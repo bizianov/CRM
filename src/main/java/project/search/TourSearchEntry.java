@@ -5,10 +5,14 @@ import lombok.Data;
 @Data
 public class TourSearchEntry {
     private Integer touristId;
-    private String operator;
-    private String hotelName;
-    private String country;
-    private String region;
-    private String startDate;
-    private String endDate;
+    private String operatorPattern;
+    private String hotelNamePattern;
+    private String countryPattern;
+    private String regionPattern;
+    private String fromStartDate;
+    private String toStartDate;
+    private String fromEndDate;
+    private String toEndDate;
+    private String fromClosureDate;
+    private String toClosureDate;
 }

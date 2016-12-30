@@ -7,17 +7,19 @@ import project.service.TourService;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class TourSearchService {
 
     @Autowired
     private TourService tourService;
+    @Autowired
+    private TourSearchFilter tourSearchFilter;
 
     public List<Tour> findTours(TourSearchEntry searchEntry) {
-        List<Tour> allTours = tourService.findAll();
-
-
-
-        return allTours;
+        return tourService.findAll().stream()
+                .filter(tour -> tourSearchFilter.checkTour(tour, searchEntry))
+                .collect(toList());
     }
 }

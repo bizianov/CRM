@@ -264,7 +264,6 @@ public class TourController {
 
     @RequestMapping(path = "/findTours", method = RequestMethod.GET)
     public String findTours(Model model, TourSearchEntry tourSearchEntry) {
-        log.info("Searching tours with params {}", tourSearchEntry);
         model.addAttribute("allTours", tourSearchService.findTours(tourSearchEntry));
         return "tour/showAllTours";
     }
