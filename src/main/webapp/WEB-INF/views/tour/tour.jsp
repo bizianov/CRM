@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
 
 <a href="/createMenu"><b>CREATE</b></a>
 <a href="/findMenu"><b>FIND</b></a>
+<a href="/newFindMenu"><b>NEW FIND</b></a>
 
 <hr>
 <b>Find tour by id:</b><br>
@@ -22,7 +24,7 @@
 <hr>
 
 <b>Create tour:</b><br>
-<form action="/createTour" method="get">
+<form action="/createTour" method="post">
     start = <input type="text" name="startDate">
     end = <input type="text" name="endDate">
     hotel = <input type="text" name="hotelId"><br>

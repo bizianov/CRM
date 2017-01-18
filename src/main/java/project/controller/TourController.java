@@ -1,24 +1,24 @@
 package project.controller;
 
 import com.google.common.collect.Lists;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.model.hotel.Hotel;
 import project.model.hotel.Rate;
 import project.model.tour.Tour;
 import project.model.tour.TourOperator;
+import project.search.TourSearchEntry;
 import project.model.tourist.Source;
 import project.model.tourist.Tourist;
 import project.service.HotelService;
+import project.search.TourSearchService;
 import project.service.TourService;
 import project.service.TouristService;
 
@@ -34,29 +34,29 @@ import static project.model.tour.Tour.DAY0;
  */
 
 @Controller
-@Data
-@RequiredArgsConstructor(staticName = "of", onConstructor = @__(@Autowired))
-@NoArgsConstructor
+@Slf4j
 public class TourController {
 
-    @NonNull
-    private TourService tourService;
-    @NonNull
-    private HotelService hotelService;
-    @NonNull
-    private TouristService touristService;
+    @Autowired
+    TourService tourService;
+    @Autowired
+    HotelService hotelService;
+    @Autowired
+    TouristService touristService;
+    @Autowired
+    TourSearchService tourSearchService;
 
-    @RequestMapping("/createTour")
+    @RequestMapping(value = "/createTour", method = RequestMethod.POST)
     public String createTour(Model model,
-                             @RequestParam(name = "startDate") String startDate,
-                             @RequestParam(name = "endDate") String endDate,
-                             @RequestParam(name = "tourOperator") String tourOperator,
-                             @RequestParam(name = "isAvia") String isAvia,
-                             @RequestParam(name = "visaRequired") String visaRequired,
-                             @RequestParam(name = "priceBrutto") double priceBrutto,
-                             @RequestParam(name = "hotelId") int hotelId,
-                             @RequestParam(name = "closureDate") String closureDate,
-                             @RequestParam(name = "touristId") List<String> touristIds) {
+                              @RequestParam(name = "startDate") String startDate,
+                              @RequestParam(name = "endDate") String endDate,
+                              @RequestParam(name = "tourOperator") String tourOperator,
+                              @RequestParam(name = "isAvia") String isAvia,
+                              @RequestParam(name = "visaRequired") String visaRequired,
+                              @RequestParam(name = "priceBrutto") double priceBrutto,
+                              @RequestParam(name = "hotelId") int hotelId,
+                              @RequestParam(name = "closureDate") String closureDate,
+                              @RequestParam(name = "touristId") List<String> touristIds) {
         Hotel hotelById = hotelService.findHotelById(hotelId);
         if (hotelById == null) {
             model.addAttribute("hotelId", hotelById);
@@ -262,7 +262,13 @@ public class TourController {
         return "tour/showTour";
     }
 
-    @RequestMapping("/getToursByParameters")
+    @RequestMapping(path = "/findTours", method = RequestMethod.GET)
+    public String findTours(Model model, TourSearchEntry tourSearchEntry) {
+        model.addAttribute("allTours", tourSearchService.findTours(tourSearchEntry));
+        return "tour/showAllTours";
+    }
+
+    @RequestMapping(value = "/getToursByParameters", method = RequestMethod.GET)
     public String findToursByParameters(@RequestParam(name = "touristId", required = false) Integer touristId,
                                         @RequestParam(name = "byTourist", required = false) String byTourist,
                                         @RequestParam(name = "tourOperator", required = false) String tourOperator,
@@ -386,6 +392,15 @@ public class TourController {
         String userLoggedIn = authentication.getName();
         model.addAttribute("userLoggedIn", userLoggedIn);
         return "tour/menu/findMenu";
+    }
+
+    @RequestMapping("/newFindMenu")
+    public String newFindTourMenu(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userLoggedIn = authentication.getName();
+        model.addAttribute("userLoggedIn", userLoggedIn);
+        model.addAttribute("tourSearch", new TourSearchEntry());
+        return "tour/menu/newFindMenu";
     }
 
     @RequestMapping("/createMenu")

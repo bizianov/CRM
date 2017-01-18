@@ -1,11 +1,10 @@
-package tour;
+package project.controller;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import project.controller.TourController;
 import project.service.HotelService;
 import project.service.TourService;
 import project.service.TouristService;
@@ -17,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by slava23 on 12/3/2016.
  */
-public class TourViewResolverTest {
+public class TourControllerTest {
 
     private MockMvc mockMvc;
 
@@ -41,7 +40,7 @@ public class TourViewResolverTest {
 
     @Test
     public void findToursWithParameters() throws Exception {
-        mockMvc.perform(get("/getToursByParameters"))
+        mockMvc.perform(get("/findTours"))
                 .andExpect(view().name("tour/showAllTours"));
     }
 
@@ -54,7 +53,10 @@ public class TourViewResolverTest {
         TourService tourService = mock(TourService.class);
         HotelService hotelService = mock(HotelService.class);
         TouristService touristService = mock(TouristService.class);
-        TourController tourController = TourController.of(tourService,hotelService,touristService);
+        TourController tourController = new TourController();
+        tourController.touristService = touristService;
+        tourController.hotelService = hotelService;
+        tourController.tourService = tourService;
         mockMvc = MockMvcBuilders.standaloneSetup(tourController)
                 .setViewResolvers(viewResolver)
                 .build();
